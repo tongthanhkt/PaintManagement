@@ -1,6 +1,6 @@
 const Products = require('../../models/Products')
 exports.list = async function(req, res) {
-    const products =  await Products.find({}).lean().limit(5)
+    const products =  await Products.find({}).lean().limit(100)
     res.send(products)
 }
 exports.create = async function(req, res) {
