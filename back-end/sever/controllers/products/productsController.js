@@ -8,7 +8,7 @@ exports.list = async function (req, res) {
 exports.createPaintItem = async function (req, res) {
   try {
     let paintItem = new PaintItemSchema({
-      id: req.body.id,
+      id: Date.now(),
       product_name: req.body.product_name,
       product_price: req.body.product_price,
       product_status: req.body.product_status,
@@ -63,7 +63,7 @@ exports.createPaintExport = async function (req, res) {
         paintExportItem.amount * paintExportItem.product_price;
     });
     let paintExport = new PaintExportSchema({
-      id: req.body.id,
+      id: Date.now(),
       paint_export_items: paintExportItems,
       created_time: new Date().toLocaleString(),
     });
