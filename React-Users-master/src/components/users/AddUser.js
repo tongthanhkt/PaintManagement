@@ -3,27 +3,27 @@ import axios from 'axios'
 import { useHistory } from "react-router-dom";
 
 const AddUser = () => {
-  const url = "http://localhost:9000/products/create-paint-export"
+  const url = "http://localhost:9000/products/create-paint-item"
   let history = useHistory();
   const [product, setProduct] = useState({
     id: "",
-    nameProduct: "",
-    priceProduct: "",
-    statusProduct: "",  
+    product_name: "",
+    product_price: "",
+    product_status: "",  
     dvt: "",
-    description: ""
+    amount: ""
   });
 
 
 
-  const { id = "28", nameProduct, priceProduct, statusProduct, dvt, description } = product;
+  const { id = "28", product_name, product_price, product_status, dvt, amount } = product;
   const onInputChange = e => {
     setProduct({ ...product, [e.target.name]: e.target.value });
   };
 
   const onSubmit = async e => {
     e.preventDefault();
-    await axios.get(url, product);
+    await axios.post(url, product);
     history.push("/");
   };
   return (
@@ -36,18 +36,18 @@ const AddUser = () => {
               type="text"
               className="form-control form-control-lg"
               placeholder="Nhập tên sản phẩm"
-              name="nameProduct"
-              value={nameProduct}
+              name="product_name"
+              value={product_name}
               onChange={e => onInputChange(e)}
             />
           </div>
           <div className="form-group">
             <input
-              type="text"
+              type="number"
               className="form-control form-control-lg"
               placeholder="Nhập giá sản phẩm"
-              name="priceProduct"
-              value={priceProduct}
+              name="product_price"
+              value={product_price}
               onChange={e => onInputChange(e)}
             />
           </div>
@@ -56,8 +56,8 @@ const AddUser = () => {
               type="text"
               className="form-control form-control-lg"
               placeholder="Nhập tình trạng sản phẩm"
-              name="statusProduct"
-              value={statusProduct}
+              name="product_status"
+              value={product_status}
               onChange={e => onInputChange(e)}
             />
           </div>
@@ -73,11 +73,11 @@ const AddUser = () => {
           </div>
           <div className="form-group">
             <input
-              type="text"
+              type="number"
               className="form-control form-control-lg"
-              placeholder="Nhập mô tả sản phẩm"
-              name="description"
-              value={description}
+              placeholder="Nhập số lượng sản phẩm"
+              name="amount"
+              value={amount}
               onChange={e => onInputChange(e)}
             />
           </div>

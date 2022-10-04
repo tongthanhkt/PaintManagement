@@ -24,15 +24,15 @@ const Home = () => {
     <div className="container">
       <div className="py-4">
         <h1>Tồn kho</h1>
-        <table class="table border shadow">
-          <thead class="thead-dark">
+        <table className="table border shadow">
+          <thead className="thead-dark">
             <tr>
               <th scope="col"># Id</th>
               <th scope="col">Tên sản phẩm</th>
               <th scope="col">Giá sản phẩm</th>
               <th scope="col">Tình trạng sản phẩm</th>
               <th scope="col">Đơn vị tính</th>
-              <th scope="col">Mô tả sản phẩm</th>
+              <th scope="col">Số lượng sản phẩm</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -40,11 +40,11 @@ const Home = () => {
             {products.map((product, index) => (
               <tr>
                 <th scope="row">{index + 1}</th>
-                <td>{product.nameProduct}</td>
-                <td>{product.priceProduct}</td>
-                <td>{product.statusProduct}</td>
+                <td>{product.product_name}</td>
+                <td>{product.product_price}</td>
+                <td>{product.product_status}</td>
                 <td>{product.dvt}</td>
-                <td>{product.description}</td>
+                <td>{product.amount}</td>
                 
                 <td>
                   <Link class="btn btn-primary mr-2" to={`/products/${product.id}`}>
