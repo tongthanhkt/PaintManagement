@@ -7,7 +7,7 @@ const PaintItemSchema = new mongoose.Schema({
     type: String,
   },
   product_price: {
-    type: String,
+    type: Number,
   },
   product_status: {
     type: String,
@@ -16,7 +16,7 @@ const PaintItemSchema = new mongoose.Schema({
     type: String,
   },
   amount: {
-    type: String,
+    type: Number,
   },
   description: {
     type: String,
