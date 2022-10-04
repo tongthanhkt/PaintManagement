@@ -3,56 +3,62 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 const Home = () => {
-  const [users, setUser] = useState([]);
+  const [products, setProduct] = useState([]);
+  const url = "http://localhost:9000/products"
 
   useEffect(() => {
-    loadUsers();
+    loadProduct();
   }, []);
 
-  const loadUsers = async () => {
-    const result = await axios.get("http://localhost:3003/users");
-    setUser(result.data.reverse());
+  const loadProduct = async () => {
+    const result = await axios.get(url);
+    setProduct(result.data.reverse());
   };
 
-  const deleteUser = async id => {
-    await axios.delete(`http://localhost:3003/users/${id}`);
-    loadUsers();
+  const deleteProduct = async id => {
+    await axios.delete(`url/${id}`);
+    loadProduct();
   };
 
   return (
     <div className="container">
       <div className="py-4">
-        <h1>Home Page</h1>
+        <h1>Tồn kho</h1>
         <table class="table border shadow">
           <thead class="thead-dark">
             <tr>
-              <th scope="col">#</th>
-              <th scope="col">Name</th>
-              <th scope="col">User Name</th>
-              <th scope="col">Email</th>
+              <th scope="col"># Id</th>
+              <th scope="col">Tên sản phẩm</th>
+              <th scope="col">Giá sản phẩm</th>
+              <th scope="col">Tình trạng sản phẩm</th>
+              <th scope="col">Đơn vị tính</th>
+              <th scope="col">Mô tả sản phẩm</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            {users.map((user, index) => (
+            {products.map((product, index) => (
               <tr>
                 <th scope="row">{index + 1}</th>
-                <td>{user.name}</td>
-                <td>{user.username}</td>
-                <td>{user.email}</td>
+                <td>{product.nameProduct}</td>
+                <td>{product.priceProduct}</td>
+                <td>{product.statusProduct}</td>
+                <td>{product.dvt}</td>
+                <td>{product.description}</td>
+                
                 <td>
-                  <Link class="btn btn-primary mr-2" to={`/users/${user.id}`}>
+                  <Link class="btn btn-primary mr-2" to={`/products/${product.id}`}>
                     View
                   </Link>
                   <Link
                     class="btn btn-outline-primary mr-2"
-                    to={`/users/edit/${user.id}`}
+                    to={`/users/edit/${product.id}`}
                   >
                     Edit
                   </Link>
                   <Link
                     class="btn btn-danger"
-                    onClick={() => deleteUser(user.id)}
+                    onClick={() => deleteProduct(product.id)}
                   >
                     Delete
                   </Link>
