@@ -50,6 +50,11 @@ exports.createPaintExport = async function (req, res) {
   try {
     const paintItems = await PaintItemSchema.find({});
     const paintExportItems = req.body.paint_export_items;
+    if(req.body.paint_export_items===undefined) {
+      res
+          .status(401)
+          .json({ mess: `Xuất sản phẩm có không hợp lệ` });
+    }
     const isValid = paintExportItems.every((paintExportItem) => {
       if (!checkExportItemValidation(paintExportItem, paintItems)) {
         res
@@ -58,7 +63,6 @@ exports.createPaintExport = async function (req, res) {
         return false;
       } else return true;
     });
-    console.log(isValid)
     if(isValid){
       let totalExportPrice = 0 ; 
       for (let i = 0; i < paintExportItems.length; i++) {
@@ -94,3 +98,10 @@ exports.createPaintExport = async function (req, res) {
     console.log(error);
   }
 };
+exports.listPaintExport = async function (req, res) {
+  const response = await PaintExportSchema.find({})
+  res.status(200).json({response})
+}
+exports.detailPaintExport = async function (req, res) {
+  console.log(req.query);
+}
