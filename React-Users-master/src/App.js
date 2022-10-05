@@ -12,9 +12,10 @@ import {
   withRouter
 } from "react-router-dom";
 import NotFound from "./components/pages/NotFound";
-import AddUser from "./components/users/AddUser";
-import EditUser from "./components/users/EditUser";
-import User from "./components/users/User";
+import AddUser from "./components/products/AddProduct";
+import EditUser from "./components/products/EditProduct";
+import User from "./components/products/Customer";
+import ExportProduct from "./components/products/ExportProduct"
 
 function App(props) {
   return (
@@ -29,6 +30,7 @@ function App(props) {
           <Route exact path="/users/add" component={AddUser} />
           <Route exact path="/users/edit/:id" component={EditUser} />
           <Route exact path="/users/:id" component={User} />
+          <Route exact path="/exportproduct" component={ExportProduct} />
           <Route component={NotFound} />
         </Switch>
       </div>
