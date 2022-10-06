@@ -105,3 +105,9 @@ exports.listPaintExport = async function (req, res) {
 exports.detailPaintExport = async function (req, res) {
   console.log(req.query);
 }
+exports.detailPaintItem = async function (req, res) {
+  const id = req.params.id;
+  console.log(id);
+  const response = await PaintItemSchema.find({id: id});
+  res.status(200).json({response});;
+}
