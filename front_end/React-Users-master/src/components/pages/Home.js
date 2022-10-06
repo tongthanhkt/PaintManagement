@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import BoxExport from '../BoxExport'
+
+
+
 
 const Home = () => {
   const [products, setProduct] = useState([]);
@@ -34,18 +38,18 @@ const Home = () => {
               <th scope="col">Đơn vị tính</th>
               <th scope="col">Mô tả sản phẩm</th>
               <th>Action</th>
+              <th>Xuất hàng</th>
             </tr>
           </thead>
           <tbody>
             {products.map((product, index) => (
               <tr>
                 <th scope="row">{index + 1}</th>
-                <td>{product.nameProduct}</td>
-                <td>{product.priceProduct}</td>
-                <td>{product.statusProduct}</td>
+                <td>{product.product_name}</td>
+                <td>{product.product_price}</td>
+                <td>{product.product_status}</td>
                 <td>{product.dvt}</td>
-                <td>{product.description}</td>
-                
+                <td>{product.amount}</td>
                 <td>
                   <Link class="btn btn-primary mr-2" to={`/products/${product.id}`}>
                     View
@@ -62,6 +66,11 @@ const Home = () => {
                   >
                     Delete
                   </Link>
+
+                </td>
+
+                <td>
+                 <BoxExport/>
                 </td>
               </tr>
             ))}

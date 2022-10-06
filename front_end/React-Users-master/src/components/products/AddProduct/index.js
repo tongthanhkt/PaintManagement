@@ -10,7 +10,7 @@ const AddProduct = () => {
   const url = "http://localhost:9000/products/create-paint-item"
   let history = useHistory();
   const [product, setProduct] = useState({
-    id: "",
+
     product_name: "",
     product_price: "",
     product_status: "",  
@@ -20,7 +20,7 @@ const AddProduct = () => {
 
 
 
-  const { id = "28", product_name, product_price, product_status, dvt, amount } = product;
+  const { product_name, product_price, product_status, dvt, amount } = product;
   const onInputChange = e => {
     setProduct({ ...product, [e.target.name]: e.target.value });
   };
