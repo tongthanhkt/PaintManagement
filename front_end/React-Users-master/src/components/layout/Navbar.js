@@ -4,9 +4,7 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
       <div className="container">
-        <Link className="navbar-brand" href="/">
-          Recat User
-        </Link>
+       
         <button
           className="navbar-toggler"
           type="button"
@@ -26,20 +24,13 @@ const Navbar = () => {
                 Home
               </NavLink>
             </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" exact to="/about">
-                About
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" exact to="/contact">
-                Contact
-              </NavLink>
-            </li>
+           
           </ul>
         </div>
 
         <Link className="btn btn-outline-light" to="/users/add">Thêm sản phẩm vào kho</Link>
+
+  
       </div>
     </nav>
   );

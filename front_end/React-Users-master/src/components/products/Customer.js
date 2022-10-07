@@ -18,6 +18,8 @@ const Customer = () => {
     const res = await axios.get(`http://localhost:3003/users/${id}`);
     setUser(res.data);
   };
+
+
   return (
     <div className="container py-4">
       <Link className="btn btn-primary" to="/">

@@ -27,10 +27,10 @@ function App(props) {
           <Route exact path="/" component={Home} />
 
 
-          <Route exact path="/users/add" component={AddProduct} />
-          <Route exact path="/users/edit/:id" component={EditUser} />
-          <Route exact path="/users/:id" component={User} />
-          <Route exact path="/exportproduct" component={ExportProduct} />
+          <Route exact path="/products/add" component={AddProduct} />
+          <Route exact path="/products/edit/:id" component={EditUser} />
+          <Route exact path="/products/:id" component={User} />
+          <Route exact path="/exportproduct/:id" component={ExportProduct} />
           <Route component={NotFound} />
         </Switch>
       </div>

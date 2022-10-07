@@ -9,11 +9,11 @@ import React, {useState, useRef, useEffect} from 'react'
 const cx = classNames.bind(styles)
 
 function ButtonExport({children}) {
-    const url = "http://localhost:9000/products/:id"
-    const { amount } = useParams();
+    const url = "http://localhost:9000/products/detail-paint-item/:id"
+
 
     const [amountExport, setAmountExport] = useState({
-        xAmount: "",
+        amount: "",
         id: ""
     })
 
@@ -21,13 +21,15 @@ function ButtonExport({children}) {
 
 
 
-    const {xAmount} = amountExport
+    const {amount} = amountExport
 
     const getCurrentAmount = async () => {
         const result = await axios.get(url);
 
 
-        const value = result.data.reverse()
+        // const value = result.data.reverse()
+
+        console.log(result)
 
 
     }

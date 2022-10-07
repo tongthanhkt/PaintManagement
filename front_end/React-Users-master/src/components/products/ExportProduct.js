@@ -5,32 +5,28 @@ import { useHistory, useParams } from "react-router-dom";
 
 function ExportProduct() {
     const urlExport = "http://localhost:9000/products/create-paint-export"
-    const urlProducts = "http://localhost:9000/products"
+    const urlProduct = "http://localhost:9000/products/:id"
+
   let history = useHistory();
   const { id } = useParams();
 
   const [productExport, setProductExport] = useState([{
-
+    
     amount: ""
   }]);
-
-  console.log(productExport)
-
-
-
-
-
-
 
   const { amount } = productExport;
   const onInputChange = e => {
     setProductExport({ ...productExport, id, [e.target.name]: e.target.value });
   };
 
+  console.log(productExport);
+
+
   const loadCurrentAmount = async () => {
-    const result = await axios.get(`urlProducts/${id}`);
+    const result = await axios.get(urlProduct);
     const currentAmount = result.amount
-    console.log(currentAmount)
+
 
   };
 
@@ -66,3 +62,10 @@ function ExportProduct() {
 }
 
 export default ExportProduct;
+
+
+
+
+
+
+
