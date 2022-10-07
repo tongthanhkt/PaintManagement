@@ -86,7 +86,9 @@ exports.createPaintExport = async function (req, res) {
         id: Date.now(),
         paint_export_items: paintExportItems,
         created_time: new Date().toLocaleString(),
-        total_export_price: totalExportPrice
+        total_export_price: totalExportPrice,
+        phone_number: req.body.phone_number,
+        full_name: req.body.full_name
       });
       const response = await PaintExportSchema.create(paintExport);
       res.status(201).json({ response });
@@ -103,11 +105,23 @@ exports.listPaintExport = async function (req, res) {
   res.status(200).json({response})
 }
 exports.detailPaintExport = async function (req, res) {
-  console.log(req.query);
+  console.log(req.params.id);
+  const response = await PaintExportSchema.findOne({
+    id: req.params.id
+  })
+  res.status(200).json({response});
 }
 exports.detailPaintItem = async function (req, res) {
   const id = req.params.id;
   console.log(id);
   const response = await PaintItemSchema.find({id: id});
   res.status(200).json({response});;
+}
+exports.updatePaintItem = async function (req, res) {
+  
+  const filter = req.params;
+  const update = req.body;
+  console.log(filter)
+  const response = await PaintItemSchema.findOneAndUpdate(filter, update);
+  res.status(200).json({response});
 }
