@@ -5,7 +5,8 @@ import { useHistory, useParams } from "react-router-dom";
 
 function ExportProduct() {
     const urlExport = "http://localhost:9000/products/create-paint-export"
-    const urlProduct = "http://localhost:9000/products/:id"
+    const urlDetail = "http://localhost:9000/products/detail-paint-item/:1664785931337"
+    const urlProduct = "http://localhost:9000/products"
 
   let history = useHistory();
   const { id } = useParams();
@@ -20,12 +21,12 @@ function ExportProduct() {
     setProductExport({ ...productExport, id, [e.target.name]: e.target.value });
   };
 
-  console.log(productExport);
 
 
-  const loadCurrentAmount = async () => {
-    const result = await axios.get(urlProduct);
-    const currentAmount = result.amount
+
+  const loadCurrentProducts = async () => {
+    const result = await axios.get(urlDetail);
+    console.log(result.data);
 
 
   };
@@ -33,9 +34,10 @@ function ExportProduct() {
 
   const onSubmit = async e => {
     e.preventDefault();
-    await axios.post(urlExport, productExport);
-    history.push("/");
-    loadCurrentAmount()
+    const result = await axios.get(urlProduct);
+
+    console.log(result.data)
+    // history.push("/");
   };
   return (
     <div className="container">
@@ -54,8 +56,10 @@ function ExportProduct() {
             />
           </div>
           
-          <button className="btn btn-primary btn-block">Xuất hàng</button>
+          <button className="btn btn-primary btn-block" onClick={loadCurrentProducts}>Xuất hàng</button>
         </form>
+
+        <button onClick={loadCurrentProducts}>add</button>
       </div>
     </div>
   );

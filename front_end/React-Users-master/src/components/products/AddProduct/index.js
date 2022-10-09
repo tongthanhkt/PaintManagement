@@ -30,6 +30,7 @@ const AddProduct = () => {
     await axios.post(url, product);
     history.push("/");
   };
+  
   return (
     <div className={cx("container")}>
       <div className={cx("w-75 mx-auto", "shadow p-5")}>
