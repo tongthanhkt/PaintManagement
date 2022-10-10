@@ -19,3 +19,12 @@ body {
     text-rendering: optimizeSpeed;
 }
 
+// ----------   
+
+.active {
+    display: block !important;
+}
+
+.hide {
+    display: none !important;
+}

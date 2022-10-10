@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import BoxExport from '../BoxExport'
@@ -36,15 +36,15 @@ const Home = () => {
               <th scope="col">Giá sản phẩm</th>
               <th scope="col">Tình trạng sản phẩm</th>
               <th scope="col">Đơn vị tính</th>
-              <th scope="col">Mô tả sản phẩm</th>
+              <th scope="col">Số lượng sản phẩm</th>
               <th>Action</th>
               <th>Xuất hàng</th>
             </tr>
           </thead>
           <tbody>
             {products.map((product, index) => (
-              <tr>
-                <th scope="row">{index + 1}</th>
+              <tr className="row-product">
+                <th  scope="row">{index + 1}</th>
                 <td>{product.product_name}</td>
                 <td>{product.product_price}</td>
                 <td>{product.product_status}</td>
@@ -69,9 +69,10 @@ const Home = () => {
 
                 </td>
 
-                <td>
-                 <BoxExport/>
-                </td>
+                <BoxExport props={product.id}/>
+                 
+                
+                
               </tr>
             ))}
           </tbody>

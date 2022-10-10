@@ -4,16 +4,15 @@ import { useHistory, useParams } from "react-router-dom";
 
 
 function ExportProduct() {
-    const urlExport = "http://localhost:9000/products/create-paint-export"
-    const urlDetail = "http://localhost:9000/products/detail-paint-item/:1664785931337"
-    const urlProduct = "http://localhost:9000/products"
-
+    
   let history = useHistory();
   const { id } = useParams();
+
 
   const [productExport, setProductExport] = useState([{
     
     amount: ""
+
   }]);
 
   const { amount } = productExport;
@@ -24,19 +23,14 @@ function ExportProduct() {
 
 
 
-  const loadCurrentProducts = async () => {
-    const result = await axios.get(urlDetail);
-    console.log(result.data);
-
-
-  };
-
-
   const onSubmit = async e => {
     e.preventDefault();
-    const result = await axios.get(urlProduct);
+    const result = await axios.get(`http://localhost:9000/products/detail-paint-item/${id}`);
+    console.log(id)
+    console.log(result)
 
-    console.log(result.data)
+
+
     // history.push("/");
   };
   return (
@@ -56,10 +50,10 @@ function ExportProduct() {
             />
           </div>
           
-          <button className="btn btn-primary btn-block" onClick={loadCurrentProducts}>Xuất hàng</button>
+          <button className="btn btn-primary btn-block" onClick={onSubmit}>Xuất hàng</button>
         </form>
 
-        <button onClick={loadCurrentProducts}>add</button>
+
       </div>
     </div>
   );
@@ -69,6 +63,11 @@ export default ExportProduct;
 
 
 
+
+
+
+
+  
 
 
 

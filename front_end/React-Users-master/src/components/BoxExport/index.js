@@ -8,61 +8,82 @@ import React, {useState, useRef, useEffect} from 'react'
 
 const cx = classNames.bind(styles)
 
-function ButtonExport({children}) {
-    const url = "http://localhost:9000/products/detail-paint-item/:id"
+function ButtonExport({props}) {
+    const urlExport = "http://localhost:9000/products/create-paint-export"
+    const urlDetail = "http://localhost:9000/products/detail-paint-item/"
+    const productsId = props
+
+
+
 
 
     const [amountExport, setAmountExport] = useState({
         amount: "",
-        id: ""
+        productsId
     })
 
     const [newAmount, setNewAmount] = useState()
 
-
-
     const {amount} = amountExport
 
-    const getCurrentAmount = async () => {
-        const result = await axios.get(url);
-
-
-        // const value = result.data.reverse()
-
-        console.log(result)
-
-
-    }
+    console.log(amountExport)
 
     const onInputChange = e => {
-        setAmountExport({ ...amountExport, [e.target.name]: e.target.value });
-      };
+        setAmountExport({ ...amountExport , [e.target.name]: e.target.value });
+     };
+
+     
     
     
-    const handleToggle = () => {
-        
+    const handleSelect = (e) => {
+        e.target.classList.add('hide')
+        const wrapper = e.target.closest('div')
+        wrapper.querySelector('div').classList.add('active')     
+
     }
 
-    return ( <div className={cx('wrapper')}>
-        <button className={cx('btn', 'btn-success')}>
+
+
+
+
+
+    const handleCancelSelect = (e) => {
+        e.target.classList.add('active')
+        const wrapper = e.target.closest('div')
+        wrapper.querySelector('div').classList.add('hide')  
+    }
+
+    return ( <div  className={cx('wrapper')}>
+        <button onClick={handleSelect} id="btn-wrapper" className={cx('btn', 'btn-success')}>
             Chọn
         </button>
 
+        <div id="input-wrapper" className={cx('input-wrapper')}>
         <input
 
             type='number'
             className = {cx('input')}
             placeholder='Nhập số lượng'
-            name='amountExport'
-            value={amountExport}
+            name='amount'
+            value={amount}
             onChange={e => onInputChange(e)}
 
         />
 
-        <button onClick = {getCurrentAmount} className={cx('btn', 'btn-danger')}>
+        <button onClick = {handleCancelSelect} className={cx('btn', 'btn-danger')}>
             Hủy
         </button>
+
+        <button className={cx('btn', 'btn-light')}>Xác nhận</button>
+        </div>
+
+      
     </div> )
 }
 
 export default ButtonExport;
+
+
+
+
+

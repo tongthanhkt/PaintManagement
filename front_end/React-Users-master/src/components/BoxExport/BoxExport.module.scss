@@ -7,15 +7,16 @@
         border-radius: 4px;
         border: none;
         color: #fff;
-        display: none;
+
     
         &:hover {
             opacity: 0.9;
         }
     }
     
-    .input {
+    .input-wrapper {
         padding-left: 10px;
+        display: none;
         
     }
 

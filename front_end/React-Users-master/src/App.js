@@ -30,7 +30,7 @@ function App(props) {
           <Route exact path="/products/add" component={AddProduct} />
           <Route exact path="/products/edit/:id" component={EditUser} />
           <Route exact path="/products/:id" component={User} />
-          <Route exact path="/exportproduct/:id" component={ExportProduct} />
+          <Route exact path="/exportproduct" component={ExportProduct} />
           <Route component={NotFound} />
         </Switch>
       </div>
