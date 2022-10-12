@@ -5,9 +5,13 @@ import { useParams } from 'react-router-dom';
 import React, { useReducer, useState, useEffect } from 'react';
 
 const urlExport = 'http://localhost:9000/products/create-paint-export';
-const urlDetail = 'http://localhost:9000/products/detail-paint-item/';
+const urlDetail = 'http://localhost:9000/products/detail-paint-item/:id';
 
 const cx = classNames.bind(styles);
+
+
+
+
 
 const initState = {
     productExport: '',
@@ -25,6 +29,9 @@ const setProduct = (payload) => {
     };
 };
 
+
+
+
 const addProduct = (payload) => {
     return {
         type: ADD_PRODUCT,
@@ -37,13 +44,15 @@ const reducer = (state, action) => {
         case SET_PRODUCT:
             return {
                 ...state,
-                productExport: action.payload,
+                productExport: action.payload
             };
 
         case ADD_PRODUCT: {
             return {
 
-                productsExport: [...state.productExport, action.payload]
+                productsExport: Object.assign({}, "paint_export_item", ...state.productExport)
+
+                // [...state.productExport, action.payload]
             };
         }
 
@@ -53,21 +62,30 @@ const reducer = (state, action) => {
 };
 
 function BoxExport({ props }) {
-
+    const id = props
 
     const [state, dispatch] = useReducer(reducer, initState);
 
     const { productExport, productsExport } = state;
 
 
+    
+    console.log(productsExport)
 
 
+    const loadProduct = async () => {
+        const result = await axios.get(`http://localhost:9000/products/detail-paint-item/${id}`);
+        // console.log(result.data)
+    
+      };
 
-
+    
+    console.log(productExport)
     const handleAdd = (e) => {
         dispatch(addProduct(productExport));
         dispatch(setProduct(''));
         handleCancelSelect(e)
+        loadProduct()
     };
 
     const handleSelect = (e) => {
@@ -90,6 +108,8 @@ function BoxExport({ props }) {
         inputWrapper.classList.remove('active')
 
         btnElement.classList.add('active')
+        dispatch(setProduct(''));
+
 
     };
 
