@@ -23,7 +23,7 @@ exports.createPaintItem = async function (req, res) {
   ) {
     res
       .status(400)
-      .json({ mess: "Khong duoc bo trong price, amount, name hoac dvt" });
+      .json({ mess: "Nhập sản phầm không hợp lệ" });
     return;
   }
   try {
@@ -36,7 +36,7 @@ exports.createPaintItem = async function (req, res) {
 function checkExportItemValidation(paintExportItem, paintItems) {
   let result = false;
   paintItems.every((item) => {
-    if (item.id == paintExportItem.id && paintExportItem.amount < item.amount) {
+    if (item.id == paintExportItem.id && paintExportItem.amount <= item.amount) {
       result = true;
       return false;
     }
@@ -45,7 +45,6 @@ function checkExportItemValidation(paintExportItem, paintItems) {
   return result;
 }
 exports.createPaintExport = async function (req, res) {
-  try {
     const paintItems = await PaintItemSchema.find({});
     const paintExportItems = req.body.paint_export_items;
     if(req.body.paint_export_items===undefined) {
@@ -88,15 +87,16 @@ exports.createPaintExport = async function (req, res) {
         phone_number: req.body.phone_number,
         full_name: req.body.full_name
       });
-      const response = await PaintExportSchema.create(paintExport);
-      res.status(201).json({ response });
-    } else {
-      res.status(401).json({ messs: "Gửi dữ liệu không hợp lệ" });
-    }
+      try {
+        const response = await PaintExportSchema.create(paintExport);
+        res.status(201).json({ response });
+      } catch (error) {
+        res.status(400).json({mess: "Lỗi không thể xử lí ở sever"})
+      }
+      
+    } 
 
-  } catch (error) {
-    res.status(400).json({mess: "Lỗi không thể xử lí ở server"});
-  }
+  
 };
 exports.listPaintExport = async function (req, res) {
   const response = await PaintExportSchema.find({})
