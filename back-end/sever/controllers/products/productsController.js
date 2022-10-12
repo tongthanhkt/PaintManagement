@@ -23,7 +23,7 @@ exports.createPaintItem = async function (req, res) {
   ) {
     res
       .status(400)
-      .json({ mess: "Nhập sản phầm không hợp lệ" });
+      .json({ error: "Nhập sản phầm không hợp lệ" });
     return;
   }
   try {
@@ -50,13 +50,13 @@ exports.createPaintExport = async function (req, res) {
     if(req.body.paint_export_items===undefined) {
       res
           .status(401)
-          .json({ mess: `Xuất sản phẩm có không hợp lệ` });
+          .json({ error: `Xuất sản phẩm có không hợp lệ` });
     }
     const isValid = paintExportItems.every((paintExportItem) => {
       if (!checkExportItemValidation(paintExportItem, paintItems)) {
         res
           .status(401)
-          .json({ mess: `Xuất sản phẩm có id:${paintExportItem.id} không hợp lệ` });
+          .json({ error: `Xuất sản phẩm có id:${paintExportItem.id} không hợp lệ` });
         return false;
       } else return true;
     });
@@ -91,7 +91,7 @@ exports.createPaintExport = async function (req, res) {
         const response = await PaintExportSchema.create(paintExport);
         res.status(201).json({ response });
       } catch (error) {
-        res.status(400).json({mess: "Lỗi không thể xử lí ở sever"})
+        res.status(400).json({error: "Lỗi không thể xử lí ở sever"})
       }
       
     } 
@@ -124,7 +124,7 @@ exports.updatePaintItem = async function (req, res) {
     const response = await PaintItemSchema.findOneAndUpdate(filter, update);
   res.status(200).json({response});
   } catch (error) {
-    res.status(400).json({mess: "Lỗi phía sever không thể xử lí !!"})
+    res.status(400).json({error: "Lỗi phía sever không thể xử lí !!"})
   }
   
 }
@@ -134,8 +134,8 @@ exports.deletePaintItems = async function (req, res) {
   const response = await PaintItemSchema.deleteOne(filter);
   console.log(response)
   if(response.deletedCount === 1 ) {
-    res.status(200).json({mess: "Xoá thành công"})
+    res.status(200).json({success: "Xoá thành công"})
   } else {
-    res.status(400).json({mess: "Xoá không thành công "})
+    res.status(400).json({error: "Xoá không thành công "})
   }
 }
