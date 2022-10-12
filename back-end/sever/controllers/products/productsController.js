@@ -133,7 +133,17 @@ exports.deletePaintItems = async function (req, res) {
   const filter = {id: id}
   const response = await PaintItemSchema.deleteOne(filter);
   console.log(response)
-  if(response.deletedCount === 1 ) {
+  if(response.deletedCount !== 0 ) {
+    res.status(200).json({success: "Xoá thành công"})
+  } else {
+    res.status(400).json({error: "Xoá không thành công "})
+  }
+}
+exports.deletePaintExport = async function (req, res) {
+  const id = req.params.id;
+  const filter = {id: id};
+  const response = await PaintExportSchema.deleteOne(filter);
+  if(response.deletedCount !== 0 ) {
     res.status(200).json({success: "Xoá thành công"})
   } else {
     res.status(400).json({error: "Xoá không thành công "})

@@ -10,4 +10,5 @@ router.get("/detail-paint-item/:id", productsController.detailPaintItem);
 router.put("/update-paint-item/:id", productsController.updatePaintItem);
 router.get("/detail-paint-export/:id", productsController.detailPaintExport);
 router.delete("/delete-paint-items/:id", productsController.deletePaintItems);
+router.delete("/delete-paint-export/:id", productsController.deletePaintExport);
 module.exports = router;
