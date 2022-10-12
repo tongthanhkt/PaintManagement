@@ -28,7 +28,7 @@ const Navbar = () => {
           </ul>
         </div>
 
-        <Link className="btn btn-outline-light" to="/users/add">Thêm sản phẩm vào kho</Link>
+        <Link className="btn btn-outline-light" to="/products/add">Thêm sản phẩm vào kho</Link>
 
   
       </div>

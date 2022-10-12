@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link, NavLink } from "react-router-dom";
 import styles from "./Home.module.scss"
 import classNames from "classnames/bind"
+import BoxExport from "../../BoxExport"
 
 const cx = classNames.bind(styles)
 
@@ -73,14 +74,17 @@ const Home = () => {
 
                   
                   </td>
-                  <td>
+                  {/* <td>
                   
 
                     
                       <NavLink exact to="/exportproduct" classNames={cx('btn', 'btn-danger')}>
                   Xuất hàng
                 </NavLink>
-                  </td>
+                  </td> */}
+
+                <BoxExport props={product.id}/>
+
                 </tr>
               ))}
             </tbody>

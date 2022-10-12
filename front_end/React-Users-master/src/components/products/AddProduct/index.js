@@ -71,7 +71,7 @@ const AddProduct = () => {
             <div className={cx("form-group")}>
               <input
                 type="text"
-                className="form-control form-control-lg"
+                className={cx("form-control", "form-control-lg")}
                 placeholder="Nhập đơn vị tính"
                 name="dvt"
                 value={dvt}

@@ -2,15 +2,17 @@ import styles from './BoxExport.module.scss';
 import classNames from 'classnames/bind';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import React, { useReducer } from 'react';
+import React, { useReducer, useState, useEffect } from 'react';
 
 const urlExport = 'http://localhost:9000/products/create-paint-export';
 const urlDetail = 'http://localhost:9000/products/detail-paint-item/';
+
 const cx = classNames.bind(styles);
+
 const initState = {
     productExport: '',
-    productsExport: {},
-    productsExportTotal: {}
+    productsExport: [],
+
 };
 
 const SET_PRODUCT = 'set-product';
@@ -40,8 +42,8 @@ const reducer = (state, action) => {
 
         case ADD_PRODUCT: {
             return {
-                ...state,
-                productsExport: [...state.productExport, action.payload],
+
+                productsExport: [...state.productExport, action.payload]
             };
         }
 
@@ -50,71 +52,90 @@ const reducer = (state, action) => {
     }
 };
 
-function ButtonExport({ props }) {
-    const id = props;
+function BoxExport({ props }) {
+
 
     const [state, dispatch] = useReducer(reducer, initState);
 
-    const { productExport, productsExport,productsExportTotal } = state;
+    const { productExport, productsExport } = state;
 
-    console.log(productsExport)
 
-    const handleAdd = () => {
+
+
+
+
+    const handleAdd = (e) => {
         dispatch(addProduct(productExport));
         dispatch(setProduct(''));
+        handleCancelSelect(e)
     };
 
     const handleSelect = (e) => {
-        e.target.classList.add('hide');
-        const wrapper = e.target.closest('div');
+        const targetElement = e.target
+
+        targetElement.classList.remove('active');
+        const wrapper = targetElement.closest('div');
         wrapper.querySelector('div').classList.add('active');
     };
 
+
+
     const handleCancelSelect = (e) => {
-        e.target.classList.add('active');
-        const wrapper = e.target.closest('div');
-        wrapper.querySelector('div').classList.add('hide');
+
+        const targetElement = e.target
+
+        targetElement.classList.remove('active');
+        const inputWrapper = targetElement.closest('div');
+        const btnElement = inputWrapper.parentElement.querySelector('#btn-wrapper');
+        inputWrapper.classList.remove('active')
+
+        btnElement.classList.add('active')
+
     };
 
+    
     return (
-        <div className={cx('wrapper')}>
-            <button
-                onClick={handleSelect}
-                id="btn-wrapper"
-                className={cx('btn', 'btn-success')}
-            >
-                Chọn
-            </button>
-
-            <div id="input-wrapper" className={cx('input-wrapper')}>
-                <input
-                    type="number"
-                    className={cx('input')}
-                    placeholder="Nhập số lượng"
-                    name="productExport"
-                    value={productExport}
-                    onChange={(e) => {
-                        dispatch(setProduct(e.target.value));
-                    }}
-                />
-
+       <td>
+            <div className={cx('wrapper')}>
                 <button
-                    onClick={handleCancelSelect}
-                    className={cx('btn', 'btn-danger')}
+                    onClick={handleSelect}
+                    id="btn-wrapper"
+                    className={cx('btn', 'btn-success', 'active')}
                 >
-                    Hủy
+                    Chọn
                 </button>
+    
+                <div id="input-wrapper" className={cx('input-wrapper')}>
+                    <input
 
-                <button
-                    onClick={handleAdd}
-                    id="btn"
-                    className={cx('btn', 'btn-light')}
-                >
-                    Xác nhận
-                </button>
+                        type="number"
+                        className={cx('input')}
+                        placeholder="Nhập số lượng"
+                        name="productExport"
+                        value={productExport}
+                        onChange={(e) => {
+                            dispatch(setProduct(e.target.value));
+                        }}
+                    />
+    
+                    <button
+                        onClick={handleCancelSelect}
+                        className={cx('btn', 'btn-danger')}
+                    >
+                        Hủy
+                    </button>
+    
+                    <button
+                        onClick={handleAdd}
+                        id="btn"
+                        className={cx('btn', 'btn-light')}
+                    >
+                        Xác nhận
+                    </button>
+                </div>
             </div>
-        </div>
+       </td>
     );
 }
 
-export default ButtonExport;
+export default BoxExport;
