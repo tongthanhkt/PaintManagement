@@ -14,6 +14,7 @@ const cx = classNames.bind(styles);
 
 
 const initState = {
+
     productExport: '',
     productsExport: [],
 
@@ -25,7 +26,7 @@ const ADD_PRODUCT = 'add-product';
 const setProduct = (payload) => {
     return {
         type: SET_PRODUCT,
-        payload,
+        payload
     };
 };
 
@@ -42,19 +43,32 @@ const addProduct = (payload) => {
 const reducer = (state, action) => {
     switch (action.type) {
         case SET_PRODUCT:
+
+            const productExport = action.payload
+
+
             return {
-                ...state,
-                productExport: action.payload
+
+                productExport
+            
             };
+
+            
+
 
         case ADD_PRODUCT: {
+            const amountExport = [{amount: state.productExport}]
+            // const prevAmountExport ={amount: }
+            const productsExport = [amountExport]
+            
+
+
             return {
 
-                productsExport: Object.assign({}, "paint_export_item", ...state.productExport)
-
-                // [...state.productExport, action.payload]
+                productsExport
             };
         }
+         // [...state.productExport, action.payload]
 
         default:
             throw new Error('Invalid value');
@@ -62,30 +76,23 @@ const reducer = (state, action) => {
 };
 
 function BoxExport({ props }) {
-    const id = props
-
+    let currentId = props
+    
     const [state, dispatch] = useReducer(reducer, initState);
 
-    const { productExport, productsExport } = state;
-
-
+    const {productExport,  productsExport } = state;
     
-    console.log(productsExport)
-
-
     const loadProduct = async () => {
-        const result = await axios.get(`http://localhost:9000/products/detail-paint-item/${id}`);
-        // console.log(result.data)
-    
+        const result = await axios.get(`http://localhost:9000/products/detail-paint-item/${currentId}`);
       };
 
-    
-    console.log(productExport)
+      
+
     const handleAdd = (e) => {
         dispatch(addProduct(productExport));
         dispatch(setProduct(''));
         handleCancelSelect(e)
-        loadProduct()
+
     };
 
     const handleSelect = (e) => {
@@ -114,6 +121,10 @@ function BoxExport({ props }) {
     };
 
     
+
+
+
+    
     return (
        <td>
             <div className={cx('wrapper')}>
@@ -127,7 +138,6 @@ function BoxExport({ props }) {
     
                 <div id="input-wrapper" className={cx('input-wrapper')}>
                     <input
-
                         type="number"
                         className={cx('input')}
                         placeholder="Nhập số lượng"
@@ -155,6 +165,8 @@ function BoxExport({ props }) {
                 </div>
             </div>
        </td>
+
+
     );
 }
 
