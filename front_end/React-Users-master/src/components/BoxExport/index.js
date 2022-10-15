@@ -17,21 +17,21 @@ function BoxExport({ props }) {
     // const [wrapProductsExport, setWrapProductsExport] = useState([])
 
     const handleAdd = (e) => {
-        setProductsExport(() => {
-            const detailProductsExport = [{ amount: productExport, id: id }];
+        setProductsExport((prev) => {
+            const detailProductsExport = [...prev,{ amount: productExport, id: id }];
 
             return detailProductsExport;
         });
 
-        onSubmit();
         handleCancelSelect(e);
+        onSubmit();
 
         setProductExport('');
     };
 
+    const exportItems = {paint_export_items: productsExport}
     
     const onSubmit = async () => {
-        const exportItems = {paint_export_items: productsExport}
         axios.post(urlExport, exportItems);
     };
 

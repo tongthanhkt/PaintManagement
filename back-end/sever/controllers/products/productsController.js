@@ -84,7 +84,7 @@ exports.createPaintExport = async function (req, res) {
         id: Date.now(),
         paint_export_items: paintExportItems,
         created_time: new Date().toLocaleString(),
-        total_export_price: totalExportPrice - req.body.discount,
+        total_export_price: totalExportPrice - req.body.discount||0,
         phone_number: req.body.phone_number,
         full_name: req.body.full_name
       });
