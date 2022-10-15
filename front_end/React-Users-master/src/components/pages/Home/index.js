@@ -39,7 +39,7 @@ const Home = () => {
             <tr>
               <th className={cx('table-custom')} scope="col"># Id</th>
               <th className={cx('table-custom')} scope="col">Tên sản phẩm</th>
-              <th className={cx('table-custom')} scope="col">Giá mỗi sản phẩm</th>
+              <th className={cx('table-custom')} scope="col">Giá mỗi sản phẩm (VND)</th>
 
               <th className={cx('table-custom')} scope="col">Đơn vị tính</th>
               <th className={cx('table-custom')} scope="col">Số lượng sản phẩm</th>
@@ -57,22 +57,23 @@ const Home = () => {
 
                 <td className={cx('table-custom')}>{product.dvt}</td>
                 <td className={cx('table-custom')}>{product.amount}</td>
-                
                 <td>
+                
                   <Link class="btn btn-primary mr-2" to={`/products/${product.id}`}>
-                    View
+                    Chi tiết
                   </Link>
                   <Link
                     class="btn btn-outline-primary mr-2"
-                    to={`/users/edit/${product.id}`}
+                    to={`/products/edit/${product.id}`}
+
                   >
-                    Edit
+                    Chỉnh sửa
                   </Link>
                   <Link
                     class="btn btn-danger"
                     onClick={() => deleteProduct(product.id)}
                   >
-                    Delete
+                    Xóa
                   </Link>
 
                   

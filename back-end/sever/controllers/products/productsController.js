@@ -84,7 +84,7 @@ exports.createPaintExport = async function (req, res) {
         id: Date.now(),
         paint_export_items: paintExportItems,
         created_time: new Date().toLocaleString(),
-        total_export_price: totalExportPrice - req.body.discount||0,
+        total_export_price: totalExportPrice - (req.body.discount||0),
         phone_number: req.body.phone_number,
         full_name: req.body.full_name
       });
@@ -99,6 +99,9 @@ exports.createPaintExport = async function (req, res) {
 
   
 };
+function updateProductItem(){
+
+}
 exports.listPaintExport = async function (req, res) {
   const response = await PaintExportSchema.find({})
   res.status(200).json({response})

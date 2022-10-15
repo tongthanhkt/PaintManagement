@@ -13,8 +13,8 @@ import {
 } from "react-router-dom";
 import NotFound from "./components/pages/NotFound";
 import AddProduct from "./components/products/AddProduct";
-import EditUser from "./components/products/EditProduct";
-import User from "./components/products/Customer";
+import EditProduct from "./components/products/EditProduct";
+import DetailProduct from "./components/products/DetailProduct";
 import ExportProduct from "./components/products/ExportProduct"
 
 function App(props) {
@@ -28,8 +28,8 @@ function App(props) {
 
 
           <Route exact path="/products/add" component={AddProduct} />
-          <Route exact path="/products/edit/:id" component={EditUser} />
-          <Route exact path="/products/:id" component={User} />
+          <Route exact path="/products/edit/:id" component={EditProduct} />
+          <Route exact path="/products/:id" component={DetailProduct} />
           <Route exact path="/exportproduct" component={ExportProduct} />
           <Route component={NotFound} />
         </Switch>

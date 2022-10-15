@@ -14,25 +14,39 @@ function BoxExport({ props }) {
 
     const [productExport, setProductExport] = useState('');
     const [productsExport, setProductsExport] = useState([]);
-    // const [wrapProductsExport, setWrapProductsExport] = useState([])
+
+
+    
+
+    
 
     const handleAdd = (e) => {
         setProductsExport((prev) => {
-            const detailProductsExport = [...prev,{ amount: productExport, id: id }];
-
+            const detailProductsExport = [{id, amount: productExport}];
             return detailProductsExport;
         });
 
-        handleCancelSelect(e);
-        onSubmit();
 
-        setProductExport('');
+        
+        
+
+
+        handleCancelSelect(e);
     };
 
-    const exportItems = {paint_export_items: productsExport}
-    
+
+    const exportItems = {
+        "paint_export_items": [
+            ...productsExport
+        ]
+    }
+
+
+
     const onSubmit = async () => {
-        axios.post(urlExport, exportItems);
+        axios.post(urlExport, exportItems).catch(function() {
+            alert('Số lượng sản phẩm trong kho không đủ');
+        });
     };
 
     const handleSelect = (e) => {
@@ -42,11 +56,6 @@ function BoxExport({ props }) {
         const wrapper = targetElement.closest('div');
         wrapper.querySelector('div').classList.add('active');
     };
-    // const onSubmit = async () => {
-    //     const exportItem = { paint_export_items: productsExport };
-
-    //     await axios.post(urlExport, exportItem);
-    // };
 
     const handleCancelSelect = (e) => {
         const targetElement = e.target;
@@ -99,6 +108,8 @@ function BoxExport({ props }) {
                         Xác nhận
                     </button>
                 </div>
+
+                <button onClick={onSubmit}>Add</button>
             </div>
         </td>
     );
