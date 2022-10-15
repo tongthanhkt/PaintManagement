@@ -58,16 +58,7 @@ const AddProduct = () => {
                 onChange={e => onInputChange(e)}
               />
             </div>
-            <div className={cx("form-group")}>
-              <input
-                type="text"
-                className={cx("form-control", "form-control-lg")}
-                placeholder="Nhập tình trạng sản phẩm"
-                name="product_status"
-                value={product_status}
-                onChange={e => onInputChange(e)}
-              />
-            </div>
+            
             <div className={cx("form-group")}>
               <input
                 type="text"

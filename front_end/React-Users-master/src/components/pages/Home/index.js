@@ -23,8 +23,8 @@ const Home = () => {
     setProduct(result.data.reverse());
   };
 
-  const deleteProduct = async id => {
-    await axios.delete(`url/${id}`);
+  const deleteProduct = async (id) => {
+    await axios.delete(`http://localhost:9000/products/delete-paint-items/${id}`);
     loadProduct();
   };
 
@@ -40,7 +40,7 @@ const Home = () => {
               <th className={cx('table-custom')} scope="col"># Id</th>
               <th className={cx('table-custom')} scope="col">Tên sản phẩm</th>
               <th className={cx('table-custom')} scope="col">Giá mỗi sản phẩm</th>
-              <th className={cx('table-custom')} scope="col">Tình trạng sản phẩm</th>
+
               <th className={cx('table-custom')} scope="col">Đơn vị tính</th>
               <th className={cx('table-custom')} scope="col">Số lượng sản phẩm</th>
               <th className={cx('table-custom')} scope="col">Tác vụ</th>
@@ -54,7 +54,7 @@ const Home = () => {
                 <th className={cx('table-custom')} scope="row">{index + 1}</th>
                 <td className={cx('table-custom')}>{product.product_name}</td>
                 <td className={cx('table-custom')}>{product.product_price}</td>
-                <td className={cx('table-custom')}>{product.product_status}</td>
+
                 <td className={cx('table-custom')}>{product.dvt}</td>
                 <td className={cx('table-custom')}>{product.amount}</td>
                 

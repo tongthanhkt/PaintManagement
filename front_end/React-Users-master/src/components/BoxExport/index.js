@@ -16,30 +16,27 @@ function BoxExport({ props }) {
     const [productsExport, setProductsExport] = useState([]);
     // const [wrapProductsExport, setWrapProductsExport] = useState([])
 
-    const handleAdd = (e) => {
-        setProductsExport(() => {
-            const detailProductsExport = [{ amount: productExport, id }];
-
-            return detailProductsExport;
-            // setWrapProductsExport((prevValue)=> {
-            //     const wrapDetailProductsExport = [...prevValue,detailProductsExport]
-            //     return wrapDetailProductsExport
-            // })
-        });
-
-        setProductExport('');
-        handleCancelSelect(e);
-        onSubmit();
-    };
-
-    const exportItem = { paint_export_items: [productsExport] };
-
+    const exportItem = { paint_export_items: productsExport };
     console.log(exportItem);
-
     const onSubmit = async () => {
 
+    
+        await axios.post(urlExport, exportItem);
+    };
 
-        await axios.post('http://localhost:9000/products/create-paint-export', exportItem);
+    const handleAdd = (e) => {
+
+
+        setProductsExport(() => {
+            const detailProductsExport = [{ amount: productExport, id: id }];
+
+            return detailProductsExport;
+           
+        });
+        onSubmit()
+        setProductExport('');
+        
+        handleCancelSelect(e);
     };
 
     const handleSelect = (e) => {
