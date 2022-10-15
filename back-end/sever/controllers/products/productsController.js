@@ -47,20 +47,21 @@ function checkExportItemValidation(paintExportItem, paintItems) {
 exports.createPaintExport = async function (req, res) {
     const paintItems = await PaintItemSchema.find({});
     const paintExportItems = req.body.paint_export_items;
-    if(req.body.paint_export_items===undefined) {
+    if(req.body.paint_export_items===undefined || req.body.paint_export_items.length === 0) {
       res
           .status(401)
-          .json({ error: `Xuất sản phẩm có không hợp lệ` });
+          .json({ error: 'Định dạng không hợp lệ' });
+          return
     }
     const isValid = paintExportItems.every((paintExportItem) => {
       if (!checkExportItemValidation(paintExportItem, paintItems)) {
-        res
-          .status(401)
-          .json({ error: `Xuất sản phẩm có id:${paintExportItem.id} không hợp lệ` });
         return false;
       } else return true;
     });
-    if(isValid){
+    if(!isValid){
+      res.status(400).json({error: "Xuất sản phẩm không hợp lệ"})
+    }
+    else {
       let totalExportPrice = 0 ; 
       for (let i = 0; i < paintExportItems.length; i++) {
         for (let j = 0; j < paintItems.length; j++) {
@@ -83,7 +84,7 @@ exports.createPaintExport = async function (req, res) {
         id: Date.now(),
         paint_export_items: paintExportItems,
         created_time: new Date().toLocaleString(),
-        total_export_price: totalExportPrice,
+        total_export_price: totalExportPrice - req.body.discount,
         phone_number: req.body.phone_number,
         full_name: req.body.full_name
       });
@@ -119,7 +120,6 @@ exports.updatePaintItem = async function (req, res) {
   
   const filter = req.params;
   const update = req.body;
-  console.log(filter)
   try {
     const response = await PaintItemSchema.findOneAndUpdate(filter, update);
   res.status(200).json({response});
@@ -132,7 +132,6 @@ exports.deletePaintItems = async function (req, res) {
   const id = req.params.id;
   const filter = {id: id}
   const response = await PaintItemSchema.deleteOne(filter);
-  console.log(response)
   if(response.deletedCount !== 0 ) {
     res.status(200).json({success: "Xoá thành công"})
   } else {
