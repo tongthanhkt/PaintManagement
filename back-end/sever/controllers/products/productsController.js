@@ -2,43 +2,41 @@ const PaintItemSchema = require("../../models/PaintItem");
 const PaintExportSchema = require("../../models/PaintExport");
 exports.listPaintItem = async function (req, res) {
   const products = await PaintItemSchema.find({});
-  console.log(products);
   res.send(products);
 };
 exports.createPaintItem = async function (req, res) {
+  let paintItem = new PaintItemSchema({
+    id: Date.now(),
+    product_name: req.body.product_name,
+    product_price: req.body.product_price,
+    dvt: req.body.dvt,
+    amount: req.body.amount,
+    description: req.body.description,
+  });
+  if (
+    paintItem.product_price === undefined ||
+    typeof paintItem.product_price !== "number" ||
+    paintItem.amount === undefined ||
+    typeof paintItem.amount !== "number" ||
+    paintItem.dvt.length === 0 ||
+    paintItem.product_name === 0
+  ) {
+    res
+      .status(400)
+      .json({ error: "Nhập sản phầm không hợp lệ" });
+    return;
+  }
   try {
-    let paintItem = new PaintItemSchema({
-      id: Date.now(),
-      product_name: req.body.product_name,
-      product_price: req.body.product_price,
-      product_status: req.body.product_status,
-      dvt: req.body.dvt,
-      amount: req.body.amount,
-      description: req.body.description,
-    });
-    if (
-      paintItem.product_price === undefined ||
-      typeof paintItem.product_price !== "number" ||
-      paintItem.amount === undefined ||
-      typeof paintItem.amount !== "number" ||
-      paintItem.dvt.length === 0 ||
-      paintItem.product_name === 0
-    ) {
-      res
-        .status(400)
-        .json({ mess: "Khong duoc bo trong price, amount, name hoac dvt" });
-      return;
-    }
     const response = await PaintItemSchema.create(paintItem);
     res.status(201).json({ response });
   } catch (error) {
-    console.log(error);
+    res.status(400).json({mess: "Lỗi không thể xử lí ở server"})
   }
 };
 function checkExportItemValidation(paintExportItem, paintItems) {
   let result = false;
   paintItems.every((item) => {
-    if (item.id == paintExportItem.id && paintExportItem.amount < item.amount) {
+    if (item.id == paintExportItem.id && paintExportItem.amount <= item.amount) {
       result = true;
       return false;
     }
@@ -47,19 +45,18 @@ function checkExportItemValidation(paintExportItem, paintItems) {
   return result;
 }
 exports.createPaintExport = async function (req, res) {
-  try {
     const paintItems = await PaintItemSchema.find({});
     const paintExportItems = req.body.paint_export_items;
     if(req.body.paint_export_items===undefined) {
       res
           .status(401)
-          .json({ mess: `Xuất sản phẩm có không hợp lệ` });
+          .json({ error: `Xuất sản phẩm có không hợp lệ` });
     }
     const isValid = paintExportItems.every((paintExportItem) => {
       if (!checkExportItemValidation(paintExportItem, paintItems)) {
         res
           .status(401)
-          .json({ mess: `Xuất sản phẩm có id:${paintExportItem.id} không hợp lệ` });
+          .json({ error: `Xuất sản phẩm có id:${paintExportItem.id} không hợp lệ` });
         return false;
       } else return true;
     });
@@ -90,15 +87,16 @@ exports.createPaintExport = async function (req, res) {
         phone_number: req.body.phone_number,
         full_name: req.body.full_name
       });
-      const response = await PaintExportSchema.create(paintExport);
-      res.status(201).json({ response });
-    } else {
-      res.status(401).json({ messs: "Gửi dữ liệu không hợp lệ" });
-    }
+      try {
+        const response = await PaintExportSchema.create(paintExport);
+        res.status(201).json({ response });
+      } catch (error) {
+        res.status(400).json({error: "Lỗi không thể xử lí ở sever"})
+      }
+      
+    } 
 
-  } catch (error) {
-    console.log(error);
-  }
+  
 };
 exports.listPaintExport = async function (req, res) {
   const response = await PaintExportSchema.find({})
@@ -115,13 +113,39 @@ exports.detailPaintItem = async function (req, res) {
   const id = req.params.id;
   console.log(id);
   const response = await PaintItemSchema.find({id: id});
-  res.status(200).json({response});;
+  res.status(200).json({response});
 }
 exports.updatePaintItem = async function (req, res) {
   
   const filter = req.params;
   const update = req.body;
   console.log(filter)
-  const response = await PaintItemSchema.findOneAndUpdate(filter, update);
+  try {
+    const response = await PaintItemSchema.findOneAndUpdate(filter, update);
   res.status(200).json({response});
+  } catch (error) {
+    res.status(400).json({error: "Lỗi phía sever không thể xử lí !!"})
+  }
+  
+}
+exports.deletePaintItems = async function (req, res) {
+  const id = req.params.id;
+  const filter = {id: id}
+  const response = await PaintItemSchema.deleteOne(filter);
+  console.log(response)
+  if(response.deletedCount !== 0 ) {
+    res.status(200).json({success: "Xoá thành công"})
+  } else {
+    res.status(400).json({error: "Xoá không thành công "})
+  }
+}
+exports.deletePaintExport = async function (req, res) {
+  const id = req.params.id;
+  const filter = {id: id};
+  const response = await PaintExportSchema.deleteOne(filter);
+  if(response.deletedCount !== 0 ) {
+    res.status(200).json({success: "Xoá thành công"})
+  } else {
+    res.status(400).json({error: "Xoá không thành công "})
+  }
 }
