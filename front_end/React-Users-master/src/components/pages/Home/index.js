@@ -7,6 +7,8 @@ import BoxExport from "../../BoxExport"
 
 const cx = classNames.bind(styles)
 
+
+
 const Home = () => {
   const [products, setProduct] = useState([]);
   const url = "http://localhost:9000/products"
@@ -14,6 +16,7 @@ const Home = () => {
   useEffect(() => {
     loadProduct();
   }, []);
+
 
   const loadProduct = async () => {
     const result = await axios.get(url);
@@ -25,7 +28,7 @@ const Home = () => {
     loadProduct();
   };
 
-  
+
 
   return (
     <div className={cx('container')}>
@@ -74,25 +77,22 @@ const Home = () => {
 
                   
                   </td>
-                  {/* <td>
                   
 
-                    
-                      <NavLink exact to="/exportproduct" classNames={cx('btn', 'btn-danger')}>
-                  Xuất hàng
-                </NavLink>
-                  </td> */}
-
                 <BoxExport props={product.id}/>
-
+                
                 </tr>
+                
               ))}
+                <button style={{position: 'absolute', height: '40px', fontSize: '1.6rem'}} className="btn btn-primary btn-block">Xác nhận</button>
+
             </tbody>
           </table>
         </div>
       </div>
     );
   };
+
   
   export default Home;
                   

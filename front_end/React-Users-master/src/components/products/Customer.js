@@ -23,7 +23,7 @@ const Customer = () => {
   return (
     <div className="container py-4">
       <Link className="btn btn-primary" to="/">
-        back to Home
+        Back to Home
       </Link>
       <h1 className="display-4">User Id: {id}</h1>
       <hr />
