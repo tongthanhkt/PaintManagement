@@ -12,36 +12,23 @@ const cx = classNames.bind(styles);
 function BoxExport({ props }) {
     const id = props;
 
-    const [productExport, setProductExport] = useState('');
+    const [productExport, setProductExport] = useState({
+        amount: ""
+    });
     const [productsExport, setProductsExport] = useState([]);
-
-
-    
-
-    
 
     const handleAdd = (e) => {
         setProductsExport((prev) => {
-            const detailProductsExport = [{id, amount: productExport}];
+            const detailProductsExport = [{ id, amount: productExport }];
             return detailProductsExport;
         });
-
-
-        
-        
-
 
         handleCancelSelect(e);
     };
 
-
     const exportItems = {
-        "paint_export_items": [
-            ...productsExport
-        ]
-    }
-
-
+        paint_export_items: [...productsExport],
+    };
 
     const onSubmit = async () => {
         axios.post(urlExport, exportItems).catch(function() {
