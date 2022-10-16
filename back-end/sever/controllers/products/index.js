@@ -12,4 +12,5 @@ router.get("/detail-paint-export/:id", productsController.detailPaintExport);
 router.delete("/delete-paint-items/:id", productsController.deletePaintItems);
 router.delete("/delete-paint-export/:id", productsController.deletePaintExport);
 router.get('/income-customer/:phone_number', productsController.incomeCustomer);
+router.get('/statistical-income', productsController.statisticalIncome);
 module.exports = router;

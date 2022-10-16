@@ -158,8 +158,32 @@ exports.incomeCustomer = async function (req, res) {
   const customerPaintExport = listPaintExport.filter(paintExport => 
     paintExport.phone_number === phoneNumber
   )
-  let totalIncomeCustomer = 0
-  customerPaintExport.forEach(paintExport => totalIncomeCustomer += paintExport.total_export_price )
   if(customerPaintExport.length === 0) res.status(400).json({error: `Không tồn tại hóa đơn của khách hàng ${phoneNumber}`})
-  else res.status(200).json({customerPaintExport, phone_number: phoneNumber, full_name: customerPaintExport[0].full_name || '', address: customerPaintExport[0].address, total_income_customer: totalIncomeCustomer })
+  else {
+    let totalIncomeCustomer = 0
+    customerPaintExport.forEach(paintExport => totalIncomeCustomer += paintExport.total_export_price )
+    res.status(200).json({customerPaintExport, phone_number: phoneNumber, full_name: customerPaintExport[0].full_name || '', address: customerPaintExport[0].address, total_income_customer: totalIncomeCustomer })
+    }
+  }
+  
+  
+exports.statisticalIncome = async function (req, res ){ 
+  console.log(req.body)
+  const fromDate =BigInt(req.body.from_date);
+  const toDate = BigInt(req.body.to_date);
+  const listPaintExport = await PaintExportSchema.find({});
+  const listStatisticalExport =  listPaintExport.filter(paintExport=>{
+    const create_time = new Date(paintExport.created_time)
+    if(create_time >= fromDate && create_time <= toDate ){
+      return true
+    }
+  })
+  let totalStatisticalExport = 0;
+  if(listStatisticalExport.length == 0) res.status(400).json({error: 'Không tồn tại hóa đơn trong thời gian này'})
+  else {
+    listStatisticalExport.forEach(statisticalExport => totalStatisticalExport += statisticalExport.total_export_price)
+    res.status(200).json({listStatisticalExport, total_statistical_export :totalStatisticalExport })
+  }
+  
+
 }
