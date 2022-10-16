@@ -151,3 +151,15 @@ exports.deletePaintExport = async function (req, res) {
     res.status(400).json({error: "Xoá không thành công "})
   }
 }
+exports.incomeCustomer = async function (req, res) {
+  const phoneNumber = req.params.phone_number;
+  const listPaintExport = await PaintExportSchema.find({});
+  console.log(phoneNumber)
+  const customerPaintExport = listPaintExport.filter(paintExport => 
+    paintExport.phone_number === phoneNumber
+  )
+  let totalIncomeCustomer = 0
+  customerPaintExport.forEach(paintExport => totalIncomeCustomer += paintExport.total_export_price )
+  if(customerPaintExport.length === 0) res.status(400).json({error: `Không tồn tại hóa đơn của khách hàng ${phoneNumber}`})
+  else res.status(200).json({customerPaintExport, phone_number: phoneNumber, full_name: customerPaintExport[0].full_name || '', address: customerPaintExport[0].address, total_income_customer: totalIncomeCustomer })
+}
