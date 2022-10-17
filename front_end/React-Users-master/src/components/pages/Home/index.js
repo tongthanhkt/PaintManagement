@@ -11,7 +11,7 @@ const Home = () => {
     const [products, setProduct] = useState([]);
     const [productsExport, setProductsExport] = useState([]);
     const url = 'http://localhost:9000/products';
-    console.log(products);
+
     useEffect(() => {
         loadProduct();
     }, []);
@@ -100,7 +100,7 @@ const Home = () => {
                                         }
                                     >
                                         Xóa
-                                    </Link>
+                                    </Link>``
                                 </td>
 
                                 <td>

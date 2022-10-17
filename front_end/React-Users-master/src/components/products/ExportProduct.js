@@ -44,8 +44,8 @@ function ExportProduct() {
               type="number"
               className="form-control form-control-lg"
               placeholder="Nhập số lượng sản phẩm muốn xuất"
-              name="amount"
-              value={amount}
+              name="productExport"
+              value={productExport}
               onChange={e => onInputChange(e)}
             />
           </div>

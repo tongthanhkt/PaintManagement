@@ -12,35 +12,25 @@ const cx = classNames.bind(styles);
 function BoxExport({ props }) {
     const id = props;
 
-
-    const [productExport, setProductExport] = useState({amount: ''});
-
-    const { amount } = productExport;
+    const [productExport, setProductExport] = useState('');
 
     const [productsExport, setProductsExport] = useState([]);
 
-
-
     const onInputChange = (e) => {
-        setProductExport({ ...productExport, id, [e.target.name]: e.target.value });
-
+        setProductExport(e.target.value);
         setProductsExport(() => {
-            const detailProductsExport = [
-
-                {  ...productExport},
-            ];
+            const detailProductsExport = [{ id, amount: productExport }];
             return detailProductsExport;
         });
     };
 
+    const setProducts = () => {};
+
+    console.log(productsExport);
 
     const exportItems = {
         paint_export_items: [...productsExport],
     };
-
-    console.log(exportItems);
-
-
 
     const onSubmit = async () => {
         axios.post(urlExport, exportItems).catch(function() {
@@ -48,31 +38,17 @@ function BoxExport({ props }) {
         });
     };
 
-    const handleAdd = () => {
-        setProductsExport((prev) => {
-            const detailProductsExport = [
-                ...prev,
-                { id, amount: productExport.amount },
-            ];
-            return detailProductsExport;
-        });
-    };
-
     return (
-
-            <input
-                multiple={true}
-                data-id={id}
-                type="number"
-                className={cx('input')}
-                placeholder="Nhập số lượng"
-                name="amount"
-                value={amount}
-                onChange={(e) => {
-                    onInputChange(e);
-                }}
-            />
-
+        <input
+            type="number"
+            className={cx('input')}
+            placeholder="Nhập số lượng"
+            name="productExport"
+            value={productExport}
+            onChange={(e) => {
+                onInputChange(e);
+            }}
+        />
     );
 }
 
