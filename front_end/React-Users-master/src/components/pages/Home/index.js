@@ -1,20 +1,61 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { Link, NavLink } from 'react-router-dom';
 import styles from './Home.module.scss';
 import classNames from 'classnames/bind';
-import BoxExport from '../../BoxExport';
-
+import ButtonConfirmExport from '../../ButtonConfirmExport'
 const cx = classNames.bind(styles);
 
 const Home = () => {
     const [products, setProduct] = useState([]);
+    const [productExport, setProductExport] = useState({
+        amount: '',
+        id: '',
+    });
+
+    const inputRef = useRef();
+
     const [productsExport, setProductsExport] = useState([]);
+    const { amount, id } = productExport;
+
+    const onInputChange = (e) => {
+        setProductExport({
+            ...productExport,
+            id: e.target.dataset.id,
+            [e.target.name]: e.target.value,
+        });
+
+        // setProductsExport((prev)=> {
+        //     const detailProductsExport = [...prev,productExport];
+        //     return detailProductsExport
+        // })
+    };
+
+    const confirmExportProduct = () => {
+
+        setProductsExport((prev) => {
+            const detailProductsExport = [...prev, productExport];
+            setProductExport({
+
+              })
+            return detailProductsExport;
+        });
+
+
+       
+    };
+
+
     const url = 'http://localhost:9000/products';
 
     useEffect(() => {
         loadProduct();
     }, []);
+
+    const exportItems = {
+        paint_export_items: [...productsExport],
+    };
+
 
     const loadProduct = async () => {
         const result = await axios.get(url);
@@ -100,15 +141,28 @@ const Home = () => {
                                         }
                                     >
                                         Xóa
-                                    </Link>``
+                                    </Link>
                                 </td>
 
                                 <td>
-                                        <BoxExport props={product.id}/>
+                                    <input
+                                        ref={inputRef}
+                                        data-id={product.id}
+                                        data-index={index}
+                                        type="number"
+                                        placeholder="Nhập số lượng"
+                                        name="amount"
+                                        onChange={(e) => onInputChange(e)}
+
+                                    />
+
+                                    <button onClick={confirmExportProduct}>
+                                        Xác nhận
+                                    </button>
                                 </td>
                             </tr>
                         ))}
-                       
+                        <ButtonConfirmExport props = {exportItems}/>
                     </tbody>
                 </table>
             </div>
