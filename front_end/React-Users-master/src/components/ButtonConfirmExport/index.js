@@ -1,17 +1,11 @@
 import axios from 'axios';
+import styles from './ButtonConfirmExport.module.scss';
+import classNames from 'classnames/bind';
 
+const cx = classNames.bind(styles);
 
-const urlExport = 'http://localhost:9000/products/create-paint-export';
-
-function ButtonConfirmExport({props}) {
-    console.log(props)
-    const onSubmit = async () => {
-        axios.post(urlExport, props).catch(function() {
-            alert('Vui lòng kiểm tra lại!!');
-        });
-    };
-
-    return ( <button onClick={onSubmit}>Xác nhận xuất hàng</button> );
+function ButtonConfirmExport({ props }) {
+    return <button>Xác Nhận</button>;
 }
 
 export default ButtonConfirmExport;

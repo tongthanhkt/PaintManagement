@@ -3,19 +3,27 @@ import axios from 'axios';
 import { Link, NavLink } from 'react-router-dom';
 import styles from './Home.module.scss';
 import classNames from 'classnames/bind';
-import ButtonConfirmExport from '../../ButtonConfirmExport'
+import ButtonConfirmExport from '../../ButtonConfirmExport';
+import e from 'express';
+import { response } from 'express';
 const cx = classNames.bind(styles);
 
+const url = 'http://localhost:9000/products';
+
 const Home = () => {
+    const urlExport = 'http://localhost:9000/products/create-paint-export';
+
     const [products, setProduct] = useState([]);
     const [productExport, setProductExport] = useState({
         amount: '',
         id: '',
     });
 
-    const inputRef = useRef();
-
     const [productsExport, setProductsExport] = useState([]);
+
+    const [revertId, setRevertId] = useState();
+
+    console.log(revertId);
     const { amount, id } = productExport;
 
     const onInputChange = (e) => {
@@ -24,43 +32,36 @@ const Home = () => {
             id: e.target.dataset.id,
             [e.target.name]: e.target.value,
         });
-
-        // setProductsExport((prev)=> {
-        //     const detailProductsExport = [...prev,productExport];
-        //     return detailProductsExport
-        // })
     };
 
-    const confirmExportProduct = () => {
+    const onSubmit = (e) => {
+        if (e.target.closest('td').querySelector('input').value === '') {
+            alert('Vui lòng nhập số lượng');
+        } else {
+            setProductsExport((prev) => {
+                const detailExport = [...prev, productExport];
+                return detailExport;
+            });
 
-        setProductsExport((prev) => {
-            const detailProductsExport = [...prev, productExport];
             setProductExport({
+                id: '',
+                amount: '',
+            });
 
-              })
-            return detailProductsExport;
-        });
+            const wrapper = e.target.closest('td');
 
-
-       
+            const inputValue = wrapper.querySelector('input');
+            inputValue.value = '';
+        }
     };
-
-
-    const url = 'http://localhost:9000/products';
 
     useEffect(() => {
         loadProduct();
     }, []);
 
-    const exportItems = {
-        paint_export_items: [...productsExport],
-    };
-
-
     const loadProduct = async () => {
         const result = await axios.get(url);
         const value = result.data.reverse();
-
         setProduct(value);
     };
 
@@ -71,6 +72,31 @@ const Home = () => {
         loadProduct();
     };
 
+    const confirmExport = async (e) => {
+        // const targetValue = e.target
+        // console.log(targetValue);
+        const exportItems = {
+            paint_export_items: [...productsExport],
+        };
+        await axios
+            .post(urlExport, { ...exportItems })
+            .then(function(response) {
+                const value = response.data;
+                const idExport = value.response.id;
+
+                return idExport;
+            })
+
+            // .then(function(result) {
+
+            // })
+
+            .catch(function() {
+                alert('Vui lòng nhập số lượng phù hợp');
+            });
+
+    };
+
     return (
         <div className={cx('container')}>
             <div className={cx('py-4')}>
@@ -79,7 +105,7 @@ const Home = () => {
                     <thead className={cx('thead-dark')}>
                         <tr>
                             <th className={cx('table-custom')} scope="col">
-                                # Id
+                                #Id
                             </th>
                             <th className={cx('table-custom')} scope="col">
                                 Tên sản phẩm
@@ -146,24 +172,33 @@ const Home = () => {
 
                                 <td>
                                     <input
-                                        ref={inputRef}
                                         data-id={product.id}
                                         data-index={index}
                                         type="number"
                                         placeholder="Nhập số lượng"
                                         name="amount"
                                         onChange={(e) => onInputChange(e)}
-
                                     />
 
-                                    <button onClick={confirmExportProduct}>
+                                    <button
+                                        onClick={onSubmit}
+                                        data-id={product.id}
+                                    >
                                         Xác nhận
                                     </button>
                                 </td>
                             </tr>
                         ))}
-                        <ButtonConfirmExport props = {exportItems}/>
+
+                        {/* <button onClick={confirmExport}>Xác nhận</button> */}
                     </tbody>
+                    <Link
+                        class="btn btn-danger"
+                        onClick={confirmExport}
+                        to={`/detail-paint-export`}
+                    >
+                        Xác nhận
+                    </Link>
                 </table>
             </div>
         </div>
