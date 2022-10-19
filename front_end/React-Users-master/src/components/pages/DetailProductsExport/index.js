@@ -8,7 +8,7 @@ function DetailProductsExport({ props }) {
     return (
         <div className={cx('container')}>
             <div className={cx('py-4')}>
-                <h1 className={cx('header-title')}>Tồn kho</h1>
+                <h1 className={cx('header-title')}>Chi tiết xuất hàng</h1>
                 <table className={cx('table', 'table-bordered')}>
                     <thead className={cx('thead-dark')}>
                         <tr>

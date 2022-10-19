@@ -4,8 +4,7 @@ import { Link, NavLink } from 'react-router-dom';
 import styles from './Home.module.scss';
 import classNames from 'classnames/bind';
 import ButtonConfirmExport from '../../ButtonConfirmExport';
-import e from 'express';
-import { response } from 'express';
+
 const cx = classNames.bind(styles);
 
 const url = 'http://localhost:9000/products';
@@ -21,9 +20,6 @@ const Home = () => {
 
     const [productsExport, setProductsExport] = useState([]);
 
-    const [revertId, setRevertId] = useState();
-
-    console.log(revertId);
     const { amount, id } = productExport;
 
     const onInputChange = (e) => {
@@ -72,29 +68,32 @@ const Home = () => {
         loadProduct();
     };
 
+    const loadExportDetail = async () => {
+        const result = await axios.get(
+            'http://localhost:9000/products/list-paint-export',
+        );
+
+        const value = result.data.response.slice(-1);
+
+        const idRevert = value[0].id;
+
+        const jsonId = JSON.stringify(idRevert);
+        localStorage.setItem('id', jsonId);
+    };
+
     const confirmExport = async (e) => {
-        // const targetValue = e.target
-        // console.log(targetValue);
         const exportItems = {
             paint_export_items: [...productsExport],
         };
+        console.log(exportItems);
         await axios
             .post(urlExport, { ...exportItems })
-            .then(function(response) {
-                const value = response.data;
-                const idExport = value.response.id;
-
-                return idExport;
-            })
-
-            // .then(function(result) {
-
-            // })
 
             .catch(function() {
                 alert('Vui lòng nhập số lượng phù hợp');
             });
 
+        loadExportDetail();
     };
 
     return (
