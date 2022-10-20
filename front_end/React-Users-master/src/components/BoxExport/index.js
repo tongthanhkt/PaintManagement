@@ -37,11 +37,6 @@ function BoxExport({ props }) {
     const exportItems = {
         paint_export_items: [...productsExport],
     };
-
-    console.log(exportItems);
-
-
-
     const onSubmit = async () => {
         axios.post(urlExport, exportItems).catch(function() {
             alert('Vui lòng kiểm tra lại!!');

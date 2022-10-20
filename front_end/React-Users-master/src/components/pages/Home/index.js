@@ -11,7 +11,7 @@ const Home = () => {
     const [products, setProduct] = useState([]);
     const [productsExport, setProductsExport] = useState([]);
     const url = 'http://localhost:9000/products';
-    console.log(products);
+    console.log(productsExport);
     useEffect(() => {
         loadProduct();
     }, []);
