@@ -78,6 +78,12 @@ exports.createPaintExport = async function (req, res) {
               paintExportItems[i].product_price * paintExportItems[i].amount;
               totalExportPrice += paintExportItems[i].total_price
           }
+          if(paintItems[j].amount - paintExportItems[i].amount === 0) {
+            const id = paintItems[j].id;
+            const filter = {id: id}
+            const response = await PaintItemSchema.deleteOne(filter);
+            
+          }
         }
       }
       let paintExport = new PaintExportSchema({
