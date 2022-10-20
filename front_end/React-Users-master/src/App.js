@@ -15,7 +15,7 @@ import AddProduct from './components/products/AddProduct';
 import EditProduct from './components/products/EditProduct';
 import DetailProduct from './components/products/DetailProduct';
 import ExportProduct from './components/products/ExportProduct';
-import DetailProductsExport from './components/pages/DetailProductsExport';
+import AllBillExport from './components/pages/AllBillExport';
 
 function App() {
     return (
@@ -42,12 +42,13 @@ function App() {
                         path="/exportproduct"
                         component={ExportProduct}
                     />
+
                     <Route
                         exact
-                        path="/detail-paint-export"
-                        component={DetailProductsExport}
-
+                        path="/detailbillexport"
+                        component={AllBillExport}
                     />
+
                     <Route component={NotFound} />
                 </Switch>
             </div>

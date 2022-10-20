@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link, NavLink } from 'react-router-dom';
 import styles from './Home.module.scss';
 import classNames from 'classnames/bind';
-import ButtonConfirmExport from '../../ButtonConfirmExport';
+
 
 const cx = classNames.bind(styles);
 
@@ -78,6 +78,8 @@ const Home = () => {
         const value = result.data.reverse();
         setProduct(value);
     };
+
+    console.log(products)
 
     const deleteProduct = async (id) => {
         await axios.delete(
