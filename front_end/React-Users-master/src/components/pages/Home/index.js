@@ -1,17 +1,74 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { Link, NavLink } from 'react-router-dom';
 import styles from './Home.module.scss';
 import classNames from 'classnames/bind';
-import BoxExport from '../../BoxExport';
+import ButtonConfirmExport from '../../ButtonConfirmExport';
 
 const cx = classNames.bind(styles);
 
+const url = 'http://localhost:9000/products';
+
 const Home = () => {
+    const urlExport = 'http://localhost:9000/products/create-paint-export';
+
+    const box = document.querySelector('.box')
+
+
+
     const [products, setProduct] = useState([]);
+    const [productExport, setProductExport] = useState({
+        amount: '',
+        id: '',
+    });
+
     const [productsExport, setProductsExport] = useState([]);
-    const url = 'http://localhost:9000/products';
-    console.log(productsExport);
+
+    const [userInfo, setUserInfo] = useState({
+        full_name: '',
+        phone_number: ''
+    });
+
+    const { full_name, phone_number } = userInfo
+
+
+    const { amount, id } = productExport;
+
+    const onInputChange = (e) => {
+        setProductExport({
+            ...productExport,
+            id: e.target.dataset.id,
+            [e.target.name]: e.target.value,
+        });
+    };
+
+    const onBoxInputChange = (e) => {
+        setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
+    };
+
+    const onSubmit = (e) => {
+        if (e.target.closest('td').querySelector('input').value === '') {
+            alert('Vui lòng nhập số lượng');
+        } else {
+            setProductsExport((prev) => {
+                const detailExport = [...prev, productExport];
+                return detailExport;
+            });
+
+            setProductExport({
+                id: '',
+                amount: '',
+            });
+
+            const wrapper = e.target.closest('td');
+
+            const inputValue = wrapper.querySelector('input');
+            inputValue.value = '';
+            box.style.display = 'block'
+        }
+    };
+
+
     useEffect(() => {
         loadProduct();
     }, []);
@@ -19,7 +76,6 @@ const Home = () => {
     const loadProduct = async () => {
         const result = await axios.get(url);
         const value = result.data.reverse();
-
         setProduct(value);
     };
 
@@ -30,6 +86,28 @@ const Home = () => {
         loadProduct();
     };
 
+
+
+    const confirmExport = async (e) => {
+
+        const exportItems = {
+            paint_export_items: [...productsExport],
+            ...userInfo
+        };
+
+        await axios
+            .post(urlExport, { ...exportItems })
+
+            .catch(function () {
+                alert('Vui lòng nhập thông tin xuất hàng phù hợp');
+            });
+            box.style.display = 'none'
+
+        window.location.reload();
+
+
+    };
+
     return (
         <div className={cx('container')}>
             <div className={cx('py-4')}>
@@ -38,7 +116,7 @@ const Home = () => {
                     <thead className={cx('thead-dark')}>
                         <tr>
                             <th className={cx('table-custom')} scope="col">
-                                # Id
+                                #Id
                             </th>
                             <th className={cx('table-custom')} scope="col">
                                 Tên sản phẩm
@@ -104,13 +182,64 @@ const Home = () => {
                                 </td>
 
                                 <td>
-                                        <BoxExport props={product.id}/>
+                                    <input
+                                        data-id={product.id}
+                                        data-index={index}
+                                        type="number"
+                                        placeholder="Nhập số lượng"
+                                        name="amount"
+                                        onChange={(e) => onInputChange(e)}
+                                    />
+
+                                    <button
+                                        onClick={onSubmit}
+                                        data-id={product.id}
+                                    >
+                                        Xác nhận
+                                    </button>
                                 </td>
                             </tr>
                         ))}
-                       
+
                     </tbody>
+
+
                 </table>
+            </div>
+
+            <div className={cx('box')} style={{display: 'none'}}>
+
+
+
+                <div className={cx('form-group')}>
+                    <input
+                        type="text"
+                        className={cx('form-control form-control-lg')}
+                        placeholder="Nhập tên khách hàng"
+                        name="full_name"
+                        value={full_name}
+                        onChange={(e) => onBoxInputChange(e)}
+                    />
+                </div>
+                <div className={cx('form-group')}>
+                    <input
+                        type="number"
+                        className={cx(
+                            'form-control',
+                            'form-control-lg',
+                        )}
+                        placeholder="Nhập số điện thoại khách hàng"
+                        name="phone_number"
+                        value={phone_number}
+                        onChange={(e) => onBoxInputChange(e)}
+                    />
+                </div>
+
+
+                <button onClick={confirmExport} className={cx('btn btn-primary', 'btn-block')}>
+                    Xác nhận xuất hàng
+                </button>
+
             </div>
         </div>
     );
