@@ -4,7 +4,7 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
       <div className="container">
-       
+
         <button
           className="navbar-toggler"
           type="button"
@@ -23,14 +23,24 @@ const Navbar = () => {
               <NavLink className="nav-link" exact to="/">
                 Home
               </NavLink>
+
+
             </li>
-           
+
+            <li className="nav-item">
+
+              <NavLink className="nav-link" exact to="/detailbillexport">
+                Hóa đơn đã xuất
+              </NavLink>
+            </li>
+
+
           </ul>
         </div>
 
         <Link className="btn btn-outline-light" to="/products/add">Thêm sản phẩm vào kho</Link>
 
-  
+
       </div>
     </nav>
   );
