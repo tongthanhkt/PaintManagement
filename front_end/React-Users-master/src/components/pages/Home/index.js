@@ -30,7 +30,7 @@ const Home = () => {
     });
 
     const { full_name, phone_number } = userInfo
-    console.log(userInfo)
+
 
     const { amount, id } = productExport;
 
@@ -202,7 +202,7 @@ const Home = () => {
                         ))}
 
                     </tbody>
-                    <button >Xác nhận</button>
+
 
                 </table>
             </div>
