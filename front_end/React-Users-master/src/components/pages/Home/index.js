@@ -12,6 +12,10 @@ const url = 'http://localhost:9000/products';
 const Home = () => {
     const urlExport = 'http://localhost:9000/products/create-paint-export';
 
+    const box = document.querySelector('.box')
+
+
+
     const [products, setProduct] = useState([]);
     const [productExport, setProductExport] = useState({
         amount: '',
@@ -19,6 +23,14 @@ const Home = () => {
     });
 
     const [productsExport, setProductsExport] = useState([]);
+
+    const [userInfo, setUserInfo] = useState({
+        full_name: '',
+        phone_number: ''
+    });
+
+    const { full_name, phone_number } = userInfo
+    console.log(userInfo)
 
     const { amount, id } = productExport;
 
@@ -28,6 +40,10 @@ const Home = () => {
             id: e.target.dataset.id,
             [e.target.name]: e.target.value,
         });
+    };
+
+    const onBoxInputChange = (e) => {
+        setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
     };
 
     const onSubmit = (e) => {
@@ -48,8 +64,10 @@ const Home = () => {
 
             const inputValue = wrapper.querySelector('input');
             inputValue.value = '';
+            box.style.display = 'block'
         }
     };
+
 
     useEffect(() => {
         loadProduct();
@@ -68,32 +86,26 @@ const Home = () => {
         loadProduct();
     };
 
-    const loadExportDetail = async () => {
-        const result = await axios.get(
-            'http://localhost:9000/products/list-paint-export',
-        );
 
-        const value = result.data.response.slice(-1);
-
-        const idRevert = value[0].id;
-
-        const jsonId = JSON.stringify(idRevert);
-        localStorage.setItem('id', jsonId);
-    };
 
     const confirmExport = async (e) => {
+
         const exportItems = {
             paint_export_items: [...productsExport],
+            ...userInfo
         };
-        console.log(exportItems);
+
         await axios
             .post(urlExport, { ...exportItems })
 
-            .catch(function() {
-                alert('Vui lòng nhập số lượng phù hợp');
+            .catch(function () {
+                alert('Vui lòng nhập thông tin xuất hàng phù hợp');
             });
+            box.style.display = 'none'
 
-        loadExportDetail();
+        window.location.reload();
+
+
     };
 
     return (
@@ -189,16 +201,45 @@ const Home = () => {
                             </tr>
                         ))}
 
-                        {/* <button onClick={confirmExport}>Xác nhận</button> */}
                     </tbody>
-                    <Link
-                        class="btn btn-danger"
-                        onClick={confirmExport}
-                        to={`/detail-paint-export`}
-                    >
-                        Xác nhận
-                    </Link>
+                    <button >Xác nhận</button>
+
                 </table>
+            </div>
+
+            <div className={cx('box')} style={{display: 'none'}}>
+
+
+
+                <div className={cx('form-group')}>
+                    <input
+                        type="text"
+                        className={cx('form-control form-control-lg')}
+                        placeholder="Nhập tên khách hàng"
+                        name="full_name"
+                        value={full_name}
+                        onChange={(e) => onBoxInputChange(e)}
+                    />
+                </div>
+                <div className={cx('form-group')}>
+                    <input
+                        type="number"
+                        className={cx(
+                            'form-control',
+                            'form-control-lg',
+                        )}
+                        placeholder="Nhập số điện thoại khách hàng"
+                        name="phone_number"
+                        value={phone_number}
+                        onChange={(e) => onBoxInputChange(e)}
+                    />
+                </div>
+
+
+                <button onClick={confirmExport} className={cx('btn btn-primary', 'btn-block')}>
+                    Xác nhận xuất hàng
+                </button>
+
             </div>
         </div>
     );
