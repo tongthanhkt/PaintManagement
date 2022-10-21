@@ -29,7 +29,7 @@ const Navbar = () => {
 
             <li className="nav-item">
 
-              <NavLink className="nav-link" exact to="/detailbillexport">
+              <NavLink className="nav-link" exact to="/detailallbillexport">
                 Hóa đơn đã xuất
               </NavLink>
             </li>

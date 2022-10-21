@@ -16,6 +16,7 @@ import EditProduct from './components/products/EditProduct';
 import DetailProduct from './components/products/DetailProduct';
 import ExportProduct from './components/products/ExportProduct';
 import AllBillExport from './components/pages/AllBillExport';
+import DetailBillExport from './components/pages/DetailBillExport';
 
 function App() {
     return (
@@ -45,8 +46,14 @@ function App() {
 
                     <Route
                         exact
-                        path="/detailbillexport"
+                        path="/detailallbillexport"
                         component={AllBillExport}
+                    />
+
+                    <Route
+                        exact
+                        path="/detailbillexport"
+                        component={DetailBillExport}
                     />
 
                     <Route component={NotFound} />

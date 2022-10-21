@@ -99,19 +99,17 @@ const Home = () => {
 
         await axios
             .post(urlExport, { ...exportItems })
-            .then(function(response) {
+            .then(function (data) {
 
+                console.log(data.response.id)
+                // window.location = '/detailbillexport'
 
-                window.location = "/products/add"
-              
             })
 
             .catch(function () {
                 alert('Vui lòng nhập thông tin xuất hàng phù hợp');
             });
-            box.style.display = 'none'
-
-        window.location.reload();
+        box.style.display = 'none'
 
 
     };
@@ -215,7 +213,7 @@ const Home = () => {
                 </table>
             </div>
 
-            <div className={cx('box')} style={{display: 'none'}}>
+            <div className={cx('box')} style={{ display: 'none' }}>
 
 
 
