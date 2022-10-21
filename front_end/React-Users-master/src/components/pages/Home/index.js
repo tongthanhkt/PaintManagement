@@ -99,6 +99,12 @@ const Home = () => {
 
         await axios
             .post(urlExport, { ...exportItems })
+            .then(function(response) {
+
+
+                window.location = "/products/add"
+              
+            })
 
             .catch(function () {
                 alert('Vui lòng nhập thông tin xuất hàng phù hợp');
