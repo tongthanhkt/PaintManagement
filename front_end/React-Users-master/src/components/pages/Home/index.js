@@ -4,7 +4,6 @@ import { Link, NavLink } from 'react-router-dom';
 import styles from './Home.module.scss';
 import classNames from 'classnames/bind';
 
-
 const cx = classNames.bind(styles);
 
 const url = 'http://localhost:9000/products';
@@ -12,11 +11,10 @@ const url = 'http://localhost:9000/products';
 const Home = () => {
     const urlExport = 'http://localhost:9000/products/create-paint-export';
 
-    const box = document.querySelector('.box')
-
-
+    const box = document.querySelector('.box');
 
     const [products, setProduct] = useState([]);
+
     const [productExport, setProductExport] = useState({
         amount: '',
         id: '',
@@ -26,11 +24,10 @@ const Home = () => {
 
     const [userInfo, setUserInfo] = useState({
         full_name: '',
-        phone_number: ''
+        phone_number: '',
     });
 
-    const { full_name, phone_number } = userInfo
-
+    const { full_name, phone_number } = userInfo;
 
     const { amount, id } = productExport;
 
@@ -55,19 +52,22 @@ const Home = () => {
                 return detailExport;
             });
 
-            setProductExport({
-                id: '',
-                amount: '',
-            });
+            
 
             const wrapper = e.target.closest('td');
 
             const inputValue = wrapper.querySelector('input');
             inputValue.value = '';
-            box.style.display = 'block'
+            box.style.display = 'block';
         }
+
+        setProductExport({
+            id: '',
+            amount: '',
+        });
     };
 
+    console.log(productsExport)
 
     useEffect(() => {
         loadProduct();
@@ -79,8 +79,6 @@ const Home = () => {
         setProduct(value);
     };
 
-    console.log(products)
-
     const deleteProduct = async (id) => {
         await axios.delete(
             `http://localhost:9000/products/delete-paint-items/${id}`,
@@ -88,30 +86,24 @@ const Home = () => {
         loadProduct();
     };
 
-
-
     const confirmExport = async (e) => {
-
         const exportItems = {
             paint_export_items: [...productsExport],
-            ...userInfo
+            ...userInfo,
         };
 
         await axios
             .post(urlExport, { ...exportItems })
-            .then(function (data) {
+            .then(function(value) {
+                const id = value.data.response.id;
 
-                console.log(data.response.id)
-                // window.location = '/detailbillexport'
-
+                window.location = `/detailbillexport/${id}`;
             })
 
-            .catch(function () {
+            .catch(function() {
                 alert('Vui lòng nhập thông tin xuất hàng phù hợp');
             });
-        box.style.display = 'none'
-
-
+        box.style.display = 'none';
     };
 
     return (
@@ -206,17 +198,11 @@ const Home = () => {
                                 </td>
                             </tr>
                         ))}
-
                     </tbody>
-
-
                 </table>
             </div>
 
             <div className={cx('box')} style={{ display: 'none' }}>
-
-
-
                 <div className={cx('form-group')}>
                     <input
                         type="text"
@@ -230,10 +216,7 @@ const Home = () => {
                 <div className={cx('form-group')}>
                     <input
                         type="number"
-                        className={cx(
-                            'form-control',
-                            'form-control-lg',
-                        )}
+                        className={cx('form-control', 'form-control-lg')}
                         placeholder="Nhập số điện thoại khách hàng"
                         name="phone_number"
                         value={phone_number}
@@ -241,11 +224,12 @@ const Home = () => {
                     />
                 </div>
 
-
-                <button onClick={confirmExport} className={cx('btn btn-primary', 'btn-block')}>
+                <button
+                    onClick={confirmExport}
+                    className={cx('btn btn-primary', 'btn-block')}
+                >
                     Xác nhận xuất hàng
                 </button>
-
             </div>
         </div>
     );

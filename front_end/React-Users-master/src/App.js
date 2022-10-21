@@ -52,7 +52,7 @@ function App() {
 
                     <Route
                         exact
-                        path="/detailbillexport"
+                        path="/detailbillexport/:id"
                         component={DetailBillExport}
                     />
 

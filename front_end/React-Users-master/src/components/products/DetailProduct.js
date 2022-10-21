@@ -22,7 +22,7 @@ const DetailProduct = () => {
   return (
     <div className="container py-4">
       <Link className="btn btn-primary" to="/">
-        Back to Home
+        Trở về trang chủ
       </Link>
 
       <hr />
