@@ -8,13 +8,15 @@
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.27.2",
     "babel-jest": "^29.1.2",
-    "bootstrap": "4.4.1",
+    "bootstrap": "^4.4.1",
     "classnames": "^2.3.2",
     "concurrently": "5.1.0",
+    "datatables-bootstrap": "^0.0.1",
     "json-server": "^0.4.2",
     "normalize.css": "^8.0.1",
-    "react": "16.13.1",
-    "react-dom": "16.13.1",
+    "react": "^16.13.1",
+    "react-bootstrap": "^2.5.0",
+    "react-dom": "^16.13.1",
     "react-router-dom": "5.1.2",
     "react-scripts": "^5.0.1"
   },
@@ -28,7 +30,6 @@
   },
   "eslintConfig": {
     "extends": "react-app"
-   
   },
   "browserslist": {
     "production": [
