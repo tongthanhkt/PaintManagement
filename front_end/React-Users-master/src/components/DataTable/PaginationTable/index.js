@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import Pagination from 'react-bootstrap/Pagination'
+import Pagination from 'react-bootstrap/Pagination';
 
 function PaginationTable({
     total = 0,
     itemsPerPage = 20,
-    currentPage = 2,
+    currentPage = 1,
     onPageChange,
 }) {
     const [totalPages, setTotalPages] = useState(0);
@@ -18,7 +18,7 @@ function PaginationTable({
     const paginationItems = useMemo(() => {
         const pages = [];
 
-        for (let i = 0; i < totalPages; i++) {
+        for (let i = 1; i <= totalPages; i++) {
             pages.push(
                 <Pagination.Item
                     key={i}
@@ -26,7 +26,7 @@ function PaginationTable({
                     onClick={() => onPageChange(i)}
                 >
                     {i}
-                </Pagination.Item>,
+                </Pagination.Item>
             );
         }
 
@@ -36,12 +36,12 @@ function PaginationTable({
     if(totalPages === 0) return null
     return (
         <Pagination>
-            <Pagination.prev
+            <Pagination.Prev
                 onClick={() => onPageChange(currentPage - 1)}
                 disabled={currentPage === 1}
             />
             {paginationItems}
-            <Pagination.next
+            <Pagination.Next
                 onClick={() => onPageChange(currentPage + 1)}
                 disabled={currentPage === totalPages}
             />

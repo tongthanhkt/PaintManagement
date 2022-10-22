@@ -1,8 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
 import { Link, NavLink } from 'react-router-dom';
 import styles from './Home.module.scss';
 import classNames from 'classnames/bind';
+import PaginationTable from '../../DataTable/PaginationTable';
+import HomeHeader from '../../DataTable/HomeHeader';
 
 const cx = classNames.bind(styles);
 
@@ -26,6 +28,11 @@ const Home = () => {
         full_name: '',
         phone_number: '',
     });
+
+    const [totalItems, setTotalItems] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
+    const ITEMS_PER_PAGE = 20;
+
 
     const { full_name, phone_number } = userInfo;
 
@@ -67,7 +74,7 @@ const Home = () => {
         });
     };
 
-    console.log(productsExport)
+
 
     useEffect(() => {
         loadProduct();
@@ -106,42 +113,29 @@ const Home = () => {
         box.style.display = 'none';
     };
 
+    const data = useMemo(() => {
+        let computedData = products
+
+        setTotalItems(computedData.length)
+
+        return computedData.slice(
+            (currentPage - 1) * ITEMS_PER_PAGE,
+            (currentPage - 1) * ITEMS_PER_PAGE + ITEMS_PER_PAGE
+        )
+    }, [products, currentPage])
+
+
     return (
         <div className={cx('container')}>
             <div className={cx('py-4')}>
                 <h1 className={cx('header-title')}>Tồn kho</h1>
                 <table className={cx('table', 'table-bordered')}>
-                    <thead className={cx('thead-dark')}>
-                        <tr>
-                            <th className={cx('table-custom')} scope="col">
-                                #Id
-                            </th>
-                            <th className={cx('table-custom')} scope="col">
-                                Tên sản phẩm
-                            </th>
-                            <th className={cx('table-custom')} scope="col">
-                                Giá mỗi sản phẩm (VND)
-                            </th>
-
-                            <th className={cx('table-custom')} scope="col">
-                                Đơn vị tính
-                            </th>
-                            <th className={cx('table-custom')} scope="col">
-                                Số lượng sản phẩm
-                            </th>
-                            <th className={cx('table-custom')} scope="col">
-                                Tác vụ
-                            </th>
-                            <th className={cx('table-custom')} scope="col">
-                                Xuất hàng
-                            </th>
-                        </tr>
-                    </thead>
+                   <HomeHeader />
                     <tbody>
-                        {products.map((product, index) => (
+                        {data.map((product, index) => (
                             <tr>
                                 <th className={cx('table-custom')} scope="row">
-                                    {index + 1}
+                                    {++index}
                                 </th>
                                 <td className={cx('table-custom')}>
                                     {product.product_name}
@@ -200,6 +194,12 @@ const Home = () => {
                         ))}
                     </tbody>
                 </table>
+                <PaginationTable
+                    total={totalItems}
+                    itemsPerpage={ITEMS_PER_PAGE}
+                    currentPage={currentPage}
+                    onPageChange={(page) => setCurrentPage(page)}
+                />
             </div>
 
             <div className={cx('box')} style={{ display: 'none' }}>

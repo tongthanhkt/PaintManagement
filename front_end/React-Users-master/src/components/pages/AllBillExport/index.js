@@ -49,7 +49,7 @@ function AllBillExport() {
         )
     }, [products, currentPage])
 
-    console.log(data)
+
 
     return (
         <div className={cx('container')}>
