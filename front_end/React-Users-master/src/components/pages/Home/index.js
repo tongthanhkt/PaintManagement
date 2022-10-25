@@ -117,7 +117,7 @@ const Home = () => {
 
     const deleteProduct = async (id) => {
         await axios.delete(
-            `http://localhost:9000/products/delete-paint-export/${id}`,
+            `http://localhost:9000/products/delete-paint-items/${id}`,
         );
 
         loadProduct();
@@ -163,20 +163,20 @@ const Home = () => {
                     <tbody>
                         {data.map((product, index) => (
                             <tr>
-                                <th className={cx('table-custom', 'text-center')} scope="row">
+                                <th className={cx('table-custom', 'text-center' ,'align-middle')} scope="row">
                                     {++index}
                                 </th>
-                                <td className={cx('table-custom', 'text-center')}>
+                                <td className={cx('table-custom', 'text-center' ,'align-middle')}>
                                     {product.product_name}
                                 </td>
-                                <td className={cx('table-custom', 'text-center')}>
+                                <td className={cx('table-custom', 'text-center' ,'align-middle')}>
                                     {product.product_price}
                                 </td>
 
-                                <td className={cx('table-custom', 'text-center')}>
+                                <td className={cx('table-custom', 'text-center' ,'align-middle')}>
                                     {product.dvt}
                                 </td>
-                                <td className={cx('table-custom', 'text-center')}>
+                                <td className={cx('table-custom', 'text-center','align-middle' )}>
                                     {product.amount}
                                 </td>
                                 <td className={cx('table-action')}> 
@@ -195,7 +195,7 @@ const Home = () => {
                                     <Link
                                         class="btn btn-danger"
                                         onClick={() =>
-                                            deleteProduct(product._id)
+                                            deleteProduct(product.id)
                                         }
                                     >
                                         Xóa
@@ -218,6 +218,7 @@ const Home = () => {
                                         onClick={onSubmit}
                                         data-name={product.product_name}
                                         data-dvt={product.dvt}
+                                        className={cx('btn', 'btn-custom', 'btn-success')}
                                     >
                                         Xác nhận
                                     </button>
@@ -275,49 +276,7 @@ const Home = () => {
                 </button>
             </div>
 
-            {/* <div id="modal" class="modal" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Thông báo</h5>
-                            <button
-                                type="button"
-                                class="close"
-                                data-dismiss="modal"
-                                aria-label="Close"
-                            >
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <p>Bạn có chắc muốn thực hiện tác vụ này ? </p>
-                        </div>
-                        <div class="modal-footer">
-                            <button
-                                onClick={(e) =>
-                                    setStatusDelete(e.target.dataset.event)
-                                }
-                                type="button"
-                                class="btn btn-primary"
-                                data-event="confirm"
-                            >
-                                Xác nhận
-                            </button>
-                            <button
-                                type="button"
-                                class="btn btn-secondary"
-                                data-dismiss="modal"
-                                data-event="cancel"
-                                onClick={(e) =>
-                                    setStatusDelete(e.target.dataset.event)
-                                }
-                            >
-                                Hủy
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div> */}
+           
         </div>
     );
 };

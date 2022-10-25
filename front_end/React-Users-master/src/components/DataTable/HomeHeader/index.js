@@ -7,26 +7,26 @@ function HomeHeader() {
     return (
         <thead className={cx('thead-dark')}>
             <tr>
-                <th className={cx('table-edit', 'align-middle')} scope="col">
+                <th className={cx('table-edit', 'align-middle', 'text-center')} scope="col">
                     #Id
                 </th>
-                <th className={cx('table-edit', 'align-middle')} scope="col">
+                <th className={cx('table-edit', 'align-middle', 'text-center')} scope="col">
                     Tên sản phẩm
                 </th>
-                <th className={cx('table-edit', 'align-middle')} scope="col">
+                <th className={cx('table-edit', 'align-middle', 'text-center')} scope="col">
                     Giá mỗi sản phẩm (VND)
                 </th>
 
-                <th className={cx('table-edit', 'align-middle')} scope="col">
+                <th className={cx('table-edit', 'align-middle', 'text-center')} scope="col">
                     Đơn vị tính
                 </th>
-                <th className={cx('table-edit', 'align-middle')} scope="col">
+                <th className={cx('table-edit', 'align-middle', 'text-center')} scope="col">
                     Số lượng sản phẩm
                 </th>
-                <th className={cx('table-edit', 'align-middle')} scope="col">
+                <th className={cx('table-edit', 'align-middle', 'text-center')} scope="col">
                     Tác vụ
                 </th>
-                <th className={cx('table-edit', 'align-middle')} scope="col">
+                <th className={cx('table-edit', 'align-middle', 'text-center')} scope="col">
                     Xuất hàng
                 </th>
             </tr>

@@ -75,7 +75,7 @@ function AllBillExport() {
                                     <Link
                                         class="btn btn-danger"
                                         onClick={() =>
-                                            deleteProduct(product.id || product._id)
+                                            deleteProduct(product._id)
                                         }
                                     >
                                         Xóa

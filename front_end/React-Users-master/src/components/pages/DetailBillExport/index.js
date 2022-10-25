@@ -32,7 +32,7 @@ function DetailBillExport() {
 
     return (
         <div className="container py-4">
-            <Link className="btn btn-primary" to="/">
+            <Link className="btn btn-primary" to="/home">
                 Trở về trang chủ
             </Link>
 
