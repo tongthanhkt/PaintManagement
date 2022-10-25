@@ -163,42 +163,88 @@ const Home = () => {
                     <tbody>
                         {data.map((product, index) => (
                             <tr>
-                                <th className={cx('table-custom', 'text-center' ,'align-middle')} scope="row">
+                                <th
+                                    className={cx(
+                                        'table-custom',
+                                        'text-center',
+                                        'align-middle',
+                                    )}
+                                    scope="row"
+                                >
                                     {++index}
                                 </th>
-                                <td className={cx('table-custom', 'text-center' ,'align-middle')}>
+                                <td
+                                    className={cx(
+                                        'table-custom',
+                                        'text-center',
+                                        'align-middle',
+                                    )}
+                                >
                                     {product.product_name}
                                 </td>
-                                <td className={cx('table-custom', 'text-center' ,'align-middle')}>
+                                <td
+                                    className={cx(
+                                        'table-custom',
+                                        'text-center',
+                                        'align-middle',
+                                    )}
+                                >
                                     {product.product_price}
                                 </td>
 
-                                <td className={cx('table-custom', 'text-center' ,'align-middle')}>
+                                <td
+                                    className={cx(
+                                        'table-custom',
+                                        'text-center',
+                                        'align-middle',
+                                    )}
+                                >
                                     {product.dvt}
                                 </td>
-                                <td className={cx('table-custom', 'text-center','align-middle' )}>
+                                <td
+                                    className={cx(
+                                        'table-custom',
+                                        'text-center',
+                                        'align-middle',
+                                    )}
+                                >
                                     {product.amount}
                                 </td>
-                                <td className={cx('table-action')}> 
+                                <td className={cx('table-action')} style={{height: '82px'}}>
                                     <Link
-                                        class="btn btn-primary mr-2"
+                                        className={cx(
+                                            'btn',
+                                            'btn-info',
+                                            'mr-2',
+                                            'p-2',
+                                        )}
                                         to={`/products/${product.id}`}
                                     >
                                         Chi tiết
                                     </Link>
                                     <Link
-                                        class="btn btn-outline-primary mr-2"
+                                        className={cx(
+                                            'btn',
+                                            'btn-primary',
+                                            'mr-2',
+                                            'p-2',
+                                        )}
                                         to={`/products/edit/${product.id}`}
                                     >
                                         Chỉnh sửa
                                     </Link>
                                     <Link
-                                        class="btn btn-danger"
+                                        className={cx(
+                                            'btn',
+                                            'btn-danger',
+                                            'mr-2',
+                                            'p-2',
+                                        )}
                                         onClick={() =>
                                             deleteProduct(product.id)
                                         }
                                     >
-                                        Xóa
+                                        Xóa bỏ
                                     </Link>
                                 </td>
 
@@ -218,7 +264,13 @@ const Home = () => {
                                         onClick={onSubmit}
                                         data-name={product.product_name}
                                         data-dvt={product.dvt}
-                                        className={cx('btn', 'btn-custom', 'btn-success')}
+                                        className={cx(
+                                            'btn',
+                                            'btn-custom',
+                                            'btn-success',
+                                        )}
+
+                                        style={{width: '100%'}}
                                     >
                                         Xác nhận
                                     </button>
@@ -275,8 +327,6 @@ const Home = () => {
                     Xác nhận xuất hàng
                 </button>
             </div>
-
-           
         </div>
     );
 };

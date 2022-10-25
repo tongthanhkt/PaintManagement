@@ -26,6 +26,10 @@ function Header () {
                 </th>
 
                 <th className={cx('table-custom')} scope="col">
+                    Chi tiết đơn hàng
+                </th>
+
+                <th className={cx('table-custom')} scope="col">
                     Tác vụ
                 </th>
             </tr>

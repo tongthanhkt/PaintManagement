@@ -22,21 +22,15 @@ function DetailBillExport() {
         );
 
         const value = result.data.response;
-        const detail = result.data.response.paint_export_items
+        const detail = result.data.response.paint_export_items;
 
         setProduct(value);
-        setProducts(detail)
+        setProducts(detail);
     };
 
-    
-
     return (
-        <div className="container py-4">
-            <Link className="btn btn-primary" to="/home">
-                Trở về trang chủ
-            </Link>
-
-            <hr />
+        <div className="container py-4" style={{ marginTop: '40px' }}>
+            <h3 style={{ fontSize: '30px' }}>Chi tiết đơn hàng</h3>
             <ul className="list-group w-50">
                 <li className="list-group-item">
                     Tên khách hàng: {product.full_name}
@@ -46,7 +40,7 @@ function DetailBillExport() {
                 </li>
 
                 <li className="list-group-item">
-                    Tổng giá trị hàng hóa {product.total_export_price} VND
+                    Tổng giá trị hàng hóa: {product.total_export_price} VND
                 </li>
                 <li className="list-group-item">
                     Thời gian xuất hàng: {product.created_time}
@@ -55,8 +49,10 @@ function DetailBillExport() {
                     Chi tiết đơn hàng:
                     <ul>
                         {products.map((data, index) => (
-                           <li key={index}>{data.amount} {data.dvt} {data.product_name}</li>
-                       ))}
+                            <li key={index}>
+                                {data.amount} {data.dvt} {data.product_name}
+                            </li>
+                        ))}
                     </ul>
                 </li>
             </ul>
