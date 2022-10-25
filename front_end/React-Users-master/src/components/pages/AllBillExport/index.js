@@ -25,11 +25,7 @@ function AllBillExport() {
         const result = await axios.get(url);
         const value = result.data.response;
         setProducts(value);
-
-    
     };
-
-
 
     const deleteProduct = async (id) => {
         await axios.delete(
@@ -39,22 +35,20 @@ function AllBillExport() {
     };
 
     const data = useMemo(() => {
-        let computedData = products
+        let computedData = products;
 
-        setTotalItems(computedData.length)
+        setTotalItems(computedData.length);
 
         return computedData.slice(
             (currentPage - 1) * ITEMS_PER_PAGE,
-            (currentPage - 1) * ITEMS_PER_PAGE + ITEMS_PER_PAGE
-        )
-    }, [products, currentPage])
-
-
+            (currentPage - 1) * ITEMS_PER_PAGE + ITEMS_PER_PAGE,
+        );
+    }, [products, currentPage]);
 
     return (
         <div className={cx('container')}>
             <div className={cx('py-4')}>
-                <h1 className={cx('header-title')}>Tất cả hóa đơn xuất hàng</h1>
+                <h1 className={cx('header-title')}>Thống kê hóa đơn đã xuất hàng</h1>
                 <table className={cx('table', 'table-bordered')}>
                     <Header />
                     <tbody>
@@ -81,7 +75,7 @@ function AllBillExport() {
                                     <Link
                                         class="btn btn-danger"
                                         onClick={() =>
-                                            deleteProduct(product.id)
+                                            deleteProduct(product.id || product._id)
                                         }
                                     >
                                         Xóa

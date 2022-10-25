@@ -31,7 +31,7 @@ const AddProduct = () => {
     const onSubmit = async (e) => {
         e.preventDefault();
         await axios.post(url, product);
-        history.push('/');
+        history.push('/home');
     };
 
     return (

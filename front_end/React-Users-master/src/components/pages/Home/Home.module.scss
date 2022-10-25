@@ -6,9 +6,26 @@
 
 .table-custom {
     text-align: center;
+    
+}
+
+th.table-edit {
+    text-align: center;
+    vertical-align: middle;
+
 }
 
 tbody {
     position: relative;
 
 }
+
+
+td.table-action {
+    display: flex;
+}
+
+
+
+
+

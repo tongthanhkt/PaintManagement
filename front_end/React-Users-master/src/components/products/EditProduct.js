@@ -20,7 +20,7 @@ const EditProduct = () => {
             `http://localhost:9000/products/update-paint-item/${id.id}`,
             editedProduct,
         );
-        history.push('/');
+        history.push('/home');
     };
 
 

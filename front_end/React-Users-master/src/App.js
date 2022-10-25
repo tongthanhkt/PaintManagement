@@ -17,6 +17,7 @@ import DetailProduct from './components/products/DetailProduct';
 import ExportProduct from './components/products/ExportProduct';
 import AllBillExport from './components/pages/AllBillExport';
 import DetailBillExport from './components/pages/DetailBillExport';
+import Register from './components/pages/Register';
 
 function App() {
     return (
@@ -25,7 +26,7 @@ function App() {
                 <Navbar />
 
                 <Switch>
-                    <Route exact path="/" component={Home} />
+                    <Route exact path="/home" component={Home} />
 
                     <Route exact path="/products/add" component={AddProduct} />
                     <Route
@@ -54,6 +55,12 @@ function App() {
                         exact
                         path="/detailbillexport/:id"
                         component={DetailBillExport}
+                    />
+
+                    <Route
+                        exact
+                        path="/register"
+                        component={Register}
                     />
 
                     <Route component={NotFound} />
