@@ -136,6 +136,7 @@ const Home = () => {
 
                 window.location = `/detailbillexport/${id}`;
             })
+            
 
             .catch(function() {
                 alert('Vui lòng nhập thông tin xuất hàng phù hợp');

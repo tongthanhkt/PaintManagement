@@ -7,6 +7,7 @@ import ExportProduct from '../products/ExportProduct'
 import AllBillExport from '../pages/AllBillExport'
 import DetailBillExport from '../pages/DetailBillExport'
 import Login from '../pages/Login'
+import CustomerIncome from '../pages/CustomerIncome'
 
 const publicRoutes = [
     { path: '/home', component: Home, layout: Navbar  },
@@ -16,6 +17,7 @@ const publicRoutes = [
     { path: '/exportproduct', component: ExportProduct, layout: Navbar },
     { path: '/detailallbillexport', component: AllBillExport, layout: Navbar },
     { path: '/detailbillexport/:id', component: DetailBillExport, layout: Navbar },
+    { path: '/customerincome', component: CustomerIncome, layout: Navbar },
     { path: '/login', component: Login, layout: null }
 ];
 
