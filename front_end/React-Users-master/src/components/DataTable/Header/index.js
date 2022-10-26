@@ -9,7 +9,7 @@ function Header () {
         <thead className={cx('thead-dark')}>
             <tr>
                 <th className={cx('table-custom')} scope="col">
-                    #Id
+                    Số thứ tự
                 </th>
                 <th className={cx('table-custom')} scope="col">
                     Tên khách hàng
@@ -25,7 +25,7 @@ function Header () {
                     Thời gian xuất hóa đơn
                 </th>
 
-                <th className={cx('table-custom')} scope="col">
+                <th scope="col" style={{width: '500px'}}>
                     Tác vụ
                 </th>
             </tr>

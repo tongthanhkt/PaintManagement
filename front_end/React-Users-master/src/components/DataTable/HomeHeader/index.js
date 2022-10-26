@@ -1,16 +1,17 @@
 import React from 'react';
 import styles from '../../pages/AllBillExport/AllBillExport.module.scss';
 import classNames from 'classnames/bind';
+import './index.css'
 const cx = classNames.bind(styles);
 
 function HomeHeader() {
     return (
-        <thead className={cx('thead-dark')}>
+        <thead className={cx('thead-dark')} >
             <tr>
-                <th className={cx('table-edit', 'align-middle')} scope="col">
-                    #Id
+                <th className='stt' scope="col">
+                    Số thứ tự
                 </th>
-                <th className={cx('table-edit', 'align-middle')} scope="col">
+                <th className='name' scope="col">
                     Tên sản phẩm
                 </th>
                 <th className={cx('table-edit', 'align-middle')} scope="col">
@@ -23,7 +24,7 @@ function HomeHeader() {
                 <th className={cx('table-edit', 'align-middle')} scope="col">
                     Số lượng sản phẩm
                 </th>
-                <th className={cx('table-edit', 'align-middle')} scope="col">
+                <th style={{width: "200px"}} scope="col">
                     Tác vụ
                 </th>
                 <th className={cx('table-edit', 'align-middle')} scope="col">

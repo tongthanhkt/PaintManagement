@@ -155,10 +155,10 @@ const Home = () => {
     }, [products, currentPage]);
 
     return (
-        <div className={cx('container')}>
-            <div className={cx('py-4')}>
+        <div className={cx('container')} style={{maxWidth: "1400px"}}>
+            <div>
                 <h1 className={cx('header-title')}>Tồn kho</h1>
-                <table className={cx('table', 'table-bordered')}>
+                <table className={cx('table', 'table-bordered')} style={{width: ""}}>
                     <HomeHeader />
                     <tbody>
                         {data.map((product, index) => (
