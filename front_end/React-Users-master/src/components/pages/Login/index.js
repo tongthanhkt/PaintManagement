@@ -29,13 +29,8 @@ function Login() {
                                         className={cx(
                                             'form-control form-control-lg',
                                         )}
+                                        placeholder="Tên đăng nhập"
                                     />
-                                    <label
-                                        className={cx('form-label')}
-                                        for="typeEmailX-2"
-                                    >
-                                        Tên đăng nhập
-                                    </label>
                                 </div>
 
                                 <div className={cx('form-outline mb-4')}>
@@ -45,13 +40,8 @@ function Login() {
                                         className={cx(
                                             'form-control form-control-lg',
                                         )}
+                                        placeholder="Mật khẩu"
                                     />
-                                    <label
-                                        className={cx('form-label')}
-                                        for="typePasswordX-2"
-                                    >
-                                        Mật khẩu
-                                    </label>
                                 </div>
 
                                 <button
