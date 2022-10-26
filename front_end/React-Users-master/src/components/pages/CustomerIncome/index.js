@@ -69,8 +69,8 @@ function CustomerIncome() {
                     </li>
 
                     <li className={cx('list-group-item')}>
-                        Tổng giá trị hàng hóa:{' '}
-                        {customerIncome.total_income_customer} VND
+                        Tổng giá trị hàng hóa (VND): {customerIncome.total_income_customer} 
+                        
                     </li>
 
                     <li className={cx('list-group-item')}>
