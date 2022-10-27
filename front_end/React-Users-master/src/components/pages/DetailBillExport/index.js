@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { Link, NavLink } from 'react-router-dom';
+import './index.css';
 
 function DetailBillExport() {
     const [product, setProduct] = useState([]);
@@ -29,33 +30,93 @@ function DetailBillExport() {
     };
 
     return (
-        <div className="container py-4" style={{ marginTop: '40px' }}>
-            <h3 style={{ fontSize: '30px' }}>Chi tiết đơn hàng</h3>
-            <ul className="list-group w-50">
-                <li className="list-group-item">
-                    Tên khách hàng: {product.full_name}
-                </li>
-                <li className="list-group-item">
-                    Số điện thoại khách hàng: {product.phone_number}
-                </li>
+        <div className="wrapper">
+            <div className="w-75 mx-auto shadow p-5 detail">
+                <h2 className="text-center mb-4">Chi tiết hóa đơn</h2>
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label">Tên khách hàng</label>
 
-                <li className="list-group-item">
-                    Tổng giá trị hàng hóa: {product.total_export_price} VND
-                </li>
-                <li className="list-group-item">
-                    Thời gian xuất hàng: {product.created_time}
-                </li>
-                <li className="list-group-item">
-                    Chi tiết đơn hàng:
-                    <ul>
+                        <input
+                            type="text"
+                            class="form-control form-control-lg form-item form-edit "
+                            id="inputItem"
+                            value={product.full_name}
+                            disable
+                            readOnly
+                        />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Địa chỉ</label>
+
+                        <input
+                            type="text"
+                            class="form-control form-control-lg form-item form-edit "
+                            id="inputItem"
+                            value={product.address}
+                            disable
+                            readOnly
+                        />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Số điện thoại</label>
+
+                        <input
+                            type="text"
+                            class="form-control form-control-lg form-item form-edit "
+                            id="inputItem"
+                            value={product.phone_number}
+                            disable
+                            readOnly
+                        />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Tổng giá trị hàng hóa </label>
+
+                        <input
+                            type="text"
+                            class="form-control form-control-lg form-item form-edit "
+                            id="inputItem"
+                            value={`${product.total_export_price} VND`}
+                            disable
+                            readOnly
+                        />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Thời gian xuất hóa đơn</label>
+
+                        <input
+                            type="text"
+                            class="form-control form-control-lg form-item form-edit "
+                            id="inputItem"
+                            value={product.created_time}
+                            disable
+                            readOnly
+                        />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Chi tiết sản phẩm</label>
+
                         {products.map((data, index) => (
-                            <li key={index}>
-                                {data.amount} {data.dvt} {data.product_name}
-                            </li>
+                            <input
+                                key={index}
+                                type="text"
+                                class="form-control form-control-lg form-item form-edit "
+                                id="inputItem"
+                                value={` ${data.amount} ${data.dvt} ${data.product_name}`}
+                                disable
+                                readOnly
+                                
+                            />
                         ))}
-                    </ul>
-                </li>
-            </ul>
+                    </div>
+                </form>
+            </div>
         </div>
     );
 }

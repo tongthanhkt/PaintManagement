@@ -39,7 +39,7 @@ const AddProduct = () => {
             <div className={cx('container')}>
                 <div className={cx('w-75 mx-auto', 'shadow p-5')}>
                     <h2 className={cx('text-center', 'mb-4')}>
-                        Thêm sản phẩm sơn
+                        Thêm sản phẩm 
                     </h2>
                     <form onSubmit={(e) => onSubmit(e)}>
                         <div className={cx('form-group')}>

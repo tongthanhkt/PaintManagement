@@ -1,3 +1,9 @@
 .action {
     width: 300px;
+    text-align: center;
+}
+
+.name {
+    text-align: center;
+    
 }

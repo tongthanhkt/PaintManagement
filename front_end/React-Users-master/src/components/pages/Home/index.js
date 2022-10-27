@@ -9,7 +9,6 @@ import { useHistory } from 'react-router-dom';
 import './index.css';
 const cx = classNames.bind(styles);
 
-
 const url = 'http://localhost:9000/products';
 
 const Home = () => {
@@ -164,7 +163,7 @@ const Home = () => {
                 <table
                     className={cx('table', 'table-bordered')}
                     style={{ width: '' }}
- >
+                >
                     <HomeHeader />
                     <tbody>
                         {data.map((product, index) => (
@@ -217,28 +216,67 @@ const Home = () => {
                                     {product.amount}
                                 </td>
                                 <td
-                                    className={cx('table-action')}
+                                    className={cx(
+                                        'table-action',
+                                        'text-center',
+                                    )}
                                     style={{ height: '82px' }}
                                 >
-                                    <button type="button" class="btn btn-info m-2 btn-lg" onClick={() => history.push(`/products/${product.id}`)} >Chi tiết</button>
-                                    <button type="button" class="btn btn-secondary m-2 btn-lg" onClick={() => history.push(`/products/edit/${product.id}`)}>Chỉnh sửa</button>
-                                    <button type="button" className="btn btn-danger m-2 btn-lg" onClick={() => deleteProduct(product.id)}>Xóa</button>
+                                    <button
+                                        type="button"
+                                        class="btn btn-info m-2 btn-lg"
+                                        onClick={() =>
+                                            history.push(
+                                                `/products/${product.id}`,
+                                            )
+                                        }
+                                    >
+                                        Chi tiết
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="btn btn-secondary m-2 btn-lg"
+                                        onClick={() =>
+                                            history.push(
+                                                `/products/edit/${product.id}`,
+                                            )
+                                        }
+                                    >
+                                        Chỉnh sửa
+                                    </button>
+                                    <button
+                                        type="button"
+                                        className="btn btn-danger m-2 btn-lg"
+                                        onClick={() =>
+                                            deleteProduct(product.id)
+                                        }
+                                    >
+                                        Xóa
+                                    </button>
                                 </td>
                                 <td>
-                                <div className="wrap-export">
-                                <input
-                                        data-id={product.id}
-                                        data-index={index}
-                                        data-name={product.product_name}
-                                        data-dvt={product.dvt}
-                                        type="number"
-                                        placeholder="Nhập số lượng"
-                                        name="amount"
-                                        onChange={(e) => onInputChange(e)}
-                                        className="input"
-                                    />
-                                    <button type="button" className="btn btn-success m-2 btn-lg export-btn" onClick={onSubmit} data-name={product.product_name} data-dvt={product.dvt}>Xuất hàng</button>
-                                </div>
+                                    <div className="wrap-export">
+                                        <input
+                                            data-id={product.id}
+                                            data-index={index}
+                                            data-name={product.product_name}
+                                            data-dvt={product.dvt}
+                                            type="number"
+                                            placeholder="Nhập số lượng"
+                                            name="amount"
+                                            onChange={(e) => onInputChange(e)}
+                                            className="input"
+                                        />
+                                        <button
+                                            type="button"
+                                            className="btn btn-success m-2 btn-lg export-btn"
+                                            onClick={onSubmit}
+                                            data-name={product.product_name}
+                                            data-dvt={product.dvt}
+                                        >
+                                            Xuất hàng
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                         ))}
@@ -252,53 +290,77 @@ const Home = () => {
                 />
             </div>
 
-            <div className='export-form'>
-                <h3>Thông tin xuất hàng</h3>
+            <div className="export-form">
+                <div className="wrapper w-75 mx-auto shadow p-5 ">
+                    <h3 className="export-info">Thông tin xuất hàng</h3>
 
-                <div className="container py-4">
-                    {detailProductExport.map((item, index) => (
-                        <ul className="list-group w-50">
-                            <li key={index}>
-                                {item.amount} {item.dvt} {item.name}
-                            </li>
-                        </ul>
-                    ))}
+                    <div className="container">
+                        <div class="form-wrapper">
+                            <div class="mb-3">
+                                <label class="form-label">Sản phẩm xuất</label>
+                                {detailProductExport.map((item, index) => (
+                                    <input
+                                        key={index}
+                                        type="text"
+                                        class="form-control form-control-lg form-item form-edit "
+                                        id="inputItem"
+                                        value={`${item.amount} ${item.dvt} ${item.name}`}
+                                        disable
+                                        readOnly
+                                    />
+                                ))}
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="inputName">
+                                    Họ và tên
+                                </label>
+                                <input
+                                    type="text"
+                                    class="form-control form-control-lg form-edit"
+                                    id="inputName"
+                                    placeholder="Nhập tên khách hàng"
+                                    name="full_name"
+                                    value={full_name}
+                                    onChange={(e) => onBoxInputChange(e)}
+                                />
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label" for="inputName">
+                                    Số điện thoại
+                                </label>
+                                <input
+                                    type="text"
+                                    class="form-control form-control-lg form-edit"
+                                    id="inputName"
+                                    placeholder="Nhập số điện thoại khách hàng"
+                                    name="phone_number"
+                                    value={phone_number}
+                                    onChange={(e) => onBoxInputChange(e)}
+                                />
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label" for="inputName">
+                                    Địa chỉ
+                                </label>
+                                <input
+                                    type="text"
+                                    class="form-control form-control-lg form-edit"
+                                    id="inputName"
+                                    placeholder="Nhập địa chỉ"
+                                    name="address"
+                                    value={address}
+                                    onChange={(e) => onBoxInputChange(e)}
+                                />
+                            </div>
+
+                            <button onClick={confirmExport} class="btn btn-success btn-lg">
+                                Xác nhận
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <div className={cx('form-group')}>
-                    <input
-                        type="text"
-                        className={cx('form-control form-control-lg')}
-                        placeholder="Nhập tên khách hàng"
-                        name="full_name"
-                        value={full_name}
-                        onChange={(e) => onBoxInputChange(e)}
-                    />
-                </div>
-                <div className={cx('form-group')}>
-                    <input
-                        type="number"
-                        className={cx('form-control', 'form-control-lg')}
-                        placeholder="Nhập số điện thoại khách hàng"
-                        name="phone_number"
-                        value={phone_number}
-                        onChange={(e) => onBoxInputChange(e)}
-                    />
-                </div>
-                <div className={cx('form-group')}>
-                    <input
-                        className={cx('form-control', 'form-control-lg')}
-                        placeholder="Nhập địa chỉ khách hàng"
-                        name="address"
-                        value={address}
-                        onChange={(e) => onBoxInputChange(e)}
-                    />
-                </div>
-                <button
-                    onClick={confirmExport}
-                    className='btn btn-success lg exports-btn'
-                >
-                    Xác nhận xuất hàng
-                </button>
             </div>
         </div>
     );
