@@ -5,7 +5,7 @@ import styles from './AllBillExport.module.scss';
 import classNames from 'classnames/bind';
 import Header from '../../DataTable/Header';
 import PaginationTable from '../../DataTable/PaginationTable';
-import './index.css'
+import './index.css';
 
 const cx = classNames.bind(styles);
 
@@ -47,7 +47,7 @@ function AllBillExport() {
     }, [products, currentPage]);
 
     return (
-        <div className={cx('container-custom')} >
+        <div className={cx('container-custom')}>
             <div className={cx('py-4')}>
                 <h1 className={cx('header-title')}>
                     Thống kê đơn hàng đã xuất
@@ -123,13 +123,13 @@ function AllBillExport() {
                                     </Link>
                                 </td>
 
-                                <td >
+                                <td>
                                     <Link
                                         class="btn btn-danger"
                                         onClick={() =>
                                             deleteProduct(product._id)
                                         }
-                                        style={{marginTop: '15px'}}
+                                        style={{ marginTop: '15px' }}
                                     >
                                         Xóa
                                     </Link>

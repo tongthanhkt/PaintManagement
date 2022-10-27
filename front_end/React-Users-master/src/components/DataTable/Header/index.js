@@ -1,11 +1,10 @@
-import './index.css'
+import './index.css';
 import React from 'react';
 import styles from '../../pages/AllBillExport/AllBillExport.module.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
-
-function Header () {
+function Header() {
     return (
         <thead className={cx('thead-dark')}>
             <tr>
@@ -36,6 +35,6 @@ function Header () {
             </tr>
         </thead>
     );
-};
+}
 
 export default Header;

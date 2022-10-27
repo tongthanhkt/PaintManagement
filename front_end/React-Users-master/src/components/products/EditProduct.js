@@ -10,7 +10,6 @@ const EditProduct = () => {
     const [editedProduct, setEditedProduct] = useState([]);
 
     useEffect(() => {
-
         currentProduct();
     }, []);
 
@@ -22,8 +21,6 @@ const EditProduct = () => {
         );
         history.push('/home');
     };
-
-
 
     const currentProduct = async () => {
         const result = await axios.get(
@@ -39,7 +36,10 @@ const EditProduct = () => {
 
     return (
         <div className="container">
-            <div className="w-75 mx-auto shadow p-5" style={{marginTop: '40px'}}>
+            <div
+                className="w-75 mx-auto shadow p-5"
+                style={{ marginTop: '40px' }}
+            >
                 <h2 className="text-center mb-4">
                     Chỉnh sửa thông tin sản phẩm
                 </h2>

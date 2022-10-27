@@ -13,27 +13,13 @@ const DetailProduct = () => {
         const result = await axios.get(
             `http://localhost:9000/products/detail-paint-item/${id}`,
         );
-        // setProduct(result.data.reverse());
+
         const value = result.data.response;
 
         setProduct(value[0]);
     };
 
     return (
-        // <div className="container py-4">
-        //     <ul className="list-group w-50">
-        //         <li className="list-group-item">
-        //             Tên sản phẩm: {product.product_name}
-        //         </li>
-        //         <li className="list-group-item">
-        //             Giá sản phẩm: {product.product_price}
-        //         </li>
-
-        //         <li className="list-group-item">Đơn vị tính: {product.dvt}</li>
-        //         <li className="list-group-item">Số lượng: {product.amount}</li>
-        //     </ul>
-        // </div>
-
         <div className="wrapper">
             <div className="w-75 mx-auto shadow p-5 detail">
                 <h2 className="text-center mb-4">Chi tiết sản phẩm</h2>

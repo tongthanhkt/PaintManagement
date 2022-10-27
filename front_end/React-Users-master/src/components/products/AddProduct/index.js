@@ -18,13 +18,8 @@ const AddProduct = () => {
         amount: '',
     });
 
-    const {
-        product_name,
-        product_price,
-        product_status,
-        dvt,
-        amount,
-    } = product;
+    const { product_name, product_price, product_status, dvt, amount } =
+        product;
     const onInputChange = (e) => {
         setProduct({ ...product, [e.target.name]: e.target.value });
     };
@@ -39,9 +34,7 @@ const AddProduct = () => {
         <td>
             <div className={cx('container')}>
                 <div className={cx('w-75 mx-auto', 'shadow p-5')}>
-                    <h2 className={cx('text-center', 'mb-4')}>
-                        Thêm sản phẩm 
-                    </h2>
+                    <h2 className={cx('text-center', 'mb-4')}>Thêm sản phẩm</h2>
                     <form onSubmit={(e) => onSubmit(e)}>
                         <div className={cx('form-group')}>
                             <input
@@ -93,15 +86,17 @@ const AddProduct = () => {
                                 onChange={(e) => onInputChange(e)}
                             />
                         </div>
-                        <button className={cx('btn btn-success', 'btn-block')} style={{
-                            marginRight: 'auto',
-                            marginLeft: 'auto',
-                            height: '40px',
-                            width: '120px',
-                            marginTop: '20px',
-                            fontSize: '14px'
-
-                        }}>
+                        <button
+                            className={cx('btn btn-success', 'btn-block')}
+                            style={{
+                                marginRight: 'auto',
+                                marginLeft: 'auto',
+                                height: '40px',
+                                width: '120px',
+                                marginTop: '20px',
+                                fontSize: '14px',
+                            }}
+                        >
                             Thêm sản phẩm
                         </button>
                     </form>

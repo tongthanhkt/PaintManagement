@@ -26,14 +26,14 @@ function PaginationTable({
                     onClick={() => onPageChange(i)}
                 >
                     {i}
-                </Pagination.Item>
+                </Pagination.Item>,
             );
         }
 
         return pages;
     }, [totalPages, currentPage]);
 
-    if(totalPages === 0) return null
+    if (totalPages === 0) return null;
     return (
         <Pagination>
             <Pagination.Prev
@@ -50,4 +50,3 @@ function PaginationTable({
 }
 
 export default PaginationTable;
-

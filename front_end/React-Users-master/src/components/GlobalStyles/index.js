@@ -1,6 +1,6 @@
-import './GlobalStyles.scss'
+import './GlobalStyles.scss';
 
-function GlobalStyles({children}) {
+function GlobalStyles({ children }) {
     return children;
 }
 

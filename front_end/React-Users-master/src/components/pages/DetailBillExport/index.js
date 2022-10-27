@@ -111,7 +111,6 @@ function DetailBillExport() {
                                 value={` ${data.amount} ${data.dvt} ${data.product_name}`}
                                 disable
                                 readOnly
-                                
                             />
                         ))}
                     </div>
