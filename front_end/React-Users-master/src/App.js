@@ -2,27 +2,10 @@ import React from 'react';
 
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
 
-import Navbar from './components/layout/Navbar';
-
 import { Fragment } from 'react';
 import { publicRoutes } from './components/routes';
 
-import {
-    BrowserRouter as Router,
-    Routes,
-    Route,
-    Switch,
-} from 'react-router-dom';
-
-import NotFound from './components/pages/NotFound';
-import AddProduct from './components/products/AddProduct';
-import EditProduct from './components/products/EditProduct';
-import DetailProduct from './components/products/DetailProduct';
-import ExportProduct from './components/products/ExportProduct';
-import AllBillExport from './components/pages/AllBillExport';
-import DetailBillExport from './components/pages/DetailBillExport';
-import Home from './components/pages/Home';
-import Login from './components/pages/Login';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 function App() {
     return (
@@ -42,10 +25,6 @@ function App() {
 
                         return (
                             <Route key={index} path={route.path}>
-                                {/* <Layout>
-                                    <Page />
-                                </Layout> */}
-
                                 <Layout />
                                 <Page />
                             </Route>

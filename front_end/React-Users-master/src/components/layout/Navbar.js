@@ -9,13 +9,27 @@ const Navbar = () => {
         <nav className={cx('navbar', 'navbar-dark', 'bg-dark')}>
             <div className={cx('container')}>
                 <nav
-                    className={cx('navbar', 'navbar-expand-lg', 'navbar-light')}
+                    className={cx(
+                        'navbar',
+                        'navbar-expand-lg',
+                        'navbar-light',
+                        'nav-custom',
+                    )}
                 >
                     <div
                         id="navbarTogglerDemo01"
                         className={cx('collapse', 'navbar-collapse')}
                     >
-                        <ul className={cx('navbar-nav', 'mr-auto', 'mt-2', 'mt-lg-0', 'navbar-custom')}>
+                        <ul
+                            className={cx(
+                                'navbar-nav',
+                                'mr-auto',
+                                'mt-2',
+                                'mt-lg-0',
+                                'navbar-custom',
+
+                            )}
+                        >
                             <li className={cx('nav-item', 'active')}>
                                 <li className={cx('nav-item')}>
                                     <NavLink
@@ -23,11 +37,10 @@ const Navbar = () => {
                                         exact
                                         to="/home"
                                     >
-                                        Tổn kho
+                                        Tồn kho
                                     </NavLink>
                                 </li>
                             </li>
-                           
 
                             <li class={cx('nav-item')}>
                                 <NavLink
@@ -51,9 +64,7 @@ const Navbar = () => {
 
                             <li className={cx('nav-item')}>
                                 <Link
-
                                     className={cx('nav-link')}
-
                                     to="/products/add"
                                 >
                                     Thêm sản phẩm vào kho
