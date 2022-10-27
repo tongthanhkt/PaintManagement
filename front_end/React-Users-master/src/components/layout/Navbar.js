@@ -7,7 +7,7 @@ const cx = classNames.bind(styles);
 const Navbar = () => {
     return (
         <nav className={cx('navbar', 'navbar-dark', 'bg-dark')}>
-            <div className={cx('container')}>
+            <div className={cx('container', 'container-custom')}>
                 <nav
                     className={cx(
                         'navbar',
