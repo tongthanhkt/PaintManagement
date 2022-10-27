@@ -42,12 +42,12 @@ const Navbar = () => {
                             </li>
 
                             <li className={cx('nav-item')}>
-                                <Link
+                                <NavLink
                                     className={cx('nav-link')}
                                     to="/products/add"
                                 >
                                     Thêm sản phẩm vào kho
-                                </Link>
+                                </NavLink>
                             </li>
 
                             <li class={cx('nav-item')}>
