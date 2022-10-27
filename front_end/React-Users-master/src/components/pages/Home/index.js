@@ -355,7 +355,7 @@ const Home = () => {
                                 />
                             </div>
 
-                            <button onClick={confirmExport} class="btn btn-success btn-lg">
+                            <button onClick={confirmExport} class="btn btn-success btn-lg btn-export">
                                 Xác nhận
                             </button>
                         </div>

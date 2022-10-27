@@ -67,3 +67,10 @@ label {
 #input-item {
     background-color: red;
 }
+
+.btn-export {
+    margin-top: 20px;
+    width: 200px;
+    font-size: 20px;
+    font-weight: 600;
+}

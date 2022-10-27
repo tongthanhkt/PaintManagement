@@ -53,7 +53,12 @@ function CustomerIncome() {
                     </div>
                     <button
                         onClick={onSubmit}
-                        className={cx('btn btn-primary', 'btn-block')}
+                        className={cx('btn btn-success', 'btn-block')}
+                        style={{
+                            fontSize:'14px',
+                            width: '200px',
+                            marginTop: '20px'
+                        }}
                     >
                         Tra cứu
                     </button>
@@ -105,7 +110,7 @@ function CustomerIncome() {
 
                         <div class="mb-3">
                             <label class="form-label">
-                                Tổng giá trị hàng hóa{' '}
+                                Tổng giá trị hàng hóa (VND)
                             </label>
 
                             <input

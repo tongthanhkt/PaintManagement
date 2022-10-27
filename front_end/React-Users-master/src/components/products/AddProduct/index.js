@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import styles from './AddProduct.module.scss';
 import classNames from 'classnames/bind';
+import './index.css';
 
 const cx = classNames.bind(styles);
 
@@ -92,7 +93,15 @@ const AddProduct = () => {
                                 onChange={(e) => onInputChange(e)}
                             />
                         </div>
-                        <button className={cx('btn btn-primary', 'btn-block')}>
+                        <button className={cx('btn btn-success', 'btn-block')} style={{
+                            marginRight: 'auto',
+                            marginLeft: 'auto',
+                            height: '40px',
+                            width: '120px',
+                            marginTop: '20px',
+                            fontSize: '14px'
+
+                        }}>
                             Thêm sản phẩm
                         </button>
                     </form>

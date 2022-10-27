@@ -27,7 +27,6 @@ const Navbar = () => {
                                 'mt-2',
                                 'mt-lg-0',
                                 'navbar-custom',
-
                             )}
                         >
                             <li className={cx('nav-item', 'active')}>
@@ -40,6 +39,15 @@ const Navbar = () => {
                                         Tồn kho
                                     </NavLink>
                                 </li>
+                            </li>
+
+                            <li className={cx('nav-item')}>
+                                <Link
+                                    className={cx('nav-link')}
+                                    to="/products/add"
+                                >
+                                    Thêm sản phẩm vào kho
+                                </Link>
                             </li>
 
                             <li class={cx('nav-item')}>
@@ -60,15 +68,6 @@ const Navbar = () => {
                                 >
                                     Doanh thu theo khách hàng
                                 </NavLink>
-                            </li>
-
-                            <li className={cx('nav-item')}>
-                                <Link
-                                    className={cx('nav-link')}
-                                    to="/products/add"
-                                >
-                                    Thêm sản phẩm vào kho
-                                </Link>
                             </li>
                         </ul>
                     </div>
