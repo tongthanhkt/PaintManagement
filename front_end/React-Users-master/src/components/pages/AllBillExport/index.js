@@ -48,35 +48,87 @@ function AllBillExport() {
     return (
         <div className={cx('container')}>
             <div className={cx('py-4')}>
-                <h1 className={cx('header-title')}>Thống kê hóa đơn đã xuất hàng</h1>
+                <h1 className={cx('header-title')}>
+                    Thống kê đơn hàng đã xuất
+                </h1>
                 <table className={cx('table', 'table-bordered')}>
                     <Header />
                     <tbody>
                         {data.map((product, index) => (
                             <tr>
-                                <th className={cx('table-custom')} scope="row">
+                                <th
+                                    className={cx(
+                                        'table-custom',
+                                        'text-center',
+                                        'align-middle',
+                                    )}
+                                    scope="row"
+                                >
                                     {index + 1}
                                 </th>
-                                <td className={cx('table-custom')}>
+                                <td
+                                    className={cx(
+                                        'table-custom',
+                                        'text-center',
+                                        'align-middle',
+                                    )}
+                                >
                                     {product.full_name}
                                 </td>
-                                <td className={cx('table-custom')}>
+                                <td
+                                    className={cx(
+                                        'table-custom',
+                                        'text-center',
+                                        'align-middle',
+                                    )}
+                                >
                                     {product.phone_number}
                                 </td>
 
-                                <td className={cx('table-custom')}>
+                                <td
+                                    className={cx(
+                                        'table-custom',
+                                        'text-center',
+                                        'align-middle',
+                                    )}
+                                >
                                     {product.total_export_price}
                                 </td>
-                                <td className={cx('table-custom')}>
+                                <td
+                                    className={cx(
+                                        'table-custom',
+                                        'text-center',
+                                        'align-middle',
+                                    )}
+                                >
                                     {product.created_time}
                                 </td>
 
-                                <td>
+                                <td
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        height: '70px',
+                                        with: '100px',
+                                    }}
+                                >
+                                    <Link
+                                        class="btn btn-secondary"
+                                        to={`/detailbillexport/${product.id}`}
+                                        style={{ width: '150px' }}
+                                    >
+                                        Chi tiết
+                                    </Link>
+                                </td>
+
+                                <td >
                                     <Link
                                         class="btn btn-danger"
                                         onClick={() =>
-                                            deleteProduct(product.id || product._id)
+                                            deleteProduct(product._id)
                                         }
+                                        style={{marginTop: '15px'}}
                                     >
                                         Xóa
                                     </Link>

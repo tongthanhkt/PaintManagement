@@ -25,7 +25,11 @@ function Header () {
                     Thời gian xuất hóa đơn
                 </th>
 
-                <th scope="col" style={{width: '500px'}}>
+                <th className={cx('table-custom')} scope="col">
+                    Chi tiết đơn hàng
+                </th>
+
+                <th className={cx('table-custom')} scope="col">
                     Tác vụ
                 </th>
             </tr>

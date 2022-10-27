@@ -8,6 +8,7 @@ var PaintExportSchema = new mongoose.Schema({
   phone_number: String,
   created_time: String,
   full_name: String,
+  address: String
   
 });
 module.exports = mongoose.model("PaintExport", PaintExportSchema);

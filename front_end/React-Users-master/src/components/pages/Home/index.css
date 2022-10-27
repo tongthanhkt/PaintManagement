@@ -1,0 +1,23 @@
+.input {
+    display: inline-block;
+}
+.export-btn {
+    display: inline !important;
+}
+.wrap-export {
+    display: inline-block;
+    margin-top: 15px;
+}
+.export-form {
+    margin-left: auto;
+    margin-right: auto;
+    width: 1000px;
+    display: none;
+}
+.exports-btn {
+    width: 186px;
+    height: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 15px;
+}

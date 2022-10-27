@@ -1,15 +1,19 @@
 import React from 'react';
 
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
-import Home from './components/pages/Home';
 
 import Navbar from './components/layout/Navbar';
+
+import { Fragment } from 'react';
+import { publicRoutes } from './components/routes';
+
 import {
     BrowserRouter as Router,
+    Routes,
     Route,
     Switch,
-    withRouter,
 } from 'react-router-dom';
+
 import NotFound from './components/pages/NotFound';
 import AddProduct from './components/products/AddProduct';
 import EditProduct from './components/products/EditProduct';
@@ -17,53 +21,36 @@ import DetailProduct from './components/products/DetailProduct';
 import ExportProduct from './components/products/ExportProduct';
 import AllBillExport from './components/pages/AllBillExport';
 import DetailBillExport from './components/pages/DetailBillExport';
-import Register from './components/pages/Register';
+import Home from './components/pages/Home';
+import Login from './components/pages/Login';
 
 function App() {
     return (
         <Router>
             <div className="App">
-                <Navbar />
-
                 <Switch>
-                    <Route exact path="/home" component={Home} />
+                    {publicRoutes.map((route, index) => {
+                        const Page = route.component;
 
-                    <Route exact path="/products/add" component={AddProduct} />
-                    <Route
-                        exact
-                        path="/products/edit/:id"
-                        component={EditProduct}
-                    />
-                    <Route
-                        exact
-                        path="/products/:id"
-                        component={DetailProduct}
-                    />
-                    <Route
-                        exact
-                        path="/exportproduct"
-                        component={ExportProduct}
-                    />
+                        let Layout = route.layout;
 
-                    <Route
-                        exact
-                        path="/detailallbillexport"
-                        component={AllBillExport}
-                    />
+                        if (route.layout) {
+                            Layout = route.layout;
+                        } else if (route.layout === null) {
+                            Layout = Fragment;
+                        }
 
-                    <Route
-                        exact
-                        path="/detailbillexport/:id"
-                        component={DetailBillExport}
-                    />
+                        return (
+                            <Route key={index} path={route.path}>
+                                {/* <Layout>
+                                    <Page />
+                                </Layout> */}
 
-                    <Route
-                        exact
-                        path="/register"
-                        component={Register}
-                    />
-
-                    <Route component={NotFound} />
+                                <Layout />
+                                <Page />
+                            </Route>
+                        );
+                    })}
                 </Switch>
             </div>
         </Router>

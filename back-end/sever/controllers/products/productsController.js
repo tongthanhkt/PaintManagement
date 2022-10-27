@@ -86,7 +86,8 @@ exports.createPaintExport = async function (req, res) {
         created_time: new Date().toLocaleString(),
         total_export_price: totalExportPrice - (req.body.discount||0),
         phone_number: req.body.phone_number,
-        full_name: req.body.full_name
+        full_name: req.body.full_name,
+        address: req.body.address
       });
       try {
         const response = await PaintExportSchema.create(paintExport);

@@ -5,17 +5,19 @@ import styles from './Home.module.scss';
 import classNames from 'classnames/bind';
 import PaginationTable from '../../DataTable/PaginationTable';
 import HomeHeader from '../../DataTable/HomeHeader';
-import Alert from '../../Alert';
+import { useHistory } from 'react-router-dom';
+import './index.css';
 const cx = classNames.bind(styles);
+
 
 const url = 'http://localhost:9000/products';
 
 const Home = () => {
     const urlExport = 'http://localhost:9000/products/create-paint-export';
-
+    const history = useHistory();
     const modal = document.getElementById('modal');
 
-    const box = document.querySelector('.box');
+    const box = document.querySelector('.export-form');
 
     const [products, setProduct] = useState([]);
 
@@ -35,13 +37,14 @@ const Home = () => {
     const [userInfo, setUserInfo] = useState({
         full_name: '',
         phone_number: '',
+        address: '',
     });
 
     const [totalItems, setTotalItems] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const ITEMS_PER_PAGE = 20;
 
-    const { full_name, phone_number } = userInfo;
+    const { full_name, phone_number, address } = userInfo;
 
     const { amount, id, product_name, dvt } = productExport;
 
@@ -117,7 +120,7 @@ const Home = () => {
 
     const deleteProduct = async (id) => {
         await axios.delete(
-            `http://localhost:9000/products/delete-paint-export/${id}`,
+            `http://localhost:9000/products/delete-paint-items/${id}`,
         );
 
         loadProduct();
@@ -128,16 +131,16 @@ const Home = () => {
             paint_export_items: [...productsExport],
             ...userInfo,
         };
-
+        console.log(exportItems);
         await axios
             .post(urlExport, { ...exportItems })
-            .then(function(value) {
+            .then(function (value) {
                 const id = value.data.response.id;
 
                 window.location = `/detailbillexport/${id}`;
             })
 
-            .catch(function() {
+            .catch(function () {
                 alert('Vui lòng nhập thông tin xuất hàng phù hợp');
             });
         box.style.display = 'none';
@@ -155,55 +158,75 @@ const Home = () => {
     }, [products, currentPage]);
 
     return (
-        <div className={cx('container')} style={{maxWidth: "1400px"}}>
+        <div className={cx('container')} style={{ maxWidth: '1600px' }}>
             <div>
                 <h1 className={cx('header-title')}>Tồn kho</h1>
-                <table className={cx('table', 'table-bordered')} style={{width: ""}}>
+                <table
+                    className={cx('table', 'table-bordered')}
+                    style={{ width: '' }}
+ >
                     <HomeHeader />
                     <tbody>
                         {data.map((product, index) => (
                             <tr>
-                                <th className={cx('table-custom', 'text-center')} scope="row">
+                                <th
+                                    className={cx(
+                                        'table-custom',
+                                        'text-center',
+                                        'align-middle',
+                                    )}
+                                    scope="row"
+                                >
                                     {++index}
                                 </th>
-                                <td className={cx('table-custom', 'text-center')}>
+                                <td
+                                    className={cx(
+                                        'table-custom',
+                                        'text-center',
+                                        'align-middle',
+                                    )}
+                                >
                                     {product.product_name}
                                 </td>
-                                <td className={cx('table-custom', 'text-center')}>
+                                <td
+                                    className={cx(
+                                        'table-custom',
+                                        'text-center',
+                                        'align-middle',
+                                    )}
+                                >
                                     {product.product_price}
                                 </td>
 
-                                <td className={cx('table-custom', 'text-center')}>
+                                <td
+                                    className={cx(
+                                        'table-custom',
+                                        'text-center',
+                                        'align-middle',
+                                    )}
+                                >
                                     {product.dvt}
                                 </td>
-                                <td className={cx('table-custom', 'text-center')}>
+                                <td
+                                    className={cx(
+                                        'table-custom',
+                                        'text-center',
+                                        'align-middle',
+                                    )}
+                                >
                                     {product.amount}
                                 </td>
-                                <td className={cx('table-action')}> 
-                                    <Link
-                                        class="btn btn-primary mr-2"
-                                        to={`/products/${product.id}`}
-                                    >
-                                        Chi tiết
-                                    </Link>
-                                    <Link
-                                        class="btn btn-outline-primary mr-2"
-                                        to={`/products/edit/${product.id}`}
-                                    >
-                                        Chỉnh sửa
-                                    </Link>
-                                    <Link
-                                        class="btn btn-danger"
-                                        onClick={() =>
-                                            deleteProduct(product._id)
-                                        }
-                                    >
-                                        Xóa
-                                    </Link>
+                                <td
+                                    className={cx('table-action')}
+                                    style={{ height: '82px' }}
+                                >
+                                    <button type="button" class="btn btn-info m-2 btn-lg" onClick={() => history.push(`/products/${product.id}`)} >Chi tiết</button>
+                                    <button type="button" class="btn btn-secondary m-2 btn-lg" onClick={() => history.push(`/products/edit/${product.id}`)}>Chỉnh sửa</button>
+                                    <button type="button" className="btn btn-danger m-2 btn-lg" onClick={() => deleteProduct(product.id)}>Xóa</button>
                                 </td>
-
                                 <td>
-                                    <input
+                                <div className="wrap-export">
+                                <input
                                         data-id={product.id}
                                         data-index={index}
                                         data-name={product.product_name}
@@ -212,15 +235,10 @@ const Home = () => {
                                         placeholder="Nhập số lượng"
                                         name="amount"
                                         onChange={(e) => onInputChange(e)}
+                                        className="input"
                                     />
-
-                                    <button
-                                        onClick={onSubmit}
-                                        data-name={product.product_name}
-                                        data-dvt={product.dvt}
-                                    >
-                                        Xác nhận
-                                    </button>
+                                    <button type="button" className="btn btn-success m-2 btn-lg export-btn" onClick={onSubmit} data-name={product.product_name} data-dvt={product.dvt}>Xuất hàng</button>
+                                </div>
                                 </td>
                             </tr>
                         ))}
@@ -234,7 +252,7 @@ const Home = () => {
                 />
             </div>
 
-            <div className={cx('box')} style={{ display: 'none' }}>
+            <div className='export-form'>
                 <h3>Thông tin xuất hàng</h3>
 
                 <div className="container py-4">
@@ -266,58 +284,22 @@ const Home = () => {
                         onChange={(e) => onBoxInputChange(e)}
                     />
                 </div>
-
+                <div className={cx('form-group')}>
+                    <input
+                        className={cx('form-control', 'form-control-lg')}
+                        placeholder="Nhập địa chỉ khách hàng"
+                        name="address"
+                        value={address}
+                        onChange={(e) => onBoxInputChange(e)}
+                    />
+                </div>
                 <button
                     onClick={confirmExport}
-                    className={cx('btn btn-primary', 'btn-block')}
+                    className='btn btn-success lg exports-btn'
                 >
                     Xác nhận xuất hàng
                 </button>
             </div>
-
-            {/* <div id="modal" class="modal" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Thông báo</h5>
-                            <button
-                                type="button"
-                                class="close"
-                                data-dismiss="modal"
-                                aria-label="Close"
-                            >
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <p>Bạn có chắc muốn thực hiện tác vụ này ? </p>
-                        </div>
-                        <div class="modal-footer">
-                            <button
-                                onClick={(e) =>
-                                    setStatusDelete(e.target.dataset.event)
-                                }
-                                type="button"
-                                class="btn btn-primary"
-                                data-event="confirm"
-                            >
-                                Xác nhận
-                            </button>
-                            <button
-                                type="button"
-                                class="btn btn-secondary"
-                                data-dismiss="modal"
-                                data-event="cancel"
-                                onClick={(e) =>
-                                    setStatusDelete(e.target.dataset.event)
-                                }
-                            >
-                                Hủy
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div> */}
         </div>
     );
 };
