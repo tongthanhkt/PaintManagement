@@ -9,11 +9,9 @@ const cx = classNames.bind(styles);
 
 function CustomerIncome() {
     const [phoneNumber, setPhoneNumber] = useState();
-
     const [customerIncome, setCustomerIncome] = useState([]);
     const [detailExport, setDetailExport] = useState([]);
     const wrapper = document.querySelector('.wrapper-income');
-
 
     const onSubmit = async () => {
         await axios
@@ -31,8 +29,7 @@ function CustomerIncome() {
                 alert('Số vừa nhập chưa chính xác, vui lòng kiểm tra lại');
             });
 
-            wrapper.style.display = 'block';
-
+        wrapper.style.display = 'block';
     };
 
     return (
@@ -55,9 +52,9 @@ function CustomerIncome() {
                         onClick={onSubmit}
                         className={cx('btn btn-success', 'btn-block')}
                         style={{
-                            fontSize:'14px',
+                            fontSize: '14px',
                             width: '200px',
-                            marginTop: '20px'
+                            marginTop: '20px',
                         }}
                     >
                         Tra cứu

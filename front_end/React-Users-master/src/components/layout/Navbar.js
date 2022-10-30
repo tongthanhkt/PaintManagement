@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import styles from './Navbar.module.scss';
 import classNames from 'classnames/bind';
 
@@ -30,7 +30,7 @@ const Navbar = () => {
                             )}
                         >
                             <li className={cx('nav-item', 'active')}>
-                                <li className={cx('nav-item')}>
+
                                     <NavLink
                                         className={cx('nav-link')}
                                         exact
@@ -38,7 +38,7 @@ const Navbar = () => {
                                     >
                                         Tồn kho
                                     </NavLink>
-                                </li>
+
                             </li>
 
                             <li className={cx('nav-item')}>
