@@ -1,8 +1,50 @@
 import styles from './Login.module.scss';
 import className from 'classnames/bind';
+import { useHistory } from 'react-router-dom';
+import { useState } from 'react';
+import axios from 'axios';
+
 const cx = className.bind(styles);
 
-function Login() {
+function Login(props) {
+
+
+    const [loginInfo, setLoginInfo] = useState({
+        username: '',
+        password: '',
+    });
+
+
+
+
+    const { username, password } = loginInfo;
+
+    const [isValid, setValid] = useState(false);
+
+    const onInputChange = (e) => {
+        setLoginInfo({ ...loginInfo, [e.target.name]: e.target.value });
+    };
+
+    const submit = async (e) => {
+        e.preventDefault();
+        await axios
+            .post('http://localhost:9000/user/sign-in', loginInfo)
+            .then(() => {
+                setValid(true);
+            })
+
+            .catch(() => {
+                alert('Sai tên đăng nhập hoặc mật khẩu');
+            });
+    };
+
+    props = () => {
+        return isValid
+    }
+
+
+
+
     return (
         <section
             className={cx('vh-100')}
@@ -30,6 +72,9 @@ function Login() {
                                             'form-control form-control-lg',
                                         )}
                                         placeholder="Tên đăng nhập"
+                                        name="username"
+                                        value={username}
+                                        onChange={(e) => onInputChange(e)}
                                     />
                                 </div>
 
@@ -41,6 +86,9 @@ function Login() {
                                             'form-control form-control-lg',
                                         )}
                                         placeholder="Mật khẩu"
+                                        name="password"
+                                        value={password}
+                                        onChange={(e) => onInputChange(e)}
                                     />
                                 </div>
 
@@ -49,6 +97,7 @@ function Login() {
                                         'btn btn-primary btn-lg btn-block',
                                     )}
                                     type="submit"
+                                    onClick={submit}
                                 >
                                     Xác nhận
                                 </button>

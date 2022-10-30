@@ -6,7 +6,7 @@ import DetailProduct from '../products/DetailProduct';
 import ExportProduct from '../products/ExportProduct';
 import AllBillExport from '../pages/AllBillExport';
 import DetailBillExport from '../pages/DetailBillExport';
-import Login from '../pages/Login';
+import Login from '../pages/Register/Login';
 import CustomerIncome from '../pages/CustomerIncome';
 
 const publicRoutes = [
@@ -22,7 +22,9 @@ const publicRoutes = [
         layout: Navbar,
     },
     { path: '/customerincome', component: CustomerIncome, layout: Navbar },
-    { path: '/login', component: Login, layout: null },
+    { path: '/', component: Login, layout: null }
 ];
 
-export { publicRoutes };
+const privateRoutes = [{ path: '/', component: Login, layout: null }];
+
+export { publicRoutes, privateRoutes };

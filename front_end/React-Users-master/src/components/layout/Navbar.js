@@ -69,7 +69,20 @@ const Navbar = () => {
                                     Doanh thu theo khách hàng
                                 </NavLink>
                             </li>
+
+                            <li class={cx('nav-item')}>
+                                <NavLink
+                                    className={cx('nav-link', 'btn', 'btn-danger', 'btn-lg')}
+                                    exact
+                                    to="/"
+                                    style={{marginLeft: '300px'}}
+                                >
+                                    Đăng xuất
+                                </NavLink>
+                            </li>
                         </ul>
+
+
                     </div>
                 </nav>
             </div>
