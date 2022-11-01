@@ -6,16 +6,11 @@ import axios from 'axios';
 
 const cx = className.bind(styles);
 
-function Login(props) {
-
-
+function Login() {
     const [loginInfo, setLoginInfo] = useState({
         username: '',
         password: '',
     });
-
-
-
 
     const { username, password } = loginInfo;
 
@@ -29,21 +24,18 @@ function Login(props) {
         e.preventDefault();
         await axios
             .post('http://localhost:9000/user/sign-in', loginInfo)
-            .then(() => {
-                setValid(true);
+            .then((data) => {
+                localStorage.setItem('accessToken', true);
+            })
+
+            .then((data) => {
+                window.location = '/home';
             })
 
             .catch(() => {
                 alert('Sai tên đăng nhập hoặc mật khẩu');
             });
     };
-
-    props = () => {
-        return isValid
-    }
-
-
-
 
     return (
         <section

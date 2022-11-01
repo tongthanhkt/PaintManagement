@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './Navbar.module.scss';
 import classNames from 'classnames/bind';
+import Logout from '../pages/Register/Logout'
 
 const cx = classNames.bind(styles);
 const Navbar = () => {
@@ -71,14 +72,7 @@ const Navbar = () => {
                             </li>
 
                             <li class={cx('nav-item')}>
-                                <NavLink
-                                    className={cx('nav-link', 'btn', 'btn-danger', 'btn-lg')}
-                                    exact
-                                    to="/"
-                                    style={{marginLeft: '300px'}}
-                                >
-                                    Đăng xuất
-                                </NavLink>
+                               <Logout />
                             </li>
                         </ul>
 
