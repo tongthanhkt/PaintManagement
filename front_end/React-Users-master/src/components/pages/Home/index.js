@@ -14,7 +14,7 @@ const url = 'http://localhost:9000/products';
 const Home = () => {
     const urlExport = 'http://localhost:9000/products/create-paint-export';
     const history = useHistory();
-    const modal = document.getElementById('modal');
+
 
     const box = document.querySelector('.export-form');
 

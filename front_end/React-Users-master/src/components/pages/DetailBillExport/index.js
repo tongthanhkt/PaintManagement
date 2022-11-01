@@ -1,20 +1,21 @@
 import axios from 'axios';
 // import styles from 'DetailBillExport.module.scss';
 import classNames from 'classnames/bind';
-import React, { useState, useEffect,useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { useReactToPrint } from 'react-to-print';
-
+import paintCompanyData from '../../../data/PaintCompanyData';
 import { Link, NavLink } from 'react-router-dom';
 import './index.css';
-
+import images from '../../../assets/images';
+import PaintCompanyData from '../../../data/PaintCompanyData';
 
 function DetailBillExport() {
     const [product, setProduct] = useState([]);
     const [products, setProducts] = useState([]);
     const componentRef = useRef();
     const handlePrint = useReactToPrint({
-      content: () => componentRef.current,
+        content: () => componentRef.current,
     });
     const { id } = useParams();
 
@@ -36,94 +37,90 @@ function DetailBillExport() {
 
     return (
         <div className="wrapper" ref={componentRef}>
-            <div className="w-75 mx-auto shadow p-5 detail" >
-                <h2 className="text-center mb-4">Chi tiết hóa đơn</h2>
-                <form>
-                    <div class="mb-3">
-                        <label class="form-label">Tên khách hàng</label>
-
-                        <input
-                            type="text"
-                            class="form-control form-control-lg form-item form-edit "
-                            id="inputItem"
-                            value={product.full_name}
-                            disable
-                            readOnly
-                        />
+            <div className="detail">
+                <div className="heading_wrapper">
+                    <div className="heading-img">
+                        <img className="img" src={images.logo} />
                     </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">Địa chỉ</label>
-
-                        <input
-                            type="text"
-                            class="form-control form-control-lg form-item form-edit "
-                            id="inputItem"
-                            value={product.address}
-                            disable
-                            readOnly
-                        />
+                    <div className="eadinhg-info">
+                        <h3 className="company-name">
+                            {paintCompanyData.companyName}
+                        </h3>
+                        <p className="company-description">
+                            Địa chỉ: {paintCompanyData.address}
+                        </p>
+                        <p className="company-description">
+                            Hotline: {paintCompanyData.hotline}
+                        </p>
+                        <p className="company-description">
+                            Số tài khoản: {paintCompanyData.accountNumber}
+                        </p>
                     </div>
+                </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">Số điện thoại</label>
+                <div className="content">
+                    <h3 className="content-title">PHIẾU XUẤT KHO BÁN HÀNG</h3>
 
-                        <input
-                            type="text"
-                            class="form-control form-control-lg form-item form-edit "
-                            id="inputItem"
-                            value={product.phone_number}
-                            disable
-                            readOnly
-                        />
-                    </div>
+                    <ul className="customer-info_list">
+                        <li className="customer-info">
+                            Khách hàng: {product.full_name}
+                        </li>
 
-                    <div class="mb-3">
-                        <label class="form-label">Tổng giá trị hàng hóa </label>
+                        <li className="customer-info">
+                            Địa chỉ: {product.address}
+                        </li>
 
-                        <input
-                            type="text"
-                            class="form-control form-control-lg form-item form-edit "
-                            id="inputItem"
-                            value={`${product.total_export_price} VND`}
-                            disable
-                            readOnly
-                        />
-                    </div>
+                        <li className="customer-info">
+                            Số điện thoại: {product.phone_number}
+                        </li>
+                    </ul>
 
-                    <div class="mb-3">
-                        <label class="form-label">Thời gian xuất hóa đơn</label>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Tên hàng</th>
+                                <th>ĐVT</th>
+                                <th>Số lượng</th>
+                                <th>Đơn giá</th>
+                                <th>Thành tiền</th>
 
-                        <input
-                            type="text"
-                            class="form-control form-control-lg form-item form-edit "
-                            id="inputItem"
-                            value={product.created_time}
-                            disable
-                            readOnly
-                        />
-                    </div>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {/* <tr>
+                                <td>zui</td>
+                            </tr> */}
 
-                    <div class="mb-3">
-                        <label class="form-label">Chi tiết sản phẩm</label>
+                            {products.map((product, index) => (
+                                <tr>
+                                    <th scope="row">{++index}</th>
 
-                        {products.map((data, index) => (
-                            <input
-                                key={index}
-                                type="text"
-                                class="form-control form-control-lg form-item form-edit "
-                                id="inputItem"
-                                value={` ${data.amount} ${data.dvt} ${data.product_name}`}
-                                disable
-                                readOnly
-                            />
-                        ))}
-                    </div>
+                                    <td>{product.product_name}</td>
 
-                </form>
-                    <button className='btn btn-primary btn-lg' onClick={handlePrint}>In hóa đơn</button>
+                                    <td>{product.dvt}</td>
+
+                                    <td>{product.amount}</td>
+
+                                    <td>{product.product_price}</td>
+
+                                    <td>{product.total_price}</td>
+                                    <td rowspan={'1'}>{product.total_price}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div className="footer"></div>
+                <button
+                    className="btn btn-primary btn-lg"
+                    onClick={handlePrint}
+                >
+                    In hóa đơn
+                </button>
             </div>
-
         </div>
     );
 }
