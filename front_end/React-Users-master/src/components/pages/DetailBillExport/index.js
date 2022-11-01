@@ -7,7 +7,7 @@ import { useReactToPrint } from 'react-to-print';
 
 import { Link, NavLink } from 'react-router-dom';
 import './index.css';
-import Example from '../../Print';
+
 
 function DetailBillExport() {
     const [product, setProduct] = useState([]);
@@ -123,7 +123,7 @@ function DetailBillExport() {
                 </form>
                     <button className='btn btn-primary btn-lg' onClick={handlePrint}>In hóa đơn</button>
             </div>
-            {/* <Example /> */}
+
         </div>
     );
 }
