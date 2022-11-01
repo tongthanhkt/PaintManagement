@@ -1,16 +1,21 @@
 import axios from 'axios';
 // import styles from 'DetailBillExport.module.scss';
 import classNames from 'classnames/bind';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useRef } from 'react';
 import { useParams } from 'react-router-dom';
+import { useReactToPrint } from 'react-to-print';
 
 import { Link, NavLink } from 'react-router-dom';
 import './index.css';
+import Example from '../../Print';
 
 function DetailBillExport() {
     const [product, setProduct] = useState([]);
     const [products, setProducts] = useState([]);
-
+    const componentRef = useRef();
+    const handlePrint = useReactToPrint({
+      content: () => componentRef.current,
+    });
     const { id } = useParams();
 
     useEffect(() => {
@@ -30,8 +35,8 @@ function DetailBillExport() {
     };
 
     return (
-        <div className="wrapper">
-            <div className="w-75 mx-auto shadow p-5 detail">
+        <div className="wrapper" ref={componentRef}>
+            <div className="w-75 mx-auto shadow p-5 detail" >
                 <h2 className="text-center mb-4">Chi tiết hóa đơn</h2>
                 <form>
                     <div class="mb-3">
@@ -114,8 +119,11 @@ function DetailBillExport() {
                             />
                         ))}
                     </div>
+
                 </form>
+                    <button className='btn btn-primary btn-lg' onClick={handlePrint}>In hóa đơn</button>
             </div>
+            {/* <Example /> */}
         </div>
     );
 }
