@@ -85,7 +85,6 @@ function DetailBillExport() {
                                 <th>Số lượng</th>
                                 <th>Đơn giá</th>
                                 <th>Thành tiền</th>
-
                             </tr>
                         </thead>
                         <tbody>
@@ -106,16 +105,35 @@ function DetailBillExport() {
                                     <td>{product.product_price}</td>
 
                                     <td>{product.total_price}</td>
-                                    <td rowspan={'1'}>{product.total_price}</td>
                                 </tr>
                             ))}
                         </tbody>
+
+                        <tfoot>
+                            <tr>
+                                <td  colspan="5">Tổng cộng</td>
+                                <td>{product.total_export_price}</td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
 
-                <div className="footer"></div>
+                <div className="footer">
+                    <p className="time-export">Thời gian xuất hóa đơn: {product.created_time}</p>
+                    <h3 className="footer-text">Trân trọng kính chào và chúc hợp tác thành công !</h3>
+
+                    <div className="confirm">
+                        <h3 className="customer-confirm">Khách hàng</h3>
+
+                        <div className="company-confirm">
+                            <p className="time">Pleiku, ngày _______, tháng ______, năm ________</p>
+                            <h3 className="company-represent">ĐẠI DIỆN CÔNG TY</h3>
+                        </div>
+                    </div>
+                </div>
                 <button
                     className="btn btn-primary btn-lg"
+                    id='btn-print'
                     onClick={handlePrint}
                 >
                     In hóa đơn
