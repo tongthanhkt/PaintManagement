@@ -2,7 +2,8 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './Navbar.module.scss';
 import classNames from 'classnames/bind';
-import Logout from '../pages/Register/Logout'
+import Logout from '../pages/Register/Logout';
+import CreateAcc from '../pages/Register/CreateAcc';
 
 const cx = classNames.bind(styles);
 const Navbar = () => {
@@ -31,15 +32,13 @@ const Navbar = () => {
                             )}
                         >
                             <li className={cx('nav-item', 'active')}>
-
-                                    <NavLink
-                                        className={cx('nav-link')}
-                                        exact
-                                        to="/home"
-                                    >
-                                        Tồn kho
-                                    </NavLink>
-
+                                <NavLink
+                                    className={cx('nav-link')}
+                                    exact
+                                    to="/home"
+                                >
+                                    Tồn kho
+                                </NavLink>
                             </li>
 
                             <li className={cx('nav-item')}>
@@ -72,11 +71,34 @@ const Navbar = () => {
                             </li>
 
                             <li class={cx('nav-item')}>
-                               <Logout />
+                                <NavLink
+                                    className={cx(
+                                        'nav-link',
+                                        'btn',
+                                        'btn-primary',
+                                    )}
+                                    exact
+                                    to="/createaccount"
+                                    style={{ marginLeft: '240px' }}
+                                >
+                                    Tạo tài khoản
+                                </NavLink>
                             </li>
+
+                            <li class={cx('nav-item')}>
+                                <Logout />
+                            </li>
+
+                            {/* <li class={cx('nav-item')}>
+                                <NavLink
+                                    className={cx('nav-link')}
+                                    exact
+                                    to="/customerincome"
+                                >
+                                    Doanh thu theo khách hàng
+                                </NavLink>
+                            </li> */}
                         </ul>
-
-
                     </div>
                 </nav>
             </div>

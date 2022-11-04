@@ -1,40 +1,44 @@
-import styles from './Login.module.scss';
-import className from 'classnames/bind';
-import { useHistory } from 'react-router-dom';
-import { useState, useRef } from 'react';
+import React from 'react';
+import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import styles from './CreateAcc.module.scss';
 import axios from 'axios';
 
-const cx = className.bind(styles);
+import './index.css'
+import classNames from 'classnames/bind';
+const cx = classNames.bind(styles);
 
-function Login() {
-    const [loginInfo, setLoginInfo] = useState({
+
+function CreateAcc() {
+
+
+    const [signupInfo, setSignupInfo] = useState({
         username: '',
         password: '',
     });
 
-    const { username, password } = loginInfo;
+    const { username, password } = signupInfo;
 
-    const [isValid, setValid] = useState(false);
+
 
     const onInputChange = (e) => {
-        setLoginInfo({ ...loginInfo, [e.target.name]: e.target.value });
+        setSignupInfo({ ...signupInfo, [e.target.name]: e.target.value });
     };
 
     const submit = async (e) => {
         e.preventDefault();
-        await axios
-            .post('http://localhost:9000/user/sign-in', loginInfo)
-            .then((data) => {
-                localStorage.setItem('accessToken', true);
-            })
+        await axios.post('http://localhost:9000/user/sign-up', signupInfo)
+                    .then(() =>{
+                        alert('Tạo tài khoản thành công')
+                        window.location = '/'
+                    })
 
-            .then((data) => {
-                window.location = '/home';
-            })
 
-            .catch(() => {
-                alert('Sai tên đăng nhập hoặc mật khẩu');
-            });
+
+                    .catch(() => {
+                        alert('Tạo tài khoản thất bại')
+                    })
+           
     };
 
     return (
@@ -54,7 +58,7 @@ function Login() {
                             style={{ borderRadius: '1rem' }}
                         >
                             <div className={cx('card-body p-5 text-center')}>
-                                <h3 className={cx('mb-5')}>Đăng nhập</h3>
+                                <h3 className={cx('mb-5')}>Tạo tài khoản</h3>
 
                                 <div className={cx('form-outline mb-4')}>
                                     <input
@@ -99,7 +103,7 @@ function Login() {
                 </div>
             </div>
         </section>
-    );
+    )
 }
 
-export default Login;
+export default CreateAcc;

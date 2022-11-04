@@ -8,6 +8,7 @@ import AllBillExport from '../pages/AllBillExport';
 import DetailBillExport from '../pages/DetailBillExport';
 import Login from '../pages/Register/Login';
 import CustomerIncome from '../pages/CustomerIncome';
+import CreateAcc from '../pages/Register/CreateAcc'
 
 const publicRoutes = [
     { path: '/home', component: Home, layout: Navbar },
@@ -22,6 +23,7 @@ const publicRoutes = [
         layout: Navbar,
     },
     { path: '/customerincome', component: CustomerIncome, layout: Navbar },
+    { path: '/createaccount', component: CreateAcc, layout: Navbar },
     { path: '/', component: Login, layout: null }
 ];
 
