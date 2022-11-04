@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const productsController = require("./productsController");
-router.get("/", productsController.listPaintItem);
+router.get("/list-paint-items", productsController.listPaintItem);
 router.post("/create-paint-item", productsController.createPaintItem);
 router.get("/detail-paint-item", productsController.detailPaintItem);
 router.post("/create-paint-export", productsController.createPaintExport);
