@@ -1,0 +1,16 @@
+const express = require("express");
+const router = express.Router();
+const productsController = require("./materialsController");
+router.get("/list-material-items", productsController.listMaterialItem);
+router.post("/create-material-item", productsController.createMaterialItem);
+router.get("/detail-material-item", productsController.detailMaterialItem);
+router.post("/create-material-export", productsController.createMaterialExport);
+router.get("/list-material-export", productsController.listMaterialExport);
+router.get("/detail-material-item/:id", productsController.detailMaterialItem);
+router.put("/update-material-item/:id", productsController.updateMaterialItem);
+router.get("/detail-material-export/:id", productsController.detailMaterialExport);
+router.delete("/delete-material-items/:id", productsController.deleteMaterialItems);
+router.delete("/delete-material-export/:id", productsController.deleteMaterialExport);
+router.get('/income-customer/:phone_number', productsController.incomeCustomer);
+router.get('/statistical-income', productsController.statisticalIncome);
+module.exports = router;
