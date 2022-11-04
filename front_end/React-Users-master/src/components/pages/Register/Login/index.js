@@ -29,7 +29,7 @@ function Login() {
             })
 
             .then((data) => {
-                window.location = '/home';
+                window.location = '/select';
             })
 
             .catch(() => {

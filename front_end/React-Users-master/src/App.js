@@ -16,30 +16,7 @@ import Admin from './AppRouter';
 
 function App() {
     return (
-        //     <Router>
-        //       <Switch>
-        //         {publicRoutes.map((route, index) => {
-        //           const Page = route.component;
-
-        //           let Layout = route.layout;
-
-        //           if (route.layout) {
-        //             Layout = route.layout;
-        //           } else if (route.layout === null) {
-        //             Layout = Fragment;
-        //           }
-
-        //           return (
-        //             <Route key={index} path={route.path}>
-        //               <Layout />
-        //               <Page />
-        //             </Route>
-        //           );
-        //         })}
-        //       </Switch>
-        //     </Router>
-        // )
-
+       
         <Router>
             <div className="App">
                 <Switch>
@@ -60,43 +37,12 @@ function App() {
                                 <Page />
                             </Route>
                         ) : (
-                            <Route  path='/' component={Login} />
+                            <Route path="/" component={Login} />
                         );
                     })}
-
-                    {/* {privateRoutes.map((route, index) => (
-                        <Route
-                            key={index}
-                            path={route.path}
-                            render={() => {
-                                return localStorage.getItem(
-                                    'accessToken',
-                                    true,
-                                ) ? (
-                                    <Admin />
-                                ) : (
-                                    <Redirect to="/" />
-                                );
-                            }}
-                        />
-                    ))} */}
                 </Switch>
             </div>
         </Router>
-
-        // return (
-        //     <Router>
-        //         <div className="App">
-        //             <Switch>
-
-        // {privateRoutes.map((route, index) => <Route key={index} path={route.path} render={() => {
-        //     return localStorage.getItem('login success', true) ? <Admin /> : <Redirect to="/" />;
-        // }}/>)}
-
-        //             </Switch>
-        //         </div>
-        //     </Router>
-        // );
     );
 }
 
