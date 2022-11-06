@@ -1,14 +1,14 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import styles from './Navbar.module.scss';
+import styles from './NavbarMaterial.module.scss';
 import classNames from 'classnames/bind';
-import Logout from '../pages/Register/Logout';
-import CreateAcc from '../pages/Register/CreateAcc';
+import Logout from '../../../components/pages/Register/Logout';
+import CreateAcc from '../../../components/pages/Register/CreateAcc';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRightToBracket } from '@fortawesome/free-solid-svg-icons';
 
 const cx = classNames.bind(styles);
-const Navbar = () => {
+const NavbarMaterial = () => {
     return (
         <nav className={cx('navbar', 'navbar-dark', 'bg-dark')}>
             <div className={cx('container', 'container-custom')}>
@@ -37,7 +37,7 @@ const Navbar = () => {
                                 <NavLink
                                     className={cx('nav-link')}
                                     exact
-                                    to="/home"
+                                    to="/homematerial"
                                 >
                                     Tồn kho
                                 </NavLink>
@@ -46,13 +46,13 @@ const Navbar = () => {
                             <li className={cx('nav-item')}>
                                 <NavLink
                                     className={cx('nav-link')}
-                                    to="/products/add"
+                                    to="/addproductmaterial"
                                 >
                                     Thêm sản phẩm vào kho
                                 </NavLink>
                             </li>
 
-                            <li class={cx('nav-item')}>
+                            {/* <li class={cx('nav-item')}>
                                 <NavLink
                                     className={cx('nav-link')}
                                     exact
@@ -62,7 +62,7 @@ const Navbar = () => {
                                 </NavLink>
                             </li>
 
-                            <li class={cx('nav-item')}>
+                            {/* <li class={cx('nav-item')}>
                                 <NavLink
                                     className={cx('nav-link')}
                                     exact
@@ -70,9 +70,9 @@ const Navbar = () => {
                                 >
                                     Doanh thu theo khách hàng
                                 </NavLink>
-                            </li>
+                            </li> */}
 
-                            <li class={cx('nav-item')}>
+                            {/* <li class={cx('nav-item')}>
                                 <NavLink
                                     className={cx(
                                         'nav-link',
@@ -85,11 +85,11 @@ const Navbar = () => {
                                 >
                                     Tạo tài khoản
                                 </NavLink>
-                            </li>
+                            </li> */}
 
-                            <li className={cx('nav-item')}>
+                            {/* <li className={cx('nav-item')}>
                                 <Logout />
-                            </li>
+                            </li>  */}
 
                             <li className={cx('nav-item')}>
                                 <NavLink
@@ -103,6 +103,8 @@ const Navbar = () => {
                                     />
                                 </NavLink>
                             </li>
+
+                          
                         </ul>
                     </div>
                 </nav>
@@ -111,4 +113,4 @@ const Navbar = () => {
     );
 };
 
-export default Navbar;
+export default NavbarMaterial;

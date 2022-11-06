@@ -8,6 +8,11 @@ import AllBillExport from '../pages/AllBillExport';
 import DetailBillExport from '../pages/DetailBillExport';
 import Login from '../pages/Register/Login';
 import CustomerIncome from '../pages/CustomerIncome';
+import CreateAcc from '../pages/Register/CreateAcc';
+import SelectSide from '../pages/SelectSide';
+import NavbarMaterial from '../../Material/components/NavbarMaterial';
+import HomeMaterial from '../../Material/components/HomeMaterial';
+import AddProductMaterial from '../../Material/components/AddProductMaterial';
 
 const publicRoutes = [
     { path: '/home', component: Home, layout: Navbar },
@@ -22,7 +27,12 @@ const publicRoutes = [
         layout: Navbar,
     },
     { path: '/customerincome', component: CustomerIncome, layout: Navbar },
-    { path: '/', component: Login, layout: null }
+    { path: '/createaccount', component: CreateAcc, layout: Navbar },
+    { path: '/homematerial', component: HomeMaterial, layout: NavbarMaterial },
+    { path: '/addproductmaterial', component: AddProductMaterial, layout: NavbarMaterial },
+    { path: '/select', component: SelectSide, layout: null },
+    { path: '/', component: Login, layout: null },
+
 ];
 
 const privateRoutes = [{ path: '/', component: Login, layout: null }];

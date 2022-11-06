@@ -15,10 +15,9 @@ function Logout() {
 
     return (
         <NavLink
-            className={cx('nav-link', 'btn', 'btn-danger', 'btn-lg')}
+            className={cx('nav-link', 'btn', 'btn-danger')}
             exact
             to="/"
-            style={{ marginLeft: '300px' }}
             onClick={handleLogout}
         >
             Đăng xuất
