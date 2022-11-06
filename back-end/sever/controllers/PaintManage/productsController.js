@@ -7,6 +7,7 @@ exports.listPaintItem = async function (req, res) {
 exports.createPaintItem = async function (req, res) {
   let paintItem = new PaintItemSchema({
     id: Date.now(),
+    product_id: req.body.product_id,
     product_name: req.body.product_name,
     product_price: req.body.product_price,
     dvt: req.body.dvt,

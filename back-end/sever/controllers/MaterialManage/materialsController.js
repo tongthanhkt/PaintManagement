@@ -72,9 +72,11 @@ exports.createMaterialExport = async function (req, res) {
               { id: materialExportItems[i].id },
               { amount: materialItems[j].amount - materialExportItems[i].amount }
             );
+            materialExportItems[i].product_id = materialItems[j].product_id;
             materialExportItems[i].product_name = materialItems[j].product_name;
             materialExportItems[i].product_price = materialItems[j].product_price;
             materialExportItems[i].dvt = materialItems[j].dvt;
+            materialExportItems[i].description = materialItems[j].description;
             materialExportItems[i].total_price =
               materialExportItems[i].product_price * materialExportItems[i].amount;
               totalExportPrice += materialExportItems[i].total_price
