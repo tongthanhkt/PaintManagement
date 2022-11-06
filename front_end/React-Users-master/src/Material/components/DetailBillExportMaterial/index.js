@@ -1,16 +1,15 @@
 import axios from 'axios';
-// import styles from 'DetailBillExport.module.scss';
+// import styles from 'DetailBillExportMaterial.module.scss';
 import classNames from 'classnames/bind';
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { useReactToPrint } from 'react-to-print';
 import paintCompanyData from '../../../data/PaintCompanyData';
-import { Link, NavLink } from 'react-router-dom';
+// import { Link, NavLink } from 'react-router-dom';
 import './index.css';
 import images from '../../../assets/images';
-import PaintCompanyData from '../../../data/PaintCompanyData';
 
-function DetailBillExport() {
+function DetailBillExportMaterial() {
     const [product, setProduct] = useState([]);
     const [products, setProducts] = useState([]);
     const componentRef = useRef();
@@ -25,13 +24,11 @@ function DetailBillExport() {
 
     const loadProduct = async () => {
         const result = await axios.get(
-
-            `http://localhost:9000/products/paint/detail-paint-export/${id}`
-            
+            `http://localhost:9000/products/material/detail-material-export/${id}`,
         );
 
         const value = result.data.response;
-        const detail = result.data.response.paint_export_items;
+        const detail = result.data.response.material_export_items;
 
         setProduct(value);
         setProducts(detail);
@@ -90,10 +87,6 @@ function DetailBillExport() {
                             </tr>
                         </thead>
                         <tbody>
-                            {/* <tr>
-                                <td>zui</td>
-                            </tr> */}
-
                             {products.map((product, index) => (
                                 <tr>
                                     <th scope="row">{++index}</th>
@@ -153,4 +146,4 @@ function DetailBillExport() {
     );
 }
 
-export default DetailBillExport;
+export default DetailBillExportMaterial;

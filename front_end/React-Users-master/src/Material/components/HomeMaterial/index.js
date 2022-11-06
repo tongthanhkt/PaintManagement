@@ -10,7 +10,7 @@ import { useHistory } from 'react-router-dom';
 // import './index.css';
 const cx = classNames.bind(styles);
 
-const url = 'hhttp://localhost:9000/products/material/list-material-items';
+const url = 'http://localhost:9000/products/material/list-material-items';
 
 const Home = () => {
     const urlExport =
@@ -120,7 +120,7 @@ const Home = () => {
 
     const deleteProduct = async (id) => {
         await axios.delete(
-            `http://localhost:9000/products/delete-paint-items/${id}`,
+            `http://localhost:9000/products/material/delete-material-items/${id}`,
         );
 
         loadProduct();
@@ -128,7 +128,7 @@ const Home = () => {
 
     const confirmExport = async (e) => {
         const exportItems = {
-            paint_export_items: [...productsExport],
+            material_export_items: [...productsExport],
             ...userInfo,
         };
         console.log(exportItems);
@@ -137,7 +137,7 @@ const Home = () => {
             .then(function (value) {
                 const id = value.data.response.id;
 
-                window.location = `/detailbillexport/${id}`;
+                window.location = `/detailbillexportmaterial/${id}`;
             })
 
             .catch(function () {
@@ -228,7 +228,7 @@ const Home = () => {
                                         class="btn btn-info m-2 btn-lg"
                                         onClick={() =>
                                             history.push(
-                                                `/products/${product.id}`,
+                                                `/productsmaterial/${product.id}`,
                                             )
                                         }
                                     >
@@ -239,7 +239,7 @@ const Home = () => {
                                         class="btn btn-secondary m-2 btn-lg"
                                         onClick={() =>
                                             history.push(
-                                                `/products/edit/${product.id}`,
+                                                `/productsmaterial/edit/${product.id}`,
                                             )
                                         }
                                     >

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useHistory, useParams } from 'react-router-dom';
 
-const EditProduct = () => {
+const EditProductMaterial = () => {
     let history = useHistory();
 
     const id = useParams();
@@ -16,16 +16,16 @@ const EditProduct = () => {
     const onSubmit = async (e) => {
         e.preventDefault();
         await axios.put(
-            `http://localhost:9000/products/paint/update-paint-item/${id.id}`,
+            `http://localhost:9000/products/material/update-material-item/${id.id}`,
+
             editedProduct,
         );
-        history.push('/home');
+        history.push('/homematerial');
     };
 
     const currentProduct = async () => {
         const result = await axios.get(
-            `http://localhost:9000/products/detail-paint-item/${id.id}`,
-            
+            `http://localhost:9000/products/material/detail-material-item/${id.id}`,
         );
         const value = result.data.response;
         setEditedProduct(value[0]);
@@ -95,4 +95,4 @@ const EditProduct = () => {
     );
 };
 
-export default EditProduct;
+export default EditProductMaterial;

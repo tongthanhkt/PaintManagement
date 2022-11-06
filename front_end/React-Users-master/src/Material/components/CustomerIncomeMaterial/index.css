@@ -1,0 +1,15 @@
+.wrapper-income {
+    display: none;
+    margin-top: 20px;
+    padding-bottom: 40px;
+}
+
+.btn-income {
+    height: 40px;
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.address {
+    word-break: break-word;
+}

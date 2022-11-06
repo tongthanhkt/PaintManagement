@@ -52,27 +52,27 @@ const NavbarMaterial = () => {
                                 </NavLink>
                             </li>
 
-                            {/* <li class={cx('nav-item')}>
+                            <li class={cx('nav-item')}>
                                 <NavLink
                                     className={cx('nav-link')}
                                     exact
-                                    to="/detailallbillexport"
+                                    to="/detailallbillexportmaterial"
                                 >
                                     Hóa đơn đã xuất
                                 </NavLink>
                             </li>
 
-                            {/* <li class={cx('nav-item')}>
+                            <li class={cx('nav-item')}>
                                 <NavLink
                                     className={cx('nav-link')}
                                     exact
-                                    to="/customerincome"
+                                    to="/customerincomematerial"
                                 >
                                     Doanh thu theo khách hàng
                                 </NavLink>
-                            </li> */}
+                            </li>
 
-                            {/* <li class={cx('nav-item')}>
+                            <li class={cx('nav-item')}>
                                 <NavLink
                                     className={cx(
                                         'nav-link',
@@ -85,11 +85,11 @@ const NavbarMaterial = () => {
                                 >
                                     Tạo tài khoản
                                 </NavLink>
-                            </li> */}
+                            </li>
 
-                            {/* <li className={cx('nav-item')}>
+                             <li className={cx('nav-item')}>
                                 <Logout />
-                            </li>  */}
+                            </li> 
 
                             <li className={cx('nav-item')}>
                                 <NavLink

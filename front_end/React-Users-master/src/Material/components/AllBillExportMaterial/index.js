@@ -1,17 +1,16 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
 import { Link, NavLink } from 'react-router-dom';
-import styles from './AllBillExport.module.scss';
+import styles from './AllBillExportMaterial.module.scss';
 import classNames from 'classnames/bind';
-import Header from '../../DataTable/Header';
-import PaginationTable from '../../DataTable/PaginationTable';
+import Header from '../../../components/DataTable/Header';
+import PaginationTable from '../../../components/DataTable/PaginationTable';
 import './index.css';
 
 const cx = classNames.bind(styles);
 
-function AllBillExport() {
-    const url = 'http://localhost:9000/products/paint/list-paint-export';
-    const urlDelete = 'http://localhost:9000/products/delete-paint-export/';
+function AllBillExportMaterial() {
+    const url = 'http://localhost:9000/products/material/list-material-export';
 
     const [products, setProducts] = useState([]);
     const [totalItems, setTotalItems] = useState(0);
@@ -30,9 +29,7 @@ function AllBillExport() {
 
     const deleteProduct = async (id) => {
         await axios.delete(
-            // `http://localhost:9000/products/delete-paint-export/${id}`,
-            `http://localhost:9000/products/paint/delete-paint-export/${id}`
-            
+            `http://localhost:9000/products/material/delete-material-export/${id}`,
         );
         loadList();
     };
@@ -118,7 +115,7 @@ function AllBillExport() {
                                 >
                                     <Link
                                         class="btn btn-info"
-                                        to={`/detailbillexport/${product.id}`}
+                                        to={`/detailbillexportmaterial/${product.id}`}
                                         style={{ width: '150px' }}
                                     >
                                         Chi tiết đơn hàng
@@ -151,4 +148,4 @@ function AllBillExport() {
     );
 }
 
-export default AllBillExport;
+export default AllBillExportMaterial;

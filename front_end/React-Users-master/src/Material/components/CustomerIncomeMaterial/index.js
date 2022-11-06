@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from './CustomerIncome.module.scss';
+import styles from './CustomerIncomeMaterial.module.scss';
 import classNames from 'classnames/bind';
 import axios from 'axios';
 import { Link, NavLink } from 'react-router-dom';
@@ -7,7 +7,7 @@ import './index.css';
 
 const cx = classNames.bind(styles);
 
-function CustomerIncome() {
+function CustomerIncomeMaterial() {
     const [phoneNumber, setPhoneNumber] = useState();
     const [customerIncome, setCustomerIncome] = useState([]);
     const [detailExport, setDetailExport] = useState([]);
@@ -16,13 +16,13 @@ function CustomerIncome() {
     const onSubmit = async () => {
         await axios
             .get(
-                `http://localhost:9000/products/paint/income-customer/${phoneNumber}`,
+                `http://localhost:9000/products/material/income-customer/${phoneNumber}`,
             )
 
             .then((response) => {
                 setCustomerIncome(response.data);
 
-                setDetailExport(response.data.customerPaintExport);
+                setDetailExport(response.data.customerMaterialExport);
             })
 
             .catch(() => {
@@ -128,7 +128,7 @@ function CustomerIncome() {
                                     <li key={index}>
                                         <Link
                                             class="btn btn-success btn-income"
-                                            to={`/detailbillexport/${data.id}`}
+                                            to={`/detailbillexportmaterial/${data.id}`}
                                             target="_blank"
                                         >
                                             Thời gian xuất hóa đơn{' '}
@@ -145,4 +145,4 @@ function CustomerIncome() {
     );
 }
 
-export default CustomerIncome;
+export default CustomerIncomeMaterial;

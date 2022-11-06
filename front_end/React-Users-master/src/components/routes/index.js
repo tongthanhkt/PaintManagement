@@ -13,20 +13,34 @@ import SelectSide from '../pages/SelectSide';
 import NavbarMaterial from '../../Material/components/NavbarMaterial';
 import HomeMaterial from '../../Material/components/HomeMaterial';
 import AddProductMaterial from '../../Material/components/AddProductMaterial';
+import DetailBillExportMaterial from '../../Material/components/DetailBillExportMaterial';
+import DetailProductMaterial from '../../Material/components/DetailProductMaterial'
+import EditProductMaterial from '../../Material/components/EditProductMaterial';
+import AllBillExportMaterial from '../../Material/components/AllBillExportMaterial';
+import CustomerIncomeMaterial from '../../Material/components/CustomerIncomeMaterial';
 
 const publicRoutes = [
     { path: '/home', component: Home, layout: Navbar },
     { path: '/products/add', component: AddProduct, layout: Navbar },
     { path: '/products/edit/:id', component: EditProduct, layout: Navbar },
+    { path: '/productsmaterial/edit/:id', component: EditProductMaterial, layout: NavbarMaterial },
     { path: '/products/:id', component: DetailProduct, layout: Navbar },
+    { path: '/productsmaterial/:id', component: DetailProductMaterial, layout: NavbarMaterial },
     { path: '/exportproduct', component: ExportProduct, layout: Navbar },
     { path: '/detailallbillexport', component: AllBillExport, layout: Navbar },
+    { path: '/detailallbillexportmaterial', component: AllBillExportMaterial, layout: NavbarMaterial },
     {
         path: '/detailbillexport/:id',
         component: DetailBillExport,
         layout: Navbar,
     },
+    {
+        path: '/detailbillexportmaterial/:id',
+        component: DetailBillExportMaterial,
+        layout: NavbarMaterial,
+    },
     { path: '/customerincome', component: CustomerIncome, layout: Navbar },
+    { path: '/customerincomematerial', component: CustomerIncomeMaterial, layout: NavbarMaterial },
     { path: '/createaccount', component: CreateAcc, layout: Navbar },
     { path: '/homematerial', component: HomeMaterial, layout: NavbarMaterial },
     { path: '/addproductmaterial', component: AddProductMaterial, layout: NavbarMaterial },
