@@ -33,7 +33,7 @@ const Navbar = () => {
                                 'navbar-custom',
                             )}
                         >
-                            <li className={cx('nav-item', 'active')}>
+                            <li className={cx('nav-item')}>
                                 <NavLink
                                     className={cx('nav-link')}
                                     exact

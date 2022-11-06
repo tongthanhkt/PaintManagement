@@ -9,10 +9,10 @@ import { useHistory } from 'react-router-dom';
 import './index.css';
 const cx = classNames.bind(styles);
 
-const url = 'http://localhost:9000/products';
+const url = 'http://localhost:9000/products/paint/list-paint-items';
 
 const Home = () => {
-    const urlExport = 'http://localhost:9000/products/create-paint-export';
+    const urlExport = 'http://localhost:9000/products/paint/create-paint-export';
     const history = useHistory();
 
 
