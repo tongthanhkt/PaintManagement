@@ -5,7 +5,7 @@ import { Link, NavLink } from 'react-router-dom';
 import styles from './HomeMaterial.module.scss';
 import classNames from 'classnames/bind';
 import PaginationTable from '../../../components/DataTable/PaginationTable';
-import HomeHeader from '../../../components/DataTable/HomeHeader';
+import HomeHeaderMaterial from '../../../components/DataTable/HomeHeaderMaterial';
 import { useHistory } from 'react-router-dom';
 // import './index.css';
 const cx = classNames.bind(styles);
@@ -165,7 +165,7 @@ const Home = () => {
                     className={cx('table', 'table-bordered')}
                     style={{ width: '' }}
                 >
-                    <HomeHeader />
+                    <HomeHeaderMaterial />
                     <tbody>
                         {data.map((product, index) => (
                             <tr>
@@ -179,6 +179,15 @@ const Home = () => {
                                 >
                                     {++index}
                                 </th>
+                                <td
+                                    className={cx(
+                                        'table-custom',
+                                        'text-center',
+                                        'align-middle',
+                                    )}
+                                >
+                                    {product.product_id}
+                                </td>
                                 <td
                                     className={cx(
                                         'table-custom',
@@ -215,6 +224,16 @@ const Home = () => {
                                     )}
                                 >
                                     {product.amount}
+                                </td>
+
+                                <td
+                                    className={cx(
+                                        'table-custom',
+                                        'text-center',
+                                        'align-middle',
+                                    )}
+                                >
+                                    {product.description}
                                 </td>
                                 <td
                                     className={cx(

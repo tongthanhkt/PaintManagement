@@ -11,13 +11,14 @@ const AddProductMaterial = () => {
     let history = useHistory();
     const [product, setProduct] = useState({
         product_name: '',
+        product_id: '',
         product_price: '',
         dvt: '',
         amount: '',
         description: '',
     });
 
-    const { product_name, product_price, dvt, amount, description } = product;
+    const { product_name,product_id, product_price, dvt, amount, description } = product;
     const onInputChange = (e) => {
         setProduct({ ...product, [e.target.name]: e.target.value });
     };
@@ -41,6 +42,17 @@ const AddProductMaterial = () => {
                                 placeholder="Nhập tên sản phẩm"
                                 name="product_name"
                                 value={product_name}
+                                onChange={(e) => onInputChange(e)}
+                            />
+                        </div>
+
+                        <div className={cx('form-group')}>
+                            <input
+                                type="text"
+                                className={cx('form-control form-control-lg')}
+                                placeholder="Mã hàng"
+                                name="product_id"
+                                value={product_id}
                                 onChange={(e) => onInputChange(e)}
                             />
                         </div>
@@ -81,6 +93,20 @@ const AddProductMaterial = () => {
                                 placeholder="Nhập số lượng sản phẩm"
                                 name="amount"
                                 value={amount}
+                                onChange={(e) => onInputChange(e)}
+                            />
+                        </div>
+
+                        <div className={cx('form-group')}>
+                            <input
+                                type="text"
+                                className={cx(
+                                    'form-control',
+                                    'form-control-lg',
+                                )}
+                                placeholder="Ghi chú"
+                                name="description"
+                                value={description}
                                 onChange={(e) => onInputChange(e)}
                             />
                         </div>

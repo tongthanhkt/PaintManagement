@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { useReactToPrint } from 'react-to-print';
-import paintCompanyData from '../../../data/PaintCompanyData';
+import MaterialCompanyData from '../../../data/MaterialCompanyData'
 // import { Link, NavLink } from 'react-router-dom';
 import './index.css';
 import images from '../../../assets/images';
@@ -38,28 +38,26 @@ function DetailBillExportMaterial() {
         <div className="wrapper" ref={componentRef}>
             <div className="detail">
                 <div className="heading_wrapper">
-                    <div className="heading-img">
+                    {/* <div className="heading-img">
                         <img className="img" src={images.logo} />
-                    </div>
+                    </div> */}
 
                     <div className="eadinhg-info">
                         <h3 className="company-name">
-                            {paintCompanyData.companyName}
+                            {MaterialCompanyData.companyName}
                         </h3>
                         <p className="company-description">
-                            Địa chỉ: {paintCompanyData.address}
+                            Địa chỉ: {MaterialCompanyData.address}
                         </p>
                         <p className="company-description">
-                            Hotline: {paintCompanyData.hotline}
+                            Hotline: {MaterialCompanyData.hotline}
                         </p>
-                        <p className="company-description">
-                            Số tài khoản: {paintCompanyData.accountNumber}
-                        </p>
+                       
                     </div>
                 </div>
 
                 <div className="content">
-                    <h3 className="content-title">PHIẾU XUẤT KHO BÁN HÀNG</h3>
+                    <h3 className="content-title">PHIẾU XUẤT KHO</h3>
 
                     <ul className="customer-info_list">
                         <li className="customer-info">
@@ -79,17 +77,21 @@ function DetailBillExportMaterial() {
                         <thead>
                             <tr>
                                 <th>STT</th>
+                                <th>Mã hàng</th>
                                 <th>Tên hàng</th>
                                 <th>ĐVT</th>
                                 <th>Số lượng</th>
                                 <th>Đơn giá</th>
                                 <th>Thành tiền</th>
+                                <th>Ghi chú</th>
                             </tr>
                         </thead>
                         <tbody>
                             {products.map((product, index) => (
                                 <tr>
                                     <th scope="row">{++index}</th>
+                                    <td>{product.product_id}</td>
+
 
                                     <td>{product.product_name}</td>
 
@@ -100,6 +102,7 @@ function DetailBillExportMaterial() {
                                     <td>{product.product_price}</td>
 
                                     <td>{product.total_price}</td>
+                                    <td>{product.description}</td>
                                 </tr>
                             ))}
                         </tbody>

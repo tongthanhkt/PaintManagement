@@ -6,11 +6,13 @@
 
 .table-custom {
     text-align: center;
+    
 }
 
 th.table-edit {
     text-align: center;
     vertical-align: middle;
+    font-size: 10px;
 }
 
 tbody {
@@ -25,4 +27,8 @@ td.table-action {
 
 .btn-custom {
     margin-top: 10px;
+}
+
+th {
+    font-size: 15px;
 }

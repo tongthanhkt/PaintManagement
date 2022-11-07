@@ -24,8 +24,7 @@ const EditProduct = () => {
 
     const currentProduct = async () => {
         const result = await axios.get(
-            `http://localhost:9000/products/detail-paint-item/${id.id}`,
-            
+            `http://localhost:9000/products/paint/detail-paint-item/${id.id}`,
         );
         const value = result.data.response;
         setEditedProduct(value[0]);
