@@ -74,6 +74,16 @@ const Navbar = () => {
 
                             <li class={cx('nav-item')}>
                                 <NavLink
+                                    className={cx('nav-link')}
+                                    exact
+                                    to="/statistical"
+                                >
+                                    Thống kê
+                                </NavLink>
+                            </li>
+
+                            <li class={cx('nav-item')}>
+                                <NavLink
                                     className={cx(
                                         'nav-link',
                                         'btn',

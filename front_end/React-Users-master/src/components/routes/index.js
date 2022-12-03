@@ -18,6 +18,7 @@ import DetailProductMaterial from '../../Material/components/DetailProductMateri
 import EditProductMaterial from '../../Material/components/EditProductMaterial';
 import AllBillExportMaterial from '../../Material/components/AllBillExportMaterial';
 import CustomerIncomeMaterial from '../../Material/components/CustomerIncomeMaterial';
+import Statistical from "../pages/ Statistical"
 
 const publicRoutes = [
     { path: '/home', component: Home, layout: Navbar },
@@ -39,6 +40,8 @@ const publicRoutes = [
         component: DetailBillExportMaterial,
         layout: NavbarMaterial,
     },
+
+    {path: "/statistical", component: Statistical, layout:Navbar},
     { path: '/customerincome', component: CustomerIncome, layout: Navbar },
     { path: '/customerincomematerial', component: CustomerIncomeMaterial, layout: NavbarMaterial },
     { path: '/createaccount', component: CreateAcc, layout: Navbar },
