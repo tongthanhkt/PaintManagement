@@ -5,17 +5,18 @@ import styles from './Home.module.scss';
 import classNames from 'classnames/bind';
 import PaginationTable from '../../DataTable/PaginationTable';
 import HomeHeader from '../../DataTable/HomeHeader';
-import Alert from '../../Alert';
+import { useHistory } from 'react-router-dom';
+import './index.css';
 const cx = classNames.bind(styles);
 
-const url = 'http://localhost:9000/products';
+const url = 'http://localhost:9000/products/paint/list-paint-items';
 
 const Home = () => {
-    const urlExport = 'http://localhost:9000/products/create-paint-export';
+    const urlExport =
+        'http://localhost:9000/products/paint/create-paint-export';
+    const history = useHistory();
 
-    const modal = document.getElementById('modal');
-
-    const box = document.querySelector('.box');
+    const box = document.querySelector('.export-form');
 
     const [products, setProduct] = useState([]);
 
@@ -35,13 +36,14 @@ const Home = () => {
     const [userInfo, setUserInfo] = useState({
         full_name: '',
         phone_number: '',
+        address: '',
     });
 
     const [totalItems, setTotalItems] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const ITEMS_PER_PAGE = 20;
 
-    const { full_name, phone_number } = userInfo;
+    const { full_name, phone_number, address } = userInfo;
 
     const { amount, id, product_name, dvt } = productExport;
 
@@ -117,7 +119,7 @@ const Home = () => {
 
     const deleteProduct = async (id) => {
         await axios.delete(
-            `http://localhost:9000/products/delete-paint-export/${id}`,
+            `http://localhost:9000/products/paint/delete-paint-items/${id}`,
         );
 
         loadProduct();
@@ -128,16 +130,16 @@ const Home = () => {
             paint_export_items: [...productsExport],
             ...userInfo,
         };
-
+        console.log(exportItems);
         await axios
             .post(urlExport, { ...exportItems })
-            .then(function(value) {
+            .then(function (value) {
                 const id = value.data.response.id;
 
                 window.location = `/detailbillexport/${id}`;
             })
 
-            .catch(function() {
+            .catch(function () {
                 alert('Vui lòng nhập thông tin xuất hàng phù hợp');
             });
         box.style.display = 'none';
@@ -155,72 +157,126 @@ const Home = () => {
     }, [products, currentPage]);
 
     return (
-        <div className={cx('container')}>
-            <div className={cx('py-4')}>
+        <div className={cx('container')} style={{ maxWidth: '1600px' }}>
+            <div>
                 <h1 className={cx('header-title')}>Tồn kho</h1>
-                <table className={cx('table', 'table-bordered')}>
+                <table
+                    className={cx('table', 'table-bordered')}
+                    style={{ width: '' }}
+                >
                     <HomeHeader />
                     <tbody>
                         {data.map((product, index) => (
                             <tr>
-                                <th className={cx('table-custom', 'text-center')} scope="row">
+                                <th
+                                    className={cx(
+                                        'table-custom',
+                                        'text-center',
+                                        'align-middle',
+                                    )}
+                                    scope="row"
+                                >
                                     {++index}
                                 </th>
-                                <td className={cx('table-custom', 'text-center')}>
+                                <td
+                                    className={cx(
+                                        'table-custom',
+                                        'text-center',
+                                        'align-middle',
+                                    )}
+                                >
                                     {product.product_name}
                                 </td>
-                                <td className={cx('table-custom', 'text-center')}>
+                                <td
+                                    className={cx(
+                                        'table-custom',
+                                        'text-center',
+                                        'align-middle',
+                                    )}
+                                >
                                     {product.product_price}
                                 </td>
 
-                                <td className={cx('table-custom', 'text-center')}>
+                                <td
+                                    className={cx(
+                                        'table-custom',
+                                        'text-center',
+                                        'align-middle',
+                                    )}
+                                >
                                     {product.dvt}
                                 </td>
-                                <td className={cx('table-custom', 'text-center')}>
+                                <td
+                                    className={cx(
+                                        'table-custom',
+                                        'text-center',
+                                        'align-middle',
+                                    )}
+                                >
                                     {product.amount}
                                 </td>
-                                <td className={cx('table-action')}> 
-                                    <Link
-                                        class="btn btn-primary mr-2"
-                                        to={`/products/${product.id}`}
+                                <td
+                                    className={cx(
+                                        'table-action',
+                                        'text-center',
+                                    )}
+                                    style={{ height: '82px' }}
+                                >
+                                    <button
+                                        type="button"
+                                        class="btn btn-info m-2 btn-lg"
+                                        onClick={() =>
+                                            history.push(
+                                                `/products/${product.id}`,
+                                            )
+                                        }
                                     >
                                         Chi tiết
-                                    </Link>
-                                    <Link
-                                        class="btn btn-outline-primary mr-2"
-                                        to={`/products/edit/${product.id}`}
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="btn btn-secondary m-2 btn-lg"
+                                        onClick={() =>
+                                            history.push(
+                                                `/products/edit/${product.id}`,
+                                            )
+                                        }
                                     >
                                         Chỉnh sửa
-                                    </Link>
-                                    <Link
-                                        class="btn btn-danger"
+                                    </button>
+                                    <button
+                                        type="button"
+                                        className="btn btn-danger m-2 btn-lg"
                                         onClick={() =>
-                                            deleteProduct(product._id)
+                                            deleteProduct(product.id)
                                         }
                                     >
                                         Xóa
-                                    </Link>
-                                </td>
-
-                                <td>
-                                    <input
-                                        data-id={product.id}
-                                        data-index={index}
-                                        data-name={product.product_name}
-                                        data-dvt={product.dvt}
-                                        type="number"
-                                        placeholder="Nhập số lượng"
-                                        name="amount"
-                                        onChange={(e) => onInputChange(e)}
-                                    />
-
-                                    <button
-                                        onClick={onSubmit}
-                                        data-name={product.product_name}
-                                        data-dvt={product.dvt}
-                                    >
-                                        Xác nhận
                                     </button>
+                                </td>
+                                <td>
+                                    <div className="wrap-export">
+                                        <input
+                                            data-id={product.id}
+                                            data-index={index}
+                                            data-name={product.product_name}
+                                            data-dvt={product.dvt}
+                                            type="number"
+                                            placeholder="Nhập số lượng"
+                                            name="amount"
+                                            onChange={(e) => onInputChange(e)}
+                                            className="input"
+                                        />
+                                        <button
+                                            type="button"
+                                            className="btn btn-success m-2 btn-lg export-btn"
+                                            onClick={onSubmit}
+                                            data-name={product.product_name}
+                                            data-dvt={product.dvt}
+                                        >
+                                            Xuất hàng
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                         ))}
@@ -234,90 +290,81 @@ const Home = () => {
                 />
             </div>
 
-            <div className={cx('box')} style={{ display: 'none' }}>
-                <h3>Thông tin xuất hàng</h3>
+            <div className="export-form">
+                <div className="wrapper w-75 mx-auto shadow p-5 ">
+                    <h3 className="export-info">Thông tin xuất hàng</h3>
 
-                <div className="container py-4">
-                    {detailProductExport.map((item, index) => (
-                        <ul className="list-group w-50">
-                            <li key={index}>
-                                {item.amount} {item.dvt} {item.name}
-                            </li>
-                        </ul>
-                    ))}
-                </div>
-                <div className={cx('form-group')}>
-                    <input
-                        type="text"
-                        className={cx('form-control form-control-lg')}
-                        placeholder="Nhập tên khách hàng"
-                        name="full_name"
-                        value={full_name}
-                        onChange={(e) => onBoxInputChange(e)}
-                    />
-                </div>
-                <div className={cx('form-group')}>
-                    <input
-                        type="number"
-                        className={cx('form-control', 'form-control-lg')}
-                        placeholder="Nhập số điện thoại khách hàng"
-                        name="phone_number"
-                        value={phone_number}
-                        onChange={(e) => onBoxInputChange(e)}
-                    />
-                </div>
+                    <div className="container">
+                        <div class="form-wrapper">
+                            <div class="mb-3">
+                                <label class="form-label">Sản phẩm xuất</label>
+                                {detailProductExport.map((item, index) => (
+                                    <input
+                                        key={index}
+                                        type="text"
+                                        class="form-control form-control-lg form-item form-edit "
+                                        id="inputItem"
+                                        value={`${item.amount} ${item.dvt} ${item.name}`}
+                                        disable
+                                        readOnly
+                                    />
+                                ))}
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="inputName">
+                                    Họ và tên
+                                </label>
+                                <input
+                                    type="text"
+                                    class="form-control form-control-lg form-edit"
+                                    id="inputName"
+                                    placeholder="Nhập tên khách hàng"
+                                    name="full_name"
+                                    value={full_name}
+                                    onChange={(e) => onBoxInputChange(e)}
+                                />
+                            </div>
 
-                <button
-                    onClick={confirmExport}
-                    className={cx('btn btn-primary', 'btn-block')}
-                >
-                    Xác nhận xuất hàng
-                </button>
-            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="inputName">
+                                    Số điện thoại
+                                </label>
+                                <input
+                                    type="text"
+                                    class="form-control form-control-lg form-edit"
+                                    id="inputName"
+                                    placeholder="Nhập số điện thoại khách hàng"
+                                    name="phone_number"
+                                    value={phone_number}
+                                    onChange={(e) => onBoxInputChange(e)}
+                                />
+                            </div>
 
-            {/* <div id="modal" class="modal" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Thông báo</h5>
+                            <div class="mb-3">
+                                <label class="form-label" for="inputName">
+                                    Địa chỉ
+                                </label>
+                                <input
+                                    type="text"
+                                    class="form-control form-control-lg form-edit"
+                                    id="inputName"
+                                    placeholder="Nhập địa chỉ"
+                                    name="address"
+                                    value={address}
+                                    onChange={(e) => onBoxInputChange(e)}
+                                />
+                            </div>
+
                             <button
-                                type="button"
-                                class="close"
-                                data-dismiss="modal"
-                                aria-label="Close"
-                            >
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <p>Bạn có chắc muốn thực hiện tác vụ này ? </p>
-                        </div>
-                        <div class="modal-footer">
-                            <button
-                                onClick={(e) =>
-                                    setStatusDelete(e.target.dataset.event)
-                                }
-                                type="button"
-                                class="btn btn-primary"
-                                data-event="confirm"
+                                onClick={confirmExport}
+                                class="btn btn-success btn-lg btn-export"
                             >
                                 Xác nhận
-                            </button>
-                            <button
-                                type="button"
-                                class="btn btn-secondary"
-                                data-dismiss="modal"
-                                data-event="cancel"
-                                onClick={(e) =>
-                                    setStatusDelete(e.target.dataset.event)
-                                }
-                            >
-                                Hủy
                             </button>
                         </div>
                     </div>
                 </div>
-            </div> */}
+            </div>
         </div>
     );
 };

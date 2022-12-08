@@ -5,11 +5,12 @@ import styles from './AllBillExport.module.scss';
 import classNames from 'classnames/bind';
 import Header from '../../DataTable/Header';
 import PaginationTable from '../../DataTable/PaginationTable';
+import './index.css';
 
 const cx = classNames.bind(styles);
 
 function AllBillExport() {
-    const url = 'http://localhost:9000/products/list-paint-export';
+    const url = 'http://localhost:9000/products/paint/list-paint-export';
     const urlDelete = 'http://localhost:9000/products/delete-paint-export/';
 
     const [products, setProducts] = useState([]);
@@ -29,7 +30,9 @@ function AllBillExport() {
 
     const deleteProduct = async (id) => {
         await axios.delete(
-            `http://localhost:9000/products/delete-paint-export/${id}`,
+            // `http://localhost:9000/products/delete-paint-export/${id}`,
+            `http://localhost:9000/products/paint/delete-paint-export/${id}`
+            
         );
         loadList();
     };
@@ -46,37 +49,89 @@ function AllBillExport() {
     }, [products, currentPage]);
 
     return (
-        <div className={cx('container')}>
+        <div className={cx('container-custom')}>
             <div className={cx('py-4')}>
-                <h1 className={cx('header-title')}>Thống kê hóa đơn đã xuất hàng</h1>
+                <h1 className={cx('header-title')}>
+                    Thống kê đơn hàng đã xuất
+                </h1>
                 <table className={cx('table', 'table-bordered')}>
                     <Header />
                     <tbody>
                         {data.map((product, index) => (
                             <tr>
-                                <th className={cx('table-custom')} scope="row">
+                                <th
+                                    className={cx(
+                                        'table-custom',
+                                        'text-center',
+                                        'align-middle',
+                                    )}
+                                    scope="row"
+                                >
                                     {index + 1}
                                 </th>
-                                <td className={cx('table-custom')}>
+                                <td
+                                    className={cx(
+                                        'table-custom',
+                                        'text-center',
+                                        'align-middle',
+                                    )}
+                                >
                                     {product.full_name}
                                 </td>
-                                <td className={cx('table-custom')}>
+                                <td
+                                    className={cx(
+                                        'table-custom',
+                                        'text-center',
+                                        'align-middle',
+                                    )}
+                                >
                                     {product.phone_number}
                                 </td>
 
-                                <td className={cx('table-custom')}>
+                                <td
+                                    className={cx(
+                                        'table-custom',
+                                        'text-center',
+                                        'align-middle',
+                                    )}
+                                >
                                     {product.total_export_price}
                                 </td>
-                                <td className={cx('table-custom')}>
+                                <td
+                                    className={cx(
+                                        'table-custom',
+                                        'text-center',
+                                        'align-middle',
+                                    )}
+                                >
                                     {product.created_time}
+                                </td>
+
+                                <td
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        height: '70px',
+                                        with: '100px',
+                                    }}
+                                >
+                                    <Link
+                                        class="btn btn-info"
+                                        to={`/detailbillexport/${product.id}`}
+                                        style={{ width: '150px' }}
+                                    >
+                                        Chi tiết đơn hàng
+                                    </Link>
                                 </td>
 
                                 <td>
                                     <Link
                                         class="btn btn-danger"
                                         onClick={() =>
-                                            deleteProduct(product.id || product._id)
+                                            deleteProduct(product._id)
                                         }
+                                        style={{ marginTop: '15px' }}
                                     >
                                         Xóa
                                     </Link>

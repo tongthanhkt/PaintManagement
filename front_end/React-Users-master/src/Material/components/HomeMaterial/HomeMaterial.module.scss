@@ -1,0 +1,34 @@
+.header-title {
+    font-size: 4rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.table-custom {
+    text-align: center;
+    
+}
+
+th.table-edit {
+    text-align: center;
+    vertical-align: middle;
+    font-size: 10px;
+}
+
+tbody {
+    position: relative;
+}
+
+td.table-action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-custom {
+    margin-top: 10px;
+}
+
+th {
+    font-size: 15px;
+}

@@ -8,18 +8,18 @@
 }
 
 html {
-    font-size: 62.5%;
+    font-size: 60%;
 }
 
 body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: Arial, Tahoma;
 
     line-height: 1.5;
     font-size: 1.8rem;
     text-rendering: optimizeSpeed;
 }
 
-// ----------   
+// ----------
 
 .active {
     display: block !important;
@@ -40,4 +40,11 @@ body {
     justify-content: center;
 }
 
+.container {
+    // margin: 0 20px;
+    width: 100%;
+}
 
+.App {
+    height: 100vh;
+}

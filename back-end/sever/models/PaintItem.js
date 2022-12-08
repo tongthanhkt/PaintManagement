@@ -3,6 +3,9 @@ const PaintItemSchema = new mongoose.Schema({
   id: {
     type: String,
   },
+  product_id: {
+    type: String
+  },
   product_name: {
     type: String,
   },

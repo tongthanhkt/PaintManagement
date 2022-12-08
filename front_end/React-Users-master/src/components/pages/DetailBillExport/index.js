@@ -1,15 +1,22 @@
 import axios from 'axios';
 // import styles from 'DetailBillExport.module.scss';
 import classNames from 'classnames/bind';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
-
+import { useReactToPrint } from 'react-to-print';
+import paintCompanyData from '../../../data/PaintCompanyData';
 import { Link, NavLink } from 'react-router-dom';
+import './index.css';
+import images from '../../../assets/images';
+import PaintCompanyData from '../../../data/PaintCompanyData';
 
 function DetailBillExport() {
     const [product, setProduct] = useState([]);
     const [products, setProducts] = useState([]);
-
+    const componentRef = useRef();
+    const handlePrint = useReactToPrint({
+        content: () => componentRef.current,
+    });
     const { id } = useParams();
 
     useEffect(() => {
@@ -18,48 +25,130 @@ function DetailBillExport() {
 
     const loadProduct = async () => {
         const result = await axios.get(
-            `http://localhost:9000/products/detail-paint-export/${id}`,
+
+            `http://localhost:9000/products/paint/detail-paint-export/${id}`
+            
         );
 
         const value = result.data.response;
-        const detail = result.data.response.paint_export_items
+        const detail = result.data.response.paint_export_items;
 
         setProduct(value);
-        setProducts(detail)
+        setProducts(detail);
     };
 
-    
-
     return (
-        <div className="container py-4">
-            <Link className="btn btn-primary" to="/">
-                Trở về trang chủ
-            </Link>
+        <div className="wrapper" ref={componentRef}>
+            <div className="detail">
+                <div className="heading_wrapper">
+                    <div className="heading-img">
+                        <img className="img" src={images.logo} />
+                    </div>
 
-            <hr />
-            <ul className="list-group w-50">
-                <li className="list-group-item">
-                    Tên khách hàng: {product.full_name}
-                </li>
-                <li className="list-group-item">
-                    Số điện thoại khách hàng: {product.phone_number}
-                </li>
+                    <div className="eadinhg-info">
+                        <h3 className="company-name">
+                            {paintCompanyData.companyName}
+                        </h3>
+                        <p className="company-description">
+                            Địa chỉ: {paintCompanyData.address}
+                        </p>
+                        <p className="company-description">
+                            Hotline: {paintCompanyData.hotline}
+                        </p>
+                        <p className="company-description">
+                            Số tài khoản: {paintCompanyData.accountNumber}
+                        </p>
+                    </div>
+                </div>
 
-                <li className="list-group-item">
-                    Tổng giá trị hàng hóa {product.total_export_price} VND
-                </li>
-                <li className="list-group-item">
-                    Thời gian xuất hàng: {product.created_time}
-                </li>
-                <li className="list-group-item">
-                    Chi tiết đơn hàng:
-                    <ul>
-                        {products.map((data, index) => (
-                           <li key={index}>{data.amount} {data.dvt} {data.product_name}</li>
-                       ))}
+                <div className="content">
+                    <h3 className="content-title">PHIẾU XUẤT KHO BÁN HÀNG</h3>
+
+                    <ul className="customer-info_list">
+                        <li className="customer-info">
+                            Khách hàng: {product.full_name}
+                        </li>
+
+                        <li className="customer-info">
+                            Địa chỉ: {product.address}
+                        </li>
+
+                        <li className="customer-info">
+                            Số điện thoại: {product.phone_number}
+                        </li>
                     </ul>
-                </li>
-            </ul>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Tên hàng</th>
+                                <th>ĐVT</th>
+                                <th>Số lượng</th>
+                                <th>Đơn giá</th>
+                                <th>Thành tiền</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {/* <tr>
+                                <td>zui</td>
+                            </tr> */}
+
+                            {products.map((product, index) => (
+                                <tr>
+                                    <th scope="row">{++index}</th>
+
+                                    <td>{product.product_name}</td>
+
+                                    <td>{product.dvt}</td>
+
+                                    <td>{product.amount}</td>
+
+                                    <td>{product.product_price}</td>
+
+                                    <td>{product.total_price}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+
+                        <tfoot>
+                            <tr>
+                                <td colspan="5">Tổng cộng</td>
+                                <td>{product.total_export_price}</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <div className="footer">
+                    <p className="time-export">
+                        Thời gian xuất hóa đơn: {product.created_time}
+                    </p>
+                    <h3 className="footer-text">
+                        Trân trọng kính chào và chúc hợp tác thành công !
+                    </h3>
+
+                    <div className="confirm">
+                        <h3 className="customer-confirm">Khách hàng</h3>
+
+                        <div className="company-confirm">
+                            <p className="time">
+                                Pleiku, ngày _______, tháng ______, năm ________
+                            </p>
+                            <h3 className="company-represent">
+                                ĐẠI DIỆN CÔNG TY
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <button
+                    className="btn btn-primary btn-lg"
+                    id="btn-print"
+                    onClick={handlePrint}
+                >
+                    In hóa đơn
+                </button>
+            </div>
         </div>
     );
 }

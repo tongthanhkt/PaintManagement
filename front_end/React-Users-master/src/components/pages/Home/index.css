@@ -1,0 +1,76 @@
+.input {
+    display: inline-block;
+}
+.export-btn {
+    display: inline !important;
+}
+.wrap-export {
+    display: inline-block;
+    margin-top: 15px;
+    text-align: center;
+}
+.export-form {
+    margin-left: auto;
+    margin-right: auto;
+    width: 1000px;
+    display: none;
+    padding-bottom: 40px;
+}
+.exports-btn {
+    width: 186px;
+    height: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 15px;
+}
+
+h1 {
+    padding: 40px 0 20px 0;
+}
+
+.form-group {
+    display: flex;
+}
+
+.form-wrap {
+    width: 500px;
+}
+
+.export-info {
+    font-size: 40px;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.form-item {
+    margin-bottom: 6px;
+}
+
+.form-wrapper {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+}
+
+.form-edit {
+    width: 300px;
+    min-height: 40px;
+    font-size: 20px;
+    word-wrap: break-word;
+}
+
+label {
+    font-size: 24px;
+}
+
+#input-item {
+    background-color: red;
+}
+
+.btn-export {
+    margin-top: 20px;
+    width: 200px;
+    font-size: 20px;
+    font-weight: 600;
+}

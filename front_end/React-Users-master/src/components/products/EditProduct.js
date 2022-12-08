@@ -10,24 +10,21 @@ const EditProduct = () => {
     const [editedProduct, setEditedProduct] = useState([]);
 
     useEffect(() => {
-
         currentProduct();
     }, []);
 
     const onSubmit = async (e) => {
         e.preventDefault();
         await axios.put(
-            `http://localhost:9000/products/update-paint-item/${id.id}`,
+            `http://localhost:9000/products/paint/update-paint-item/${id.id}`,
             editedProduct,
         );
         history.push('/home');
     };
 
-
-
     const currentProduct = async () => {
         const result = await axios.get(
-            `http://localhost:9000/products/detail-paint-item/${id.id}`,
+            `http://localhost:9000/products/paint/detail-paint-item/${id.id}`,
         );
         const value = result.data.response;
         setEditedProduct(value[0]);
@@ -39,7 +36,10 @@ const EditProduct = () => {
 
     return (
         <div className="container">
-            <div className="w-75 mx-auto shadow p-5">
+            <div
+                className="w-75 mx-auto shadow p-5"
+                style={{ marginTop: '40px' }}
+            >
                 <h2 className="text-center mb-4">
                     Chỉnh sửa thông tin sản phẩm
                 </h2>
