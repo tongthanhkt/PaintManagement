@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const productsController = require("./productsController");
-router.get("/list-paint-items", productsController.listPaintItem);
-router.post("/create-paint-item", productsController.createPaintItem);
+const author = require('../../routes/author/author');
+router.get("/list-paint-items",author.verifyUserToken ,author.IsUser, productsController.listPaintItem);
+router.post("/create-paint-item", author.verifyUserToken, author.IsUser, productsController.createPaintItem);
 router.get("/detail-paint-item", productsController.detailPaintItem);
 router.post("/create-paint-export", productsController.createPaintExport);
 router.get("/list-paint-export", productsController.listPaintExport);
