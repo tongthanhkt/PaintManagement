@@ -8,7 +8,7 @@ import './index.css';
 const cx = classNames.bind(styles);
 
 const AddProduct = () => {
-    const url = 'http://localhost:9000/products/paint/create-paint-item';
+    const url = 'https://be-paint-management1.onrender.com/products/paint/create-paint-item';
     let history = useHistory();
     const [product, setProduct] = useState({
         product_name: '',

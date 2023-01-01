@@ -10,7 +10,7 @@ import './index.css';
 const cx = classNames.bind(styles);
 
 function AllBillExportMaterial() {
-    const url = 'http://localhost:9000/products/material/list-material-export';
+    const url = 'https://be-paint-management1.onrender.com/products/material/list-material-export';
 
     const [products, setProducts] = useState([]);
     const [totalItems, setTotalItems] = useState(0);
@@ -29,7 +29,7 @@ function AllBillExportMaterial() {
 
     const deleteProduct = async (id) => {
         await axios.delete(
-            `http://localhost:9000/products/material/delete-material-export/${id}`,
+            `https://be-paint-management1.onrender.com/products/material/delete-material-export/${id}`,
         );
         loadList();
     };

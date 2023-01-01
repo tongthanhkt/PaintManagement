@@ -27,7 +27,7 @@ function CreateAcc() {
 
     const submit = async (e) => {
         e.preventDefault();
-        await axios.post('http://localhost:9000/user/sign-up', signupInfo)
+        await axios.post('https://be-paint-management1.onrender.com/user/sign-up', signupInfo)
                     .then(() =>{
                         alert('Tạo tài khoản thành công')
                         window.location = '/'

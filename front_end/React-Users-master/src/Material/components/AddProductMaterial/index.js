@@ -7,7 +7,7 @@ import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
 const AddProductMaterial = () => {
-    const url = 'http://localhost:9000/products/material/create-material-item';
+    const url = 'https://be-paint-management1.onrender.com/products/material/create-material-item';
     let history = useHistory();
     const [product, setProduct] = useState({
         product_name: '',

@@ -16,7 +16,7 @@ const EditProductMaterial = () => {
     const onSubmit = async (e) => {
         e.preventDefault();
         await axios.put(
-            `http://localhost:9000/products/material/update-material-item/${id.id}`,
+            `https://be-paint-management1.onrender.com/products/material/update-material-item/${id.id}`,
 
             editedProduct,
         );
@@ -25,7 +25,7 @@ const EditProductMaterial = () => {
 
     const currentProduct = async () => {
         const result = await axios.get(
-            `http://localhost:9000/products/material/detail-material-item/${id.id}`,
+            `https://be-paint-management1.onrender.com/products/material/detail-material-item/${id.id}`,
         );
         const value = result.data.response;
         setEditedProduct(value[0]);

@@ -24,7 +24,7 @@ function ExportProduct() {
     const onSubmit = async (e) => {
         e.preventDefault();
         const result = await axios.get(
-            `http://localhost:9000/products/detail-paint-item/${id}`,
+            `https://be-paint-management1.onrender.com/products/detail-paint-item/${id}`,
         );
         console.log(id);
         console.log(result);

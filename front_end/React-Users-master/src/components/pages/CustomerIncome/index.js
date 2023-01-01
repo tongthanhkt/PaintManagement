@@ -16,7 +16,7 @@ function CustomerIncome() {
     const onSubmit = async () => {
         await axios
             .get(
-                `http://localhost:9000/products/paint/income-customer/${phoneNumber}`,
+                `https://be-paint-management1.onrender.com/products/paint/income-customer/${phoneNumber}`,
             )
 
             .then((response) => {

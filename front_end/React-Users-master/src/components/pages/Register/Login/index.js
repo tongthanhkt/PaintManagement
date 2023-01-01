@@ -8,11 +8,11 @@ const cx = className.bind(styles);
 
 function Login() {
     const [loginInfo, setLoginInfo] = useState({
-        username: '',
+        email: '',
         password: '',
     });
 
-    const { username, password } = loginInfo;
+    const { email, password } = loginInfo;
 
     const [isValid, setValid] = useState(false);
 
@@ -23,7 +23,7 @@ function Login() {
     const submit = async (e) => {
         e.preventDefault();
         await axios
-            .post('http://localhost:9000/user/sign-in', loginInfo)
+            .post('https://be-paint-management1.onrender.com/sign-in', loginInfo)
             .then((data) => {
                 localStorage.setItem('accessToken', true);
             })
@@ -64,8 +64,8 @@ function Login() {
                                             'form-control form-control-lg',
                                         )}
                                         placeholder="Tên đăng nhập"
-                                        name="username"
-                                        value={username}
+                                        name="email"
+                                        value={email}
                                         onChange={(e) => onInputChange(e)}
                                     />
                                 </div>

@@ -9,11 +9,11 @@ import { useHistory } from 'react-router-dom';
 import './index.css';
 const cx = classNames.bind(styles);
 
-const url = 'http://localhost:9000/products/paint/list-paint-items';
+const url = 'https://be-paint-management1.onrender.com/products/paint/list-paint-items';
 
 const Home = () => {
     const urlExport =
-        'http://localhost:9000/products/paint/create-paint-export';
+        'https://be-paint-management1.onrender.com/products/paint/create-paint-export';
     const history = useHistory();
 
     const box = document.querySelector('.export-form');
@@ -119,7 +119,7 @@ const Home = () => {
 
     const deleteProduct = async (id) => {
         await axios.delete(
-            `http://localhost:9000/products/paint/delete-paint-items/${id}`,
+            `https://be-paint-management1.onrender.com/products/paint/delete-paint-items/${id}`,
         );
 
         loadProduct();

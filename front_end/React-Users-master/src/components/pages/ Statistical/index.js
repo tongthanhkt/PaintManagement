@@ -9,7 +9,7 @@ import axios from "axios";
 
 registerLocale("vi", vi);
 const cx = classNames.bind(styles);
-const url = "http://localhost:9000/products/statistical-income";
+const url = "https://be-paint-management1.onrender.com/products/statistical-income";
 
 function Statistical() {
   const [startDate, setStartDate] = useState(new Date());

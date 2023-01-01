@@ -10,11 +10,11 @@ import { useHistory } from 'react-router-dom';
 // import './index.css';
 const cx = classNames.bind(styles);
 
-const url = 'http://localhost:9000/products/material/list-material-items';
+const url = 'https://be-paint-management1.onrender.com/products/material/list-material-items';
 
 const Home = () => {
     const urlExport =
-        'http://localhost:9000/products/material/create-material-export';
+        'https://be-paint-management1.onrender.com/products/material/create-material-export';
     const history = useHistory();
 
     const box = document.querySelector('.export-form');
@@ -120,7 +120,7 @@ const Home = () => {
 
     const deleteProduct = async (id) => {
         await axios.delete(
-            `http://localhost:9000/products/material/delete-material-items/${id}`,
+            `https://be-paint-management1.onrender.com/products/material/delete-material-items/${id}`,
         );
 
         loadProduct();

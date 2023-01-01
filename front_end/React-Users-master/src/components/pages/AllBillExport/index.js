@@ -10,8 +10,8 @@ import './index.css';
 const cx = classNames.bind(styles);
 
 function AllBillExport() {
-    const url = 'http://localhost:9000/products/paint/list-paint-export';
-    const urlDelete = 'http://localhost:9000/products/delete-paint-export/';
+    const url = 'https://be-paint-management1.onrender.com/products/paint/list-paint-export';
+    const urlDelete = 'https://be-paint-management1.onrender.com/products/delete-paint-export/';
 
     const [products, setProducts] = useState([]);
     const [totalItems, setTotalItems] = useState(0);
@@ -30,8 +30,8 @@ function AllBillExport() {
 
     const deleteProduct = async (id) => {
         await axios.delete(
-            // `http://localhost:9000/products/delete-paint-export/${id}`,
-            `http://localhost:9000/products/paint/delete-paint-export/${id}`
+            // `https://be-paint-management1.onrender.com/products/delete-paint-export/${id}`,
+            `https://be-paint-management1.onrender.com/products/paint/delete-paint-export/${id}`
             
         );
         loadList();

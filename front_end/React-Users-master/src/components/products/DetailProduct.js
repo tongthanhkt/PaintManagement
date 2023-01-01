@@ -11,7 +11,7 @@ const DetailProduct = () => {
     }, []);
     const loadProduct = async () => {
         const result = await axios.get(
-            `http://localhost:9000/products/paint/detail-paint-item/${id}`
+            `https://be-paint-management1.onrender.com/products/paint/detail-paint-item/${id}`
         );
 
         const value = result.data.response;

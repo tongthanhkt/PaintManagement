@@ -26,7 +26,7 @@ function DetailBillExport() {
     const loadProduct = async () => {
         const result = await axios.get(
 
-            `http://localhost:9000/products/paint/detail-paint-export/${id}`
+            `https://be-paint-management1.onrender.com/products/paint/detail-paint-export/${id}`
             
         );
 
